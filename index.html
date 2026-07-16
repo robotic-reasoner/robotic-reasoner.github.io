@@ -9,15 +9,11 @@
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
   <link rel="stylesheet" href="./static/css/bulma.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="./static/js/bulma-carousel.min.js"></script>
-  <script src="./static/js/bulma-slider.min.js"></script>
   <script src="./static/js/index.js"></script>
 </head>
 
@@ -25,21 +21,21 @@
 
   <nav class="navbar-sidebar" id="navbarSidebar">
     <div class="navbar-sidebar-content">
-      <div class="navbar-sidebar-brand">
-        <span class="nav-title">R³</span>
-      </div>
       <ul class="navbar-sidebar-menu">
         <li><a href="#introduction" class="nav-link" data-target="introduction">
           <span class="nav-indicator"></span>Introduction
         </a></li>
-        <li><a href="#data-collection" class="nav-link" data-target="data-collection">
+        <li><a href="#abstract" class="nav-link" data-target="abstract">
+          <span class="nav-indicator"></span>Abstract
+        </a></li>
+        <li><a href="#method" class="nav-link" data-target="method">
           <span class="nav-indicator"></span>Method
         </a></li>
         <li><a href="#results" class="nav-link" data-target="results">
           <span class="nav-indicator"></span>Results
         </a></li>
-        <li><a href="#evaluation" class="nav-link" data-target="evaluation">
-          <span class="nav-indicator"></span>Full Evaluation
+        <li><a href="#rollouts" class="nav-link" data-target="rollouts">
+          <span class="nav-indicator"></span>Rollouts
         </a></li>
         <li><a href="#citation" class="nav-link" data-target="citation">
           <span class="nav-indicator"></span>Citation
@@ -50,9 +46,9 @@
 
   <nav class="navbar-mobile" id="navbarMobile">
     <div class="navbar-mobile-brand">
-      <span class="nav-title-mobile">R³</span>
+      <span class="nav-title-mobile">Menu</span>
     </div>
-    <button class="navbar-mobile-burger" id="mobileMenuToggle">
+    <button class="navbar-mobile-burger" id="mobileMenuToggle" aria-label="Open menu">
       <span></span>
       <span></span>
       <span></span>
@@ -64,9 +60,10 @@
       <button class="mobile-menu-close" id="mobileMenuClose">&times;</button>
       <ul>
         <li><a href="#introduction" class="nav-link-mobile" data-target="introduction">Introduction</a></li>
-        <li><a href="#data-collection" class="nav-link-mobile" data-target="data-collection">Method</a></li>
+        <li><a href="#abstract" class="nav-link-mobile" data-target="abstract">Abstract</a></li>
+        <li><a href="#method" class="nav-link-mobile" data-target="method">Method</a></li>
         <li><a href="#results" class="nav-link-mobile" data-target="results">Results</a></li>
-        <li><a href="#evaluation" class="nav-link-mobile" data-target="evaluation">Full Evaluation</a></li>
+        <li><a href="#rollouts" class="nav-link-mobile" data-target="rollouts">Rollouts</a></li>
         <li><a href="#citation" class="nav-link-mobile" data-target="citation">Citation</a></li>
       </ul>
     </div>
@@ -76,10 +73,10 @@
 
     <section class="hero" id="introduction">
       <div class="hero-body">
-        <div class="container">
+        <div class="container is-max-desktop">
           <div class="columns is-centered">
-            <div class="has-text-centered">
-              <h1 class="title is-1 publication-title">
+            <div class="column has-text-centered">
+              <h1 class="title is-2 publication-title">
                 R³: Training Robots to Reason in Natural Language via Reinforcement Learning
               </h1>
               <div class="is-size-5 publication-authors">
@@ -91,7 +88,7 @@
                 <span class="author-block">Zackory Erickson<sup>1</sup>,</span>
                 <span class="author-block">Aviral Kumar<sup>1</sup></span>
               </div>
-              <div class="is-size-6 publication-authors">
+              <div class="is-size-5 publication-authors">
                 <span class="author-block"><sup>1</sup>Carnegie Mellon University</span>
               </div>
               <div class="column has-text-centered">
@@ -110,29 +107,297 @@
                   </span>
                 </div>
               </div>
-              <div class="content has-text-justified" style="margin-left: 20px; margin-right: 20px;">
-                <div class="abstract-container">
-                  <div class="abstract-tldr">
-                    <strong>TL;DR:
-                      Reasoning in language allows foundation models to spend more test-time compute on hard problems, such as those requiring decomposition, constraint tracking, and prediction of future consequences.
-                      We introduce R³, a simple post-training recipe that turns off-the-shelf VLMs into robotic reasoners: it first mid-trains a VLM on expert-generated reasoning traces to initialize the desired reasoning style, then improves the reasoner with single-step rubric-based RL from offline action data.
-                      These results suggest that free-form language reasoning can function as a test-time compute mechanism for steering low-level policies.</strong>
-                  </div>
-                  <button class="abstract-toggle button is-small is-outlined" onclick="toggleAbstract()">
-                    <span class="toggle-text">Click to Read More</span>
-                    <span class="icon"><i class="fas fa-chevron-down toggle-icon"></i></span>
-                  </button>
-                  <div class="abstract-full" id="abstractFull">
-                    <div class="abstract-content">
-                      <p>Whether this mechanism can improve robotic manipulation remains unclear, where long-horizon tasks require tracking partial progress, reasoning about object relations, recovering from mistakes, and steering noisy low-level policies. In this paper, we study whether VLMs can be trained to reason directly in natural language to guide low-level manipulation policies.</p>
-                      <p>Unlike prior robotic reasoning methods that mostly use structured traces as auxiliary supervision, R³ trains free-form language reasoning to produce test-time guidance for action. We instantiate R³ on Language Table, a controlled testbed for studying robotic reasoning, and find that it improves exploration and generalization across unseen tasks.</p>
-                      <div class="abstract-close-container">
-                        <button class="abstract-close button is-small is-outlined" onclick="toggleAbstract()">
-                          <span class="icon"><i class="fas fa-chevron-up"></i></span>
-                          <span>Close</span>
-                        </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="hero teaser" id="teaser">
+      <div class="container is-max-desktop">
+        <div class="hero-body"></div>
+      </div>
+    </section>
+
+    <section class="section hero is-light" id="abstract">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Abstract</h2>
+            <div class="content has-text-justified">
+              <p>
+                Reasoning in language allows foundation models to spend more test-time compute on hard problems, such as those requiring decomposition, constraint tracking, and prediction of future consequences. Whether this mechanism can improve robotic manipulation remains unclear, where long-horizon tasks require tracking partial progress, reasoning about object relations, recovering from mistakes, and steering noisy low-level policies. In this paper, we study whether VLMs can be trained to reason directly in natural language to guide low-level manipulation policies. We introduce R³, a simple post-training recipe that turns off-the-shelf VLMs into robotic reasoners: it first mid-trains a VLM on expert-generated reasoning traces to initialize the desired reasoning style, then improves the reasoner with single-step rubric-based RL from offline action data. Unlike prior robotic reasoning methods that mostly use structured traces as auxiliary supervision, R³ trains free-form language reasoning to produce test-time guidance for action. We instantiate R³ on Language Table, a controlled testbed for studying robotic reasoning, and find that it improves exploration and generalization across unseen tasks. These results suggest that free-form language reasoning can function as a test-time compute mechanism for steering low-level policies.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section content-section" id="method">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column is-full-width">
+            <h2 class="title is-3">Method: Robotic Reasoners via Reinforcement Learning</h2>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section content-section" id="results">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column is-full-width">
+            <h2 class="title is-3">Experimental Evaluation</h2>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section content-section" id="rollouts">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column is-full-width">
+            <h2 class="title is-3 has-text-centered">Examples of Successful Evaluation Rollouts</h2>
+            <p class="has-text-centered is-size-6 rollout-note">(Click Video to Play)</p>
+
+            <div class="expandable-container">
+              <button class="expandable-toggle button is-small is-outlined" onclick="toggleRollouts()">
+                <span class="rollout-toggle-text">Click to View More</span>
+                <span class="icon"><i class="fas fa-chevron-down rollout-toggle-icon"></i></span>
+              </button>
+              <div class="expandable-panel" id="rolloutsPanel">
+                <div class="expandable-content">
+
+                  <h3 class="title is-4 has-text-centered">Group blocks (group)</h3>
+                  <div class="columns is-vcentered rollout-row">
+                    <div class="column">
+                      <div class="item">
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples_ours/group_color/job0/custom_group_color_0_0_success.mp4"></video>
+                        <p class="caption has-text-centered">Example 1</p>
                       </div>
                     </div>
+                    <div class="column">
+                      <div class="item">
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples_ours/group_color/job0/custom_group_color_1_5_success.mp4"></video>
+                        <p class="caption has-text-centered">Example 2</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <h3 class="title is-4 has-text-centered">Make a line (line)</h3>
+                  <div class="columns is-vcentered rollout-row">
+                    <div class="column">
+                      <div class="item">
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples_ours/line_color/job0/custom_line_color_0_0_success.mp4"></video>
+                        <p class="caption has-text-centered">Example 1</p>
+                      </div>
+                    </div>
+                    <div class="column">
+                      <div class="item">
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples_ours/line_color/job0/custom_line_color_1_8_success.mp4"></video>
+                        <p class="caption has-text-centered">Example 2</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <h3 class="title is-4 has-text-centered">Make a T-shape (T)</h3>
+                  <div class="columns is-vcentered rollout-row">
+                    <div class="column">
+                      <div class="item">
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples_ours/T/job0/custom_T_shape_3_10_success.mp4"></video>
+                        <p class="caption has-text-centered">Example 1</p>
+                      </div>
+                    </div>
+                    <div class="column">
+                      <div class="item">
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples_ours/T/job0/custom_T_shape_1_3_success.mp4"></video>
+                        <p class="caption has-text-centered">Example 2</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <h3 class="title is-4 has-text-centered">Make a V-shape (V)</h3>
+                  <div class="columns is-vcentered rollout-row">
+                    <div class="column">
+                      <div class="item">
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples_ours/V/job0/custom_V_shape_0_0_success.mp4"></video>
+                        <p class="caption has-text-centered">Example 1</p>
+                      </div>
+                    </div>
+                    <div class="column">
+                      <div class="item">
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples_ours/V/job0/custom_V_shape_1_0_success.mp4"></video>
+                        <p class="caption has-text-centered">Example 2</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <h3 class="title is-4 has-text-centered">Make an L-shape (L)</h3>
+                  <div class="columns is-vcentered rollout-row">
+                    <div class="column">
+                      <div class="item">
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples_ours/L/job0/custom_L_shape_0_1_success.mp4"></video>
+                        <p class="caption has-text-centered">Example 1</p>
+                      </div>
+                    </div>
+                    <div class="column">
+                      <div class="item">
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples_ours/L/job0/custom_L_shape_1_2_success.mp4"></video>
+                        <p class="caption has-text-centered">Example 2</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <h3 class="title is-4 has-text-centered">Make a rectangle (rect)</h3>
+                  <div class="columns is-vcentered rollout-row">
+                    <div class="column">
+                      <div class="item">
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples_ours/rect/job0/custom_rect_5_4_success.mp4"></video>
+                        <p class="caption has-text-centered">Example 1</p>
+                      </div>
+                    </div>
+                    <div class="column">
+                      <div class="item">
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples_ours/rect/job0/custom_rect_3_7_success.mp4"></video>
+                        <p class="caption has-text-centered">Example 2</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <h3 class="title is-4 has-text-centered">Group &amp; isolate (gris)</h3>
+                  <div class="columns is-vcentered rollout-row">
+                    <div class="column">
+                      <div class="item">
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples_ours/gris/job0/custom_gris_0_2_success.mp4"></video>
+                        <p class="caption has-text-centered">Example 1</p>
+                      </div>
+                    </div>
+                    <div class="column">
+                      <div class="item">
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples_ours/gris/job0/custom_gris_1_0_success.mp4"></video>
+                        <p class="caption has-text-centered">Example 2</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <h3 class="title is-4 has-text-centered">Make a midpoint (mid)</h3>
+                  <div class="columns is-vcentered rollout-row">
+                    <div class="column">
+                      <div class="item">
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples_ours/mid/job0/custom_mid_0_0_success.mp4"></video>
+                        <p class="caption has-text-centered">Example 1</p>
+                      </div>
+                    </div>
+                    <div class="column">
+                      <div class="item">
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples_ours/mid/job0/custom_mid_1_0_success.mp4"></video>
+                        <p class="caption has-text-centered">Example 2</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <h3 class="title is-4 has-text-centered">Clear quarter (clear qtr)</h3>
+                  <div class="columns is-vcentered rollout-row">
+                    <div class="column">
+                      <div class="item">
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples_ours/clear_quarter/job0/custom_clear_quarter_0_0_success.mp4"></video>
+                        <p class="caption has-text-centered">Example 1</p>
+                      </div>
+                    </div>
+                    <div class="column">
+                      <div class="item">
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples_ours/clear_quarter/job0/custom_clear_quarter_1_0_success.mp4"></video>
+                        <p class="caption has-text-centered">Example 2</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <h3 class="title is-4 has-text-centered">Isolate in place (iip)</h3>
+                  <div class="columns is-vcentered rollout-row">
+                    <div class="column">
+                      <div class="item">
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples_ours/iip/job0/custom_iip_0_0_success.mp4"></video>
+                        <p class="caption has-text-centered">Example 1</p>
+                      </div>
+                    </div>
+                    <div class="column">
+                      <div class="item">
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples_ours/iip/job0/custom_iip_1_0_success.mp4"></video>
+                        <p class="caption has-text-centered">Example 2</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <h3 class="title is-4 has-text-centered">Make an inverted V-shape (iV)</h3>
+                  <div class="columns is-vcentered rollout-row">
+                    <div class="column">
+                      <div class="item">
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples_ours/iV/job0/custom_iV_shape_0_0_success.mp4"></video>
+                        <p class="caption has-text-centered">Example 1</p>
+                      </div>
+                    </div>
+                    <div class="column">
+                      <div class="item">
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples_ours/iV/job0/custom_iV_shape_1_0_success.mp4"></video>
+                        <p class="caption has-text-centered">Example 2</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <h3 class="title is-4 has-text-centered">Make an inverted L-shape (iL)</h3>
+                  <div class="columns is-vcentered rollout-row">
+                    <div class="column">
+                      <div class="item">
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples_ours/iL/job0/custom_iL_shape_0_0_success.mp4"></video>
+                        <p class="caption has-text-centered">Example 1</p>
+                      </div>
+                    </div>
+                    <div class="column">
+                      <div class="item">
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples_ours/iL/job0/custom_iL_shape_1_2_success.mp4"></video>
+                        <p class="caption has-text-centered">Example 2</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <h3 class="title is-4 has-text-centered">Make a diagonal line (diag line)</h3>
+                  <div class="columns is-vcentered rollout-row">
+                    <div class="column">
+                      <div class="item">
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples_ours/dline/job0/custom_dline_2_5_success.mp4"></video>
+                        <p class="caption has-text-centered">Example 1</p>
+                      </div>
+                    </div>
+                    <div class="column">
+                      <div class="item">
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples_ours/dline/job0/custom_dline_1_0_success.mp4"></video>
+                        <p class="caption has-text-centered">Example 2</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <h3 class="title is-4 has-text-centered">Clear half (clear half)</h3>
+                  <div class="columns is-vcentered rollout-row">
+                    <div class="column">
+                      <div class="item">
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples_ours/clear_half/job0/custom_clear_half_0_0_success.mp4"></video>
+                        <p class="caption has-text-centered">Example 1</p>
+                      </div>
+                    </div>
+                    <div class="column">
+                      <div class="item">
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples_ours/clear_half/job0/custom_clear_half_1_0_success.mp4"></video>
+                        <p class="caption has-text-centered">Example 2</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="expandable-close-container">
+                    <button class="expandable-close button is-small is-outlined" onclick="toggleRollouts()">
+                      <span class="icon"><i class="fas fa-chevron-up"></i></span>
+                      <span>Close</span>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -142,224 +407,9 @@
       </div>
     </section>
 
-    <section class="section" id="data-collection">
-      <div class="container">
-        <h2 class="title is-3 has-text-centered">Method</h2>
-      </div>
-    </section>
-
-    <section class="section" id="results">
-      <div class="container">
-        <h2 class="title is-3 has-text-centered">Examples of Successful Evaluation Rollouts</h2>
-        <h2 class="title is-5 has-text-centered">(Click Video to Play)</h2>
-
-        <h2 class="title is-4 has-text-centered">Group blocks (group)</h2>
-        <div class="carousel results-carousel">
-          <div class="item">
-            <video controls loop muted playsinline preload="metadata"
-              src="./static/task_examples_ours/group_color/job0/custom_group_color_0_0_success.mp4"></video>
-            <div class="caption">Example 1</div>
-          </div>
-          <div class="item">
-            <video controls loop muted playsinline preload="metadata"
-              src="./static/task_examples_ours/group_color/job0/custom_group_color_1_5_success.mp4"></video>
-            <div class="caption">Example 2</div>
-          </div>
-        </div>
-
-        <h2 class="title is-4 has-text-centered">Make a line (line)</h2>
-        <div class="carousel results-carousel">
-          <div class="item">
-            <video controls loop muted playsinline preload="metadata"
-              src="./static/task_examples_ours/line_color/job0/custom_line_color_0_0_success.mp4"></video>
-            <div class="caption">Example 1</div>
-          </div>
-          <div class="item">
-            <video controls loop muted playsinline preload="metadata"
-              src="./static/task_examples_ours/line_color/job0/custom_line_color_1_8_success.mp4"></video>
-            <div class="caption">Example 2</div>
-          </div>
-        </div>
-
-        <h2 class="title is-4 has-text-centered">Make a T-shape (T)</h2>
-        <div class="carousel results-carousel">
-          <div class="item">
-            <video controls loop muted playsinline preload="metadata"
-              src="./static/task_examples_ours/T/job0/custom_T_shape_3_10_success.mp4"></video>
-            <div class="caption">Example 1</div>
-          </div>
-          <div class="item">
-            <video controls loop muted playsinline preload="metadata"
-              src="./static/task_examples_ours/T/job0/custom_T_shape_1_3_success.mp4"></video>
-            <div class="caption">Example 2</div>
-          </div>
-        </div>
-
-        <h2 class="title is-4 has-text-centered">Make a V-shape (V)</h2>
-        <div class="carousel results-carousel">
-          <div class="item">
-            <video controls loop muted playsinline preload="metadata"
-              src="./static/task_examples_ours/V/job0/custom_V_shape_0_0_success.mp4"></video>
-            <div class="caption">Example 1</div>
-          </div>
-          <div class="item">
-            <video controls loop muted playsinline preload="metadata"
-              src="./static/task_examples_ours/V/job0/custom_V_shape_1_0_success.mp4"></video>
-            <div class="caption">Example 2</div>
-          </div>
-        </div>
-
-        <h2 class="title is-4 has-text-centered">Make an L-shape (L)</h2>
-        <div class="carousel results-carousel">
-          <div class="item">
-            <video controls loop muted playsinline preload="metadata"
-              src="./static/task_examples_ours/L/job0/custom_L_shape_0_1_success.mp4"></video>
-            <div class="caption">Example 1</div>
-          </div>
-          <div class="item">
-            <video controls loop muted playsinline preload="metadata"
-              src="./static/task_examples_ours/L/job0/custom_L_shape_1_2_success.mp4"></video>
-            <div class="caption">Example 2</div>
-          </div>
-        </div>
-
-        <h2 class="title is-4 has-text-centered">Make a rectangle (rect)</h2>
-        <div class="carousel results-carousel">
-          <div class="item">
-            <video controls loop muted playsinline preload="metadata"
-              src="./static/task_examples_ours/rect/job0/custom_rect_5_4_success.mp4"></video>
-            <div class="caption">Example 1</div>
-          </div>
-          <div class="item">
-            <video controls loop muted playsinline preload="metadata"
-              src="./static/task_examples_ours/rect/job0/custom_rect_3_7_success.mp4"></video>
-            <div class="caption">Example 2</div>
-          </div>
-        </div>
-
-        <h2 class="title is-4 has-text-centered">Group &amp; isolate (gris)</h2>
-        <div class="carousel results-carousel">
-          <div class="item">
-            <video controls loop muted playsinline preload="metadata"
-              src="./static/task_examples_ours/gris/job0/custom_gris_0_2_success.mp4"></video>
-            <div class="caption">Example 1</div>
-          </div>
-          <div class="item">
-            <video controls loop muted playsinline preload="metadata"
-              src="./static/task_examples_ours/gris/job0/custom_gris_1_0_success.mp4"></video>
-            <div class="caption">Example 2</div>
-          </div>
-        </div>
-
-        <h2 class="title is-4 has-text-centered">Make a midpoint (mid)</h2>
-        <div class="carousel results-carousel">
-          <div class="item">
-            <video controls loop muted playsinline preload="metadata"
-              src="./static/task_examples_ours/mid/job0/custom_mid_0_0_success.mp4"></video>
-            <div class="caption">Example 1</div>
-          </div>
-          <div class="item">
-            <video controls loop muted playsinline preload="metadata"
-              src="./static/task_examples_ours/mid/job0/custom_mid_1_0_success.mp4"></video>
-            <div class="caption">Example 2</div>
-          </div>
-        </div>
-
-        <h2 class="title is-4 has-text-centered">Clear quarter (clear qtr)</h2>
-        <div class="carousel results-carousel">
-          <div class="item">
-            <video controls loop muted playsinline preload="metadata"
-              src="./static/task_examples_ours/clear_quarter/job0/custom_clear_quarter_0_0_success.mp4"></video>
-            <div class="caption">Example 1</div>
-          </div>
-          <div class="item">
-            <video controls loop muted playsinline preload="metadata"
-              src="./static/task_examples_ours/clear_quarter/job0/custom_clear_quarter_1_0_success.mp4"></video>
-            <div class="caption">Example 2</div>
-          </div>
-        </div>
-
-        <h2 class="title is-4 has-text-centered">Isolate in place (iip)</h2>
-        <div class="carousel results-carousel">
-          <div class="item">
-            <video controls loop muted playsinline preload="metadata"
-              src="./static/task_examples_ours/iip/job0/custom_iip_0_0_success.mp4"></video>
-            <div class="caption">Example 1</div>
-          </div>
-          <div class="item">
-            <video controls loop muted playsinline preload="metadata"
-              src="./static/task_examples_ours/iip/job0/custom_iip_1_0_success.mp4"></video>
-            <div class="caption">Example 2</div>
-          </div>
-        </div>
-
-        <h2 class="title is-4 has-text-centered">Make an inverted V-shape (iV)</h2>
-        <div class="carousel results-carousel">
-          <div class="item">
-            <video controls loop muted playsinline preload="metadata"
-              src="./static/task_examples_ours/iV/job0/custom_iV_shape_0_0_success.mp4"></video>
-            <div class="caption">Example 1</div>
-          </div>
-          <div class="item">
-            <video controls loop muted playsinline preload="metadata"
-              src="./static/task_examples_ours/iV/job0/custom_iV_shape_1_0_success.mp4"></video>
-            <div class="caption">Example 2</div>
-          </div>
-        </div>
-
-        <h2 class="title is-4 has-text-centered">Make an inverted L-shape (iL)</h2>
-        <div class="carousel results-carousel">
-          <div class="item">
-            <video controls loop muted playsinline preload="metadata"
-              src="./static/task_examples_ours/iL/job0/custom_iL_shape_0_0_success.mp4"></video>
-            <div class="caption">Example 1</div>
-          </div>
-          <div class="item">
-            <video controls loop muted playsinline preload="metadata"
-              src="./static/task_examples_ours/iL/job0/custom_iL_shape_1_2_success.mp4"></video>
-            <div class="caption">Example 2</div>
-          </div>
-        </div>
-
-        <h2 class="title is-4 has-text-centered">Make a diagonal line (diag line)</h2>
-        <div class="carousel results-carousel">
-          <div class="item">
-            <video controls loop muted playsinline preload="metadata"
-              src="./static/task_examples_ours/dline/job0/custom_dline_2_5_success.mp4"></video>
-            <div class="caption">Example 1</div>
-          </div>
-          <div class="item">
-            <video controls loop muted playsinline preload="metadata"
-              src="./static/task_examples_ours/dline/job0/custom_dline_1_0_success.mp4"></video>
-            <div class="caption">Example 2</div>
-          </div>
-        </div>
-
-        <h2 class="title is-4 has-text-centered">Clear half (clear half)</h2>
-        <div class="carousel results-carousel">
-          <div class="item">
-            <video controls loop muted playsinline preload="metadata"
-              src="./static/task_examples_ours/clear_half/job0/custom_clear_half_0_0_success.mp4"></video>
-            <div class="caption">Example 1</div>
-          </div>
-          <div class="item">
-            <video controls loop muted playsinline preload="metadata"
-              src="./static/task_examples_ours/clear_half/job0/custom_clear_half_1_0_success.mp4"></video>
-            <div class="caption">Example 2</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="evaluation">
-      <div class="container">
-        <h2 class="title is-3 has-text-centered">Full Evaluation</h2>
-      </div>
-    </section>
-
     <section class="section" id="citation">
-      <div class="container content">
-        <h2 class="title">BibTeX</h2>
+      <div class="container is-max-desktop content">
+        <h2 class="title is-3">BibTeX</h2>
         <pre><code>@misc{wu2026r3roboticreasoners,
   title={R³: Training Robots to Reason in Natural Language via Reinforcement Learning},
   author={Lehong Wu and Yuxiao Qu and Zheyuan Hu and Ivan Zhang and Limin Wei and Zackory Erickson and Aviral Kumar},
@@ -369,17 +419,14 @@
     </section>
 
     <footer class="footer">
-      <div class="container">
-        <div class="columns is-centered">
-          <div class="column is-8">
-            <div class="content">
-              <p>
-                This website template is adapted from
-                <a href="https://rac-scaling-robot.github.io/">RaC</a> and
-                <a href="https://github.com/nerfies/nerfies.github.io">nerfies</a>.
-              </p>
-            </div>
-          </div>
+      <div class="container is-max-desktop">
+        <div class="content has-text-centered">
+          <p>
+            This website template is adapted from
+            <a href="https://matthewyryang.com/e3/">e3</a>,
+            <a href="https://rac-scaling-robot.github.io/">RaC</a>, and
+            <a href="https://github.com/nerfies/nerfies.github.io">nerfies</a>.
+          </p>
         </div>
       </div>
     </footer>

@@ -2,8 +2,8 @@ body {
   font-family: 'Noto Sans', sans-serif;
 }
 
-.column {
-  max-width: 70%;
+.container.is-max-desktop .column.is-four-fifths {
+  max-width: none;
   margin: 0 auto;
 }
 
@@ -159,21 +159,106 @@ body {
   margin: 0 auto;
 }
 
-.rollout-section .rollout-row .item {
+.column.is-full-width {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+}
+
+.teaser-caption {
+  color: #555;
+  font-size: 0.95rem;
+}
+
+.rollout-note {
+  color: #777;
+  margin-bottom: 1rem;
+}
+
+.rollout-row {
+  margin-bottom: 2rem;
+}
+
+.rollout-row .column {
+  max-width: none;
+  margin: 0;
+}
+
+.rollout-row .item {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.rollout-section .rollout-row video {
+.rollout-row video {
+  width: 100%;
+  max-width: 100%;
   border-radius: 8px;
   background: #000;
 }
 
-.rollout-section .caption {
+.rollout-row .caption {
   margin-top: 0.5rem;
   color: #555;
   font-size: 0.95rem;
+}
+
+.expandable-container {
+  position: relative;
+  text-align: center;
+}
+
+.expandable-toggle,
+.expandable-close {
+  margin: 0 auto 15px auto;
+  display: inline-flex;
+  transition: all 0.3s ease;
+}
+
+.expandable-toggle:hover,
+.expandable-close:hover {
+  transform: translateY(-1px);
+}
+
+.rollout-toggle-icon {
+  transition: transform 0.3s ease;
+}
+
+.expandable-toggle.expanded .rollout-toggle-icon {
+  transform: rotate(180deg);
+}
+
+.expandable-panel {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease-out;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  margin-top: 10px;
+  text-align: left;
+}
+
+.expandable-panel.expanded {
+  max-height: none;
+  transition: max-height 0.4s ease-in;
+}
+
+.expandable-content {
+  padding: 20px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  transition-delay: 0.1s;
+}
+
+.expandable-panel.expanded .expandable-content {
+  opacity: 1;
+}
+
+.expandable-close-container {
+  text-align: center;
+  margin-top: 10px;
+  padding-top: 15px;
+  border-top: 1px solid #e0e0e0;
 }
 
 /* Reduce vertical spacing between sections */
@@ -310,12 +395,8 @@ body {
   flex-direction: column;
 }
 
-.navbar-sidebar-brand {
-  display: flex;
-  align-items: center;
-  margin-bottom: 40px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+.navbar-sidebar-menu {
+  padding-top: 24px;
 }
 
 .nav-logo {
