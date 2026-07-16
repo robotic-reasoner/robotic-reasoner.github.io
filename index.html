@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="Training Robots to Reason in Natural Language via Reinforcement Learning">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Training Robots to Reason in Natural Language via Reinforcement Learning</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans" rel="stylesheet">
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+</head>
+
+<body>
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <h1 class="title is-1 publication-title">Training Robots to Reason in Natural Language via Reinforcement Learning</h1>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container has-text-centered">
+      <h2 class="title is-2">Examples of Successful Evaluation Rollouts</h2>
+    </div>
+  </section>
+
+  <section class="section rollout-section">
+    <div class="container">
+      <h2 class="title is-4 has-text-centered">Group blocks (group)</h2>
+      <div class="columns is-vcentered rollout-row">
+        <div class="column">
+          <div class="item">
+            <video controls muted playsinline preload="metadata">
+              <source src="./static/task_examples_ours/group_color/job0/custom_group_color_0_0_success.mp4" type="video/mp4">
+            </video>
+            <p class="caption has-text-centered">Example 1</p>
+          </div>
+        </div>
+        <div class="column">
+          <div class="item">
+            <video controls muted playsinline preload="metadata">
+              <source src="./static/task_examples_ours/group_color/job0/custom_group_color_1_5_success.mp4" type="video/mp4">
+            </video>
+            <p class="caption has-text-centered">Example 2</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section rollout-section">
+    <div class="container">
+      <h2 class="title is-4 has-text-centered">Make a line (line)</h2>
+      <div class="columns is-vcentered rollout-row">
+        <div class="column">
+          <div class="item">
+            <video controls muted playsinline preload="metadata">
+              <source src="./static/task_examples_ours/line_color/job0/custom_line_color_0_0_success.mp4" type="video/mp4">
+            </video>
+            <p class="caption has-text-centered">Example 1</p>
+          </div>
+        </div>
+        <div class="column">
+          <div class="item">
+            <video controls muted playsinline preload="metadata">
+              <source src="./static/task_examples_ours/line_color/job0/custom_line_color_1_8_success.mp4" type="video/mp4">
+            </video>
+            <p class="caption has-text-centered">Example 2</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section rollout-section">
+    <div class="container">
+      <h2 class="title is-4 has-text-centered">Make a T-shape (T)</h2>
+      <div class="columns is-vcentered rollout-row">
+        <div class="column">
+          <div class="item">
+            <video controls muted playsinline preload="metadata">
+              <source src="./static/task_examples_ours/T/job0/custom_T_shape_3_10_success.mp4" type="video/mp4">
+            </video>
+            <p class="caption has-text-centered">Example 1</p>
+          </div>
+        </div>
+        <div class="column">
+          <div class="item">
+            <video controls muted playsinline preload="metadata">
+              <source src="./static/task_examples_ours/T/job0/custom_T_shape_1_3_success.mp4" type="video/mp4">
+            </video>
+            <p class="caption has-text-centered">Example 2</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section rollout-section">
+    <div class="container">
+      <h2 class="title is-4 has-text-centered">Make a V-shape (V)</h2>
+      <div class="columns is-vcentered rollout-row">
+        <div class="column">
+          <div class="item">
+            <video controls muted playsinline preload="metadata">
+              <source src="./static/task_examples_ours/V/job0/custom_V_shape_0_0_success.mp4" type="video/mp4">
+            </video>
+            <p class="caption has-text-centered">Example 1</p>
+          </div>
+        </div>
+        <div class="column">
+          <div class="item">
+            <video controls muted playsinline preload="metadata">
+              <source src="./static/task_examples_ours/V/job0/custom_V_shape_1_0_success.mp4" type="video/mp4">
+            </video>
+            <p class="caption has-text-centered">Example 2</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section rollout-section">
+    <div class="container">
+      <h2 class="title is-4 has-text-centered">Make an L-shape (L)</h2>
+      <div class="columns is-vcentered rollout-row">
+        <div class="column">
+          <div class="item">
+            <video controls muted playsinline preload="metadata">
+              <source src="./static/task_examples_ours/L/job0/custom_L_shape_0_1_success.mp4" type="video/mp4">
+            </video>
+            <p class="caption has-text-centered">Example 1</p>
+          </div>
+        </div>
+        <div class="column">
+          <div class="item">
+            <video controls muted playsinline preload="metadata">
+              <source src="./static/task_examples_ours/L/job0/custom_L_shape_1_2_success.mp4" type="video/mp4">
+            </video>
+            <p class="caption has-text-centered">Example 2</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section rollout-section">
+    <div class="container">
+      <h2 class="title is-4 has-text-centered">Make a rectangle (rect)</h2>
+      <div class="columns is-vcentered rollout-row">
+        <div class="column">
+          <div class="item">
+            <video controls muted playsinline preload="metadata">
+              <source src="./static/task_examples_ours/rect/job0/custom_rect_5_4_success.mp4" type="video/mp4">
+            </video>
+            <p class="caption has-text-centered">Example 1</p>
+          </div>
+        </div>
+        <div class="column">
+          <div class="item">
+            <video controls muted playsinline preload="metadata">
+              <source src="./static/task_examples_ours/rect/job0/custom_rect_3_7_success.mp4" type="video/mp4">
+            </video>
+            <p class="caption has-text-centered">Example 2</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section rollout-section">
+    <div class="container">
+      <h2 class="title is-4 has-text-centered">Group &amp; isolate (gris)</h2>
+      <div class="columns is-vcentered rollout-row">
+        <div class="column">
+          <div class="item">
+            <video controls muted playsinline preload="metadata">
+              <source src="./static/task_examples_ours/gris/job0/custom_gris_0_2_success.mp4" type="video/mp4">
+            </video>
+            <p class="caption has-text-centered">Example 1</p>
+          </div>
+        </div>
+        <div class="column">
+          <div class="item">
+            <video controls muted playsinline preload="metadata">
+              <source src="./static/task_examples_ours/gris/job0/custom_gris_1_0_success.mp4" type="video/mp4">
+            </video>
+            <p class="caption has-text-centered">Example 2</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section rollout-section">
+    <div class="container">
+      <h2 class="title is-4 has-text-centered">Make a midpoint (mid)</h2>
+      <div class="columns is-vcentered rollout-row">
+        <div class="column">
+          <div class="item">
+            <video controls muted playsinline preload="metadata">
+              <source src="./static/task_examples_ours/mid/job0/custom_mid_0_0_success.mp4" type="video/mp4">
+            </video>
+            <p class="caption has-text-centered">Example 1</p>
+          </div>
+        </div>
+        <div class="column">
+          <div class="item">
+            <video controls muted playsinline preload="metadata">
+              <source src="./static/task_examples_ours/mid/job0/custom_mid_1_0_success.mp4" type="video/mp4">
+            </video>
+            <p class="caption has-text-centered">Example 2</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section rollout-section">
+    <div class="container">
+      <h2 class="title is-4 has-text-centered">Clear quarter (clear qtr)</h2>
+      <div class="columns is-vcentered rollout-row">
+        <div class="column">
+          <div class="item">
+            <video controls muted playsinline preload="metadata">
+              <source src="./static/task_examples_ours/clear_quarter/job0/custom_clear_quarter_0_0_success.mp4" type="video/mp4">
+            </video>
+            <p class="caption has-text-centered">Example 1</p>
+          </div>
+        </div>
+        <div class="column">
+          <div class="item">
+            <video controls muted playsinline preload="metadata">
+              <source src="./static/task_examples_ours/clear_quarter/job0/custom_clear_quarter_1_0_success.mp4" type="video/mp4">
+            </video>
+            <p class="caption has-text-centered">Example 2</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section rollout-section">
+    <div class="container">
+      <h2 class="title is-4 has-text-centered">Isolate in place (iip)</h2>
+      <div class="columns is-vcentered rollout-row">
+        <div class="column">
+          <div class="item">
+            <video controls muted playsinline preload="metadata">
+              <source src="./static/task_examples_ours/iip/job0/custom_iip_0_0_success.mp4" type="video/mp4">
+            </video>
+            <p class="caption has-text-centered">Example 1</p>
+          </div>
+        </div>
+        <div class="column">
+          <div class="item">
+            <video controls muted playsinline preload="metadata">
+              <source src="./static/task_examples_ours/iip/job0/custom_iip_1_0_success.mp4" type="video/mp4">
+            </video>
+            <p class="caption has-text-centered">Example 2</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section rollout-section">
+    <div class="container">
+      <h2 class="title is-4 has-text-centered">Make an inverted V-shape (iV)</h2>
+      <div class="columns is-vcentered rollout-row">
+        <div class="column">
+          <div class="item">
+            <video controls muted playsinline preload="metadata">
+              <source src="./static/task_examples_ours/iV/job0/custom_iV_shape_0_0_success.mp4" type="video/mp4">
+            </video>
+            <p class="caption has-text-centered">Example 1</p>
+          </div>
+        </div>
+        <div class="column">
+          <div class="item">
+            <video controls muted playsinline preload="metadata">
+              <source src="./static/task_examples_ours/iV/job0/custom_iV_shape_1_0_success.mp4" type="video/mp4">
+            </video>
+            <p class="caption has-text-centered">Example 2</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section rollout-section">
+    <div class="container">
+      <h2 class="title is-4 has-text-centered">Make an inverted L-shape (iL)</h2>
+      <div class="columns is-vcentered rollout-row">
+        <div class="column">
+          <div class="item">
+            <video controls muted playsinline preload="metadata">
+              <source src="./static/task_examples_ours/iL/job0/custom_iL_shape_0_0_success.mp4" type="video/mp4">
+            </video>
+            <p class="caption has-text-centered">Example 1</p>
+          </div>
+        </div>
+        <div class="column">
+          <div class="item">
+            <video controls muted playsinline preload="metadata">
+              <source src="./static/task_examples_ours/iL/job0/custom_iL_shape_1_2_success.mp4" type="video/mp4">
+            </video>
+            <p class="caption has-text-centered">Example 2</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section rollout-section">
+    <div class="container">
+      <h2 class="title is-4 has-text-centered">Make a diagonal line (diag line)</h2>
+      <div class="columns is-vcentered rollout-row">
+        <div class="column">
+          <div class="item">
+            <video controls muted playsinline preload="metadata">
+              <source src="./static/task_examples_ours/dline/job0/custom_dline_2_5_success.mp4" type="video/mp4">
+            </video>
+            <p class="caption has-text-centered">Example 1</p>
+          </div>
+        </div>
+        <div class="column">
+          <div class="item">
+            <video controls muted playsinline preload="metadata">
+              <source src="./static/task_examples_ours/dline/job0/custom_dline_1_0_success.mp4" type="video/mp4">
+            </video>
+            <p class="caption has-text-centered">Example 2</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section rollout-section">
+    <div class="container">
+      <h2 class="title is-4 has-text-centered">Clear half (clear half)</h2>
+      <div class="columns is-vcentered rollout-row">
+        <div class="column">
+          <div class="item">
+            <video controls muted playsinline preload="metadata">
+              <source src="./static/task_examples_ours/clear_half/job0/custom_clear_half_0_0_success.mp4" type="video/mp4">
+            </video>
+            <p class="caption has-text-centered">Example 1</p>
+          </div>
+        </div>
+        <div class="column">
+          <div class="item">
+            <video controls muted playsinline preload="metadata">
+              <source src="./static/task_examples_ours/clear_half/job0/custom_clear_half_1_0_success.mp4" type="video/mp4">
+            </video>
+            <p class="caption has-text-centered">Example 2</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</body>
+
+</html>
