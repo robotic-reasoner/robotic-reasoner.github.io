@@ -1,7 +1,9 @@
 .DS_store
 .idea
+.cursor
 pdf
 og
 tmp
 tmp*/
 arxiv_paper/
+AGENT_README.md
