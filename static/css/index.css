@@ -395,8 +395,17 @@ body {
   flex-direction: column;
 }
 
+.navbar-sidebar-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 28px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
 .navbar-sidebar-menu {
-  padding-top: 24px;
+  padding-top: 0;
 }
 
 .nav-logo {
