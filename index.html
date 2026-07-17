@@ -110,7 +110,7 @@
                 <span class="author-block"><a href="https://zackory.com/" target="_blank" rel="noopener">Zackory Erickson</a><sup>1</sup>,</span>
                 <span class="author-block"><a href="https://aviralkumar2907.github.io/" target="_blank" rel="noopener">Aviral Kumar</a><sup>1</sup></span>
               </div>
-              <div class="is-size-5 publication-authors">
+              <div class="is-size-6 publication-authors publication-affiliations">
                 <span class="author-block"><sup>1</sup>Carnegie Mellon University</span>
               </div>
               <div class="column has-text-centered">
@@ -158,15 +158,18 @@
               <p>
                 Reasoning in language allows foundation models to <b>spend more test-time compute</b> on hard problems,
                 such as those requiring decomposition, constraint tracking, and prediction of future consequences. Whether this
-                mechanism can improve robotic manipulation remains unclear, where long-horizon tasks require tracking partial
-                progress, reasoning about object relations, recovering from mistakes, and steering noisy low-level policies. In this
-                paper, we study whether VLMs can be trained to reason directly in natural language to guide low-level manipulation
-                policies. We introduce R³, a simple post-training recipe that turns off-the-shelf VLMs into robotic reasoners: it first
+                mechanism can improve robotic manipulation remains unclear, where <b>long-horizon tasks</b> require tracking partial
+                progress, reasoning about object relations, recovering from mistakes, and steering noisy low-level policies. 
+                <br>
+                In this paper, we study whether VLMs can be trained to <b>reason directly in natural language to guide low-level manipulation policies.</b> 
+                We introduce R³, a simple post-training recipe that turns off-the-shelf VLMs into robotic reasoners: it first
                 mid-trains a VLM on expert-generated reasoning traces to initialize the desired reasoning style, then improves the
                 reasoner with <b>single-step rubric-based RL</b> from offline action data. Unlike prior robotic reasoning methods that
                 mostly use structured traces as auxiliary supervision, R³ trains free-form language reasoning to produce test-time
-                guidance for action. We instantiate R³ on Language Table, a controlled testbed for studying robotic reasoning,
-                and find that it <b>improves exploration and generalization across unseen tasks</b>. These results suggest that free-form
+                guidance for action. 
+                <br>
+                We instantiate R³ on Language Table, a controlled testbed for studying robotic reasoning,
+                and find that it improves exploration and generalization across unseen tasks. These results suggest that free-form
                 language reasoning can function as a test-time compute mechanism for steering low-level policies. 
               </p>
             </div>

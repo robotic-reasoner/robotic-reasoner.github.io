@@ -359,12 +359,16 @@ body {
 }
 
 .rollout-row {
-  margin-bottom: 2rem;
+  display: block !important;
+  margin-bottom: 1rem;
 }
 
 .rollout-row .column {
-  max-width: none;
-  margin: 0;
+  width: 100% !important;
+  max-width: 100%;
+  margin: 0 auto 1.5rem;
+  display: block;
+  padding: 0;
 }
 
 .rollout-row .item {
@@ -598,9 +602,13 @@ body {
   line-height: 1;
   font-size: 20px;
   font-weight: 700;
-  color: #333;
   font-family: 'Google Sans', sans-serif;
   letter-spacing: 0.02em;
+  background: linear-gradient(90deg, #1e3a8a, #3b82f6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
 }
 
 .nav-title-mobile {
@@ -608,9 +616,13 @@ body {
   line-height: 1;
   font-size: 18px;
   font-weight: 700;
-  color: #333;
   font-family: 'Google Sans', sans-serif;
   letter-spacing: 0.02em;
+  background: linear-gradient(90deg, #1e3a8a, #3b82f6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
 }
 
 .navbar-sidebar-menu {
