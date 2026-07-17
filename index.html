@@ -186,23 +186,25 @@
               <div class="content">
                 <p>
                   To train reasoners for robotic manipulation, we use a hierarchical architecture:
-                  A high-level VLM generates a reasoning trace and an instruction given the scene, goal, and previous response.
-                  A language-conditioned low-level actor then executes the instruction.
+                  a low-level policy controls the robot, while a high-level VLM provides language instruction that steers this policy.
+                  With expert trajectories, our goal is to train the high-level VLM to reason in natural language before issuing this instruction.
                 </p>
                 <figure class="paper-figure" style="--fig-width: 35%;">
                   <img src="./static/images/arch_v2.png" alt="Hierarchical architecture of R³">
                   <figcaption>
-                    <b>Architecture of R³.</b>
+                    <b>Architecture of R³.</b> A high-level VLM generates a reasoning trace and an instruction given the
+                    scene, goal, and previous response as input. A language-conditioned low-level actor then executes the instruction.
                   </figcaption>
                 </figure>
                 <p>
-                  We instantiate this setup on Language Table with long-horizon block-arrangement tasks that require composing object movements and reasoning about spatial relationships.
+                  We instantiate this setup on Language Table. 
+                  We design 14 types of long-horizon block-arrangement tasks in Language Table that require composing object movements and reasoning about spatial relationships.
+                  The task suite is designed to test relational transfer, compositional generalization, and increasing geometric difficulty.
                 </p>
                 <figure class="paper-figure" style="--fig-width: 100%;">
                   <img src="./static/images/filmstrip_task_example.png" alt="Expert trajectory example on Language Table">
                   <figcaption>
-                    <b>Example expert trajectory and reasoning trace</b> on a line-arrangement task.
-                    The high-level reasoner tracks progress and issues the next instruction for the low-level policy.
+                    Example of expert-collected trajectory and reasoning trace on the "make a line" task.
                   </figcaption>
                 </figure>
               </div>
@@ -311,7 +313,7 @@
                 <ul class="takeaways">
                   <li>Mid-training stabilizes the reasoning interface; RL makes reasoning more deliberate and action-oriented. With mid-training as a warm start, RL refines an already reasonable behavior distribution rather than rediscovering behaviors from scratch.</li>
                 </ul>
-                <figure class="paper-figure" style="--fig-width: 40%;">
+                <figure class="paper-figure" style="--fig-width: 50%;">
                   <img src="./static/images/method_instr_rl_effect_log.png" alt="Effect of RL on instruction distributions">
                   <figcaption>
                     <b>RL affects instruction distributions.</b>

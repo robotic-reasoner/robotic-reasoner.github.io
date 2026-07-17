@@ -253,6 +253,7 @@ body {
 .main-content .rollout-note,
 .main-content .takeaways {
   color: #1a1a1a;
+  font-size: 1.1rem;
 }
 
 .figure-row {
