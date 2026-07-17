@@ -189,7 +189,7 @@
                   a low-level policy controls the robot, while a high-level VLM provides language instruction that steers this policy.
                   With expert trajectories, our goal is to train the high-level VLM to reason in natural language before issuing this instruction.
                 </p>
-                <figure class="paper-figure" style="--fig-width: 35%;">
+                <figure class="paper-figure" style="--fig-width: 40%;">
                   <img src="./static/images/arch_v2.png" alt="Hierarchical architecture of R³">
                   <figcaption>
                     <b>Architecture of R³.</b> A high-level VLM generates a reasoning trace and an instruction given the
@@ -313,7 +313,7 @@
                 <ul class="takeaways">
                   <li>Mid-training largely aligns the model’s instruction distribution with the expert’s, providing a strong behavioral prior before RL. With mid-training as a warm start, RL refines an already reasonable behavior distribution rather than rediscovering behaviors from scratch.</li>
                 </ul>
-                <figure class="paper-figure" style="--fig-width: 50%;">
+                <figure class="paper-figure" style="--fig-width: 60%;">
                   <img src="./static/images/method_instr_rl_effect_log.png" alt="Effect of RL on instruction distributions">
                   <figcaption>
                     <b>RL affects instruction distributions.</b>
@@ -326,7 +326,9 @@
             <div id="results-ecot" class="subsection">
               <h3 class="title is-4">Comparison with Embodied Chain-of-Thought (ECoT)</h3>
               <div class="content">
-                <p>Adding ECoT-style structured state annotations generally <b>does not help over free-form language reasoning</b> in our setting.</p>
+                <p>
+                  We adapt ECoT to our hierarchical setting by augmenting the response with explicit simulator-state annotations.
+                  Our results show that adding ECoT-style structured state annotations generally <b>does not help over free-form language reasoning</b> in our setting.</p>
                 <div class="table-placeholder">
                   <span class="table-placeholder-label">Table placeholder</span>
                   <span class="table-placeholder-caption">ECoT variants comparison</span>
@@ -344,7 +346,7 @@
         <div class="columns is-centered">
           <div class="column is-full-width">
             <h2 class="title is-3">Examples of Evaluation Rollouts</h2>
-            <p class="rollout-note">We show two successful evaluation rollouts for each of the 14 Language Table tasks.</p>
+            <p class="rollout-note">Here we show 2 successful evaluation rollouts for each of the 14 Language Table tasks.</p>
 
             <div class="expandable-container">
               <button class="expandable-toggle button is-small is-outlined" onclick="toggleRollouts()">
