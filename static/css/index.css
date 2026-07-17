@@ -196,16 +196,38 @@ body {
   width: var(--fig-width);
   max-width: var(--fig-width);
   margin: 0.75rem auto 0;
-  color: #555;
-  font-size: 0.95rem;
+  color: #6b7280;
+  font-size: 0.88rem;
   font-style: normal !important;
+  font-weight: 400;
   line-height: 1.45;
   text-align: left;
   box-sizing: border-box;
 }
 
+.paper-figure figcaption::before {
+  content: "Figure: ";
+  font-weight: 700;
+  color: #6b7280;
+}
+
+.paper-figure figcaption b {
+  color: #4b5563;
+  font-weight: 700;
+}
+
 .content .paper-figure figcaption {
   font-style: normal !important;
+  color: #6b7280;
+}
+
+/* Main body text: black; captions stay gray for contrast */
+.main-content .content,
+.main-content .content p,
+.main-content .content li,
+.main-content .rollout-note,
+.main-content .takeaways {
+  color: #1a1a1a;
 }
 
 .figure-row {

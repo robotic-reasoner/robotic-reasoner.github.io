@@ -156,10 +156,18 @@
             <h2 class="title is-3">Abstract</h2>
             <div class="content has-text-justified">
               <p>
-                Reasoning in language allows foundation models to spend more test-time compute on hard problems.
-                We study whether VLMs can be trained to reason directly in natural language to guide low-level manipulation policies.
-                We introduce R³, a post-training recipe that first mid-trains a VLM on expert-generated reasoning traces, then improves the reasoner with single-step rubric-based RL from offline action data.
-                On Language Table, free-form language reasoning improves exploration and generalization across unseen tasks.
+                Reasoning in language allows foundation models to <b>spend more test-time compute</b> on hard problems,
+                such as those requiring decomposition, constraint tracking, and prediction of future consequences. Whether this
+                mechanism can improve robotic manipulation remains unclear, where long-horizon tasks require tracking partial
+                progress, reasoning about object relations, recovering from mistakes, and steering noisy low-level policies. In this
+                paper, we study whether VLMs can be trained to reason directly in natural language to guide low-level manipulation
+                policies. We introduce R³, a simple post-training recipe that turns off-the-shelf VLMs into robotic reasoners: it first
+                mid-trains a VLM on expert-generated reasoning traces to initialize the desired reasoning style, then improves the
+                reasoner with <b>single-step rubric-based RL</b> from offline action data. Unlike prior robotic reasoning methods that
+                mostly use structured traces as auxiliary supervision, R³ trains free-form language reasoning to produce test-time
+                guidance for action. We instantiate R³ on Language Table, a controlled testbed for studying robotic reasoning,
+                and find that it <b>improves exploration and generalization across unseen tasks</b>. These results suggest that free-form
+                language reasoning can function as a test-time compute mechanism for steering low-level policies. 
               </p>
             </div>
           </div>
@@ -181,7 +189,7 @@
                   a high-level VLM reasons in natural language and issues a short-horizon instruction,
                   while a frozen language-conditioned low-level policy executes that instruction.
                 </p>
-                <figure class="paper-figure" style="--fig-width: 40%;">
+                <figure class="paper-figure" style="--fig-width: 25%;">
                   <img src="./static/images/arch_v2.png" alt="Hierarchical architecture of R³">
                   <figcaption>
                     <b>Architecture of R³.</b>
@@ -230,7 +238,6 @@
                   <li><b>Objective:</b> Dr.GRPO</li>
                   <li><b>Data:</b> expert demos without reasoning labels</li>
                   <li><b>Reward:</b> rubric-based VLM judge (semantic match to expert instruction)</li>
-                  <li><b>Design choices:</b> history as the previous response; reasoning-context imputation; filtering repetitive steps to avoid reward shortcuts</li>
                 </ul>
               </div>
             </div>
@@ -250,9 +257,9 @@
               <h3 class="title is-4">Main Results</h3>
               <div class="content">
                 <ul class="takeaways">
-                  <li><b>RL alone improves performance.</b> Rubric-based RL can reinforce useful reasoning behaviors even without mid-training.</li>
-                  <li><b>Mid-training improves RL.</b> Mid-training is a strong warm start; a modest amount of reasoning data is often enough, especially for OOD generalization.</li>
-                  <li><b>Better OOD generalization than non-reasoning imitation.</b> R³ matches or beats instruction-only imitation on seen tasks, and generalizes much better to held-out tasks.</li>
+                  <li><b>1. RL alone improves performance.</b> Rubric-based RL can reinforce useful reasoning behaviors even without mid-training.</li>
+                  <li><b>2. Mid-training improves RL.</b> Mid-training is a strong warm start; a modest amount of reasoning data is often enough, especially for OOD generalization.</li>
+                  <li><b>3. Better OOD generalization than non-reasoning imitation.</b> R³ matches or beats instruction-only imitation on seen tasks, and generalizes much better to held-out tasks.</li>
                 </ul>
                 <div class="table-placeholder">
                   <span class="table-placeholder-label">Table placeholder</span>
@@ -265,9 +272,9 @@
               <h3 class="title is-4">Does Reasoning Help Beyond Better Representations?</h3>
               <div class="content">
                 <ul class="takeaways">
-                  <li>Explicit inference-time reasoning improves generalization beyond using reasoning only as training-time supervision.</li>
-                  <li>R³ improves static perception and action understanding, but these gains alone do not explain its manipulation improvements.</li>
-                  <li>Non-reasoning policies that pre-train or co-train on reasoning still lag behind R³, especially on OOD tasks.</li>
+                  <b>Takeaway:</b> Explicit inference-time reasoning improves generalization beyond being only a training-time supervision signal.
+                  <li><b>Evidence A:</b> R³ improves static perception and action understanding,</b> but these gains alone do not explain its manipulation improvements.</li>
+                  <li><b>Evidence B:</b> Non-reasoning policies that pre-train or co-train on reasoning still lag behind R³, especially on OOD tasks.</li>
                 </ul>
                 <div class="table-placeholder">
                   <span class="table-placeholder-label">Table placeholder</span>
@@ -281,10 +288,9 @@
               <div class="content">
                 <ul class="takeaways">
                   <li>R³ learns strategies useful for manipulation: comparing alternatives, self-correction, and resolving visual or historical uncertainty.</li>
-                  <li>Mid-training stabilizes the reasoning interface; RL makes reasoning more deliberate and action-oriented.</li>
-                  <li>With mid-training as a warm start, RL refines an already reasonable behavior distribution rather than rediscovering behaviors from scratch.</li>
+                  <li>Mid-training stabilizes the reasoning interface; RL makes reasoning more deliberate and action-oriented. With mid-training as a warm start, RL refines an already reasonable behavior distribution rather than rediscovering behaviors from scratch.</li>
                 </ul>
-                <div class="columns is-mobile is-variable is-2 figure-row" style="--fig-width: 70%;">
+                <div class="columns is-mobile is-variable is-2 figure-row" style="--fig-width: 100%;">
                   <div class="column">
                     <figure class="paper-figure">
                       <img src="./static/images/reasoning_example_backtrack.png" alt="Self-correction reasoning example">
@@ -304,7 +310,7 @@
                     </figure>
                   </div>
                 </div>
-                <figure class="paper-figure" style="--fig-width: 70%;">
+                <figure class="paper-figure" style="--fig-width: 40%;">
                   <img src="./static/images/method_instr_rl_effect_log.png" alt="Effect of RL on instruction distributions">
                   <figcaption>
                     <b>RL affects instruction distributions.</b>
@@ -318,8 +324,7 @@
               <h3 class="title is-4">Comparison with Embodied Chain-of-Thought (ECoT)</h3>
               <div class="content">
                 <ul class="takeaways">
-                  <li>Adding ECoT-style structured state annotations generally does not help over free-form language reasoning in our setting.</li>
-                  <li>Post-hoc labeled reasoning performs comparably to reasoning recorded during data collection.</li>
+                  Adding ECoT-style structured state annotations generally <b>does not help</b> over free-form language reasoning in our setting.
                 </ul>
                 <div class="table-placeholder">
                   <span class="table-placeholder-label">Table placeholder</span>
