@@ -426,11 +426,13 @@ body {
   transform: translateY(-1px);
 }
 
-.rollout-toggle-icon {
+.rollout-toggle-icon,
+.main-results-table-toggle-icon {
   transition: transform 0.3s ease;
 }
 
-.expandable-toggle.expanded .rollout-toggle-icon {
+.expandable-toggle.expanded .rollout-toggle-icon,
+.expandable-toggle.expanded .main-results-table-toggle-icon {
   transform: rotate(180deg);
 }
 

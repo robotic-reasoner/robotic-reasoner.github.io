@@ -262,9 +262,36 @@
                   <li><b>Mid-training improves RL post-training.</b> Mid-training is a strong warm start; a modest amount of reasoning data is enough, especially for OOD generalization.</li>
                   <li><b>R³ enables better OOD generalization than non-reasoning imitation.</b> R³ matches or beats instruction-only imitation learning baselines on seen tasks, and generalizes much better to held-out tasks.</li>
                 </ul>
-                <div class="table-placeholder">
-                  <span class="table-placeholder-label">Table placeholder</span>
-                  <span class="table-placeholder-caption">Main results table (per-task success rates)</span>
+                <figure class="paper-figure" style="--fig-width: 100%;">
+                  <img src="./static/images/main_results_bar_chart.png" alt="Main results: average success rates across methods">
+                  <figcaption>
+                    <b>Main results.</b>
+                    Average success rates on mid-training, RL, and held-out OOD task splits across baselines and R³ variants.
+                  </figcaption>
+                </figure>
+
+                <div class="expandable-container">
+                  <button id="mainResultsTableToggle" class="expandable-toggle button is-small is-outlined" onclick="toggleMainResultsTable()">
+                    <span class="main-results-table-toggle-text">View detailed per-task numbers</span>
+                    <span class="icon"><i class="fas fa-chevron-down main-results-table-toggle-icon"></i></span>
+                  </button>
+                  <div class="expandable-panel" id="mainResultsTablePanel">
+                    <div class="expandable-content">
+                      <figure class="paper-figure" style="--fig-width: 100%;">
+                        <img src="./static/images/main_results_table.png" alt="Main results: per-task success rates">
+                        <figcaption>
+                          <b>Per-task success rates.</b>
+                          Full results table with per-task success rates across all methods.
+                        </figcaption>
+                      </figure>
+                      <div class="expandable-close-container">
+                        <button class="expandable-close button is-small is-outlined" onclick="toggleMainResultsTable()">
+                          <span class="icon"><i class="fas fa-chevron-up"></i></span>
+                          <span>Close</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -349,7 +376,7 @@
             <p class="rollout-note">Here we show 2 successful evaluation rollouts for each of the 14 Language Table tasks.</p>
 
             <div class="expandable-container">
-              <button class="expandable-toggle button is-small is-outlined" onclick="toggleRollouts()">
+              <button id="rolloutsToggle" class="expandable-toggle button is-small is-outlined" onclick="toggleRollouts()">
                 <span class="rollout-toggle-text">Click to View More</span>
                 <span class="icon"><i class="fas fa-chevron-down rollout-toggle-icon"></i></span>
               </button>

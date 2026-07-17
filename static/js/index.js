@@ -1,7 +1,9 @@
-function toggleExpandable(panelId, toggleButtonSelector, toggleTextSelector) {
+function toggleExpandable(panelId, toggleButtonSelector, toggleTextSelector, options = {}) {
     const panel = document.getElementById(panelId);
     const toggleButton = document.querySelector(toggleButtonSelector);
     const toggleText = document.querySelector(toggleTextSelector);
+    const collapsedLabel = options.collapsedLabel || 'Click to View More';
+    const expandedLabel = options.expandedLabel || 'Click to View Less';
 
     if (!panel || !toggleButton || !toggleText) {
         return;
@@ -10,16 +12,23 @@ function toggleExpandable(panelId, toggleButtonSelector, toggleTextSelector) {
     if (panel.classList.contains('expanded')) {
         panel.classList.remove('expanded');
         toggleButton.classList.remove('expanded');
-        toggleText.textContent = 'Click to View More';
+        toggleText.textContent = collapsedLabel;
     } else {
         panel.classList.add('expanded');
         toggleButton.classList.add('expanded');
-        toggleText.textContent = 'Click to View Less';
+        toggleText.textContent = expandedLabel;
     }
 }
 
 function toggleRollouts() {
-    toggleExpandable('rolloutsPanel', '.expandable-toggle', '.rollout-toggle-text');
+    toggleExpandable('rolloutsPanel', '#rolloutsToggle', '.rollout-toggle-text');
+}
+
+function toggleMainResultsTable() {
+    toggleExpandable('mainResultsTablePanel', '#mainResultsTableToggle', '.main-results-table-toggle-text', {
+        collapsedLabel: 'View detailed per-task numbers',
+        expandedLabel: 'Hide detailed table',
+    });
 }
 
 // =================================
