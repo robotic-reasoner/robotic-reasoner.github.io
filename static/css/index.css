@@ -171,7 +171,9 @@ body {
 }
 
 .paper-figure {
-  margin: 1.25rem 0 1.75rem;
+  --fig-width: 70%;
+  width: var(--fig-width);
+  margin: 1.25rem auto 1.75rem;
   text-align: center;
 }
 
@@ -185,16 +187,32 @@ body {
   background: #fff;
 }
 
-.paper-figure-narrow img {
-  max-width: 720px;
-}
-
 .paper-figure figcaption {
   margin-top: 0.75rem;
   color: #555;
   font-size: 0.95rem;
+  font-style: normal;
   line-height: 1.45;
   text-align: left;
+}
+
+.content .paper-figure figcaption {
+  font-style: normal;
+}
+
+.figure-row {
+  width: var(--fig-width, 70%);
+  margin: 1.25rem auto 1.75rem;
+}
+
+.figure-row .paper-figure {
+  --fig-width: 100%;
+  width: 100%;
+  margin: 0;
+}
+
+.figure-row .column {
+  padding: 0.5rem;
 }
 
 .subsection {

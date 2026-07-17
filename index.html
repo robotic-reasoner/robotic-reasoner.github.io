@@ -138,7 +138,7 @@
     <section class="hero teaser" id="teaser">
       <div class="container is-max-desktop">
         <div class="hero-body">
-          <figure class="paper-figure">
+          <figure class="paper-figure" style="--fig-width: 100%;">
             <img src="./static/images/workflow_v3.png" alt="Two-stage training pipeline of R³">
             <figcaption>
               <b>Two-stage training of R³.</b>
@@ -181,7 +181,7 @@
                   a high-level VLM reasons in natural language and issues a short-horizon instruction,
                   while a frozen language-conditioned low-level policy executes that instruction.
                 </p>
-                <figure class="paper-figure paper-figure-narrow">
+                <figure class="paper-figure" style="--fig-width: 40%;">
                   <img src="./static/images/arch_v2.png" alt="Hierarchical architecture of R³">
                   <figcaption>
                     <b>Architecture of R³.</b>
@@ -192,7 +192,7 @@
                 <p>
                   We instantiate this setup on Language Table with long-horizon block-arrangement tasks that require composing object movements and reasoning about spatial relationships.
                 </p>
-                <figure class="paper-figure">
+                <figure class="paper-figure" style="--fig-width: 100%;">
                   <img src="./static/images/filmstrip_task_example.png" alt="Expert trajectory example on Language Table">
                   <figcaption>
                     <b>Example expert trajectory and reasoning trace</b> on a line-arrangement task.
@@ -284,21 +284,27 @@
                   <li>Mid-training stabilizes the reasoning interface; RL makes reasoning more deliberate and action-oriented.</li>
                   <li>With mid-training as a warm start, RL refines an already reasonable behavior distribution rather than rediscovering behaviors from scratch.</li>
                 </ul>
-                <figure class="paper-figure">
-                  <img src="./static/images/reasoning_example_backtrack.png" alt="Self-correction reasoning example">
-                  <figcaption>
-                    <b>Self-correction.</b>
-                    The reasoner compares alternatives, notices an inconsistent plan, and revises before issuing the instruction.
-                  </figcaption>
-                </figure>
-                <figure class="paper-figure">
-                  <img src="./static/images/reasoning_example_occlusion.png" alt="Occlusion reasoning example">
-                  <figcaption>
-                    <b>Resolving uncertainty.</b>
-                    When an object is partially occluded, the model re-examines the scene and history instead of blindly trusting the previous response.
-                  </figcaption>
-                </figure>
-                <figure class="paper-figure paper-figure-narrow">
+                <div class="columns is-mobile is-variable is-2 figure-row" style="--fig-width: 70%;">
+                  <div class="column">
+                    <figure class="paper-figure">
+                      <img src="./static/images/reasoning_example_backtrack.png" alt="Self-correction reasoning example">
+                      <figcaption>
+                        <b>Self-correction.</b>
+                        The reasoner compares alternatives, notices an inconsistent plan, and revises before issuing the instruction.
+                      </figcaption>
+                    </figure>
+                  </div>
+                  <div class="column">
+                    <figure class="paper-figure">
+                      <img src="./static/images/reasoning_example_occlusion.png" alt="Occlusion reasoning example">
+                      <figcaption>
+                        <b>Resolving uncertainty.</b>
+                        When an object is partially occluded, the model re-examines the scene and history instead of blindly trusting the previous response.
+                      </figcaption>
+                    </figure>
+                  </div>
+                </div>
+                <figure class="paper-figure" style="--fig-width: 70%;">
                   <img src="./static/images/method_instr_rl_effect_log.png" alt="Effect of RL on instruction distributions">
                   <figcaption>
                     <b>RL affects instruction distributions.</b>
@@ -331,8 +337,8 @@
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column is-full-width">
-            <h2 class="title is-3 has-text-centered">Examples of Successful Evaluation Rollouts</h2>
-            <p class="has-text-centered rollout-note">We provide 2 examples of successful rollout videos for all 14 Language Table tasks.</p>
+            <h2 class="title is-3">Examples of Successful Evaluation Rollouts</h2>
+            <p class="rollout-note">We provide 2 examples of successful rollout videos for all 14 Language Table tasks.</p>
 
             <div class="expandable-container">
               <button class="expandable-toggle button is-small is-outlined" onclick="toggleRollouts()">
