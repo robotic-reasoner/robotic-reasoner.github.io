@@ -188,16 +188,16 @@
                   <img src="./static/images/arch_v2.png" alt="Hierarchical architecture of R³">
                   <p>
                     To train reasoners for robotic manipulation, we use a hierarchical architecture:
-                    a high-level VLM reasons in natural language and issues a short-horizon instruction,
-                    while a frozen language-conditioned low-level policy executes that instruction.
+                    A high-level VLM generates a reasoning trace and an instruction given the scene, goal, and previous response.
+                    A language-conditioned low-level actor then executes the instruction.
                   </p>
                   <p>
                     We instantiate this setup on Language Table with long-horizon block-arrangement tasks that require composing object movements and reasoning about spatial relationships.
                   </p>
                   <figcaption>
                     <b>Architecture of R³.</b>
-                    A high-level VLM generates a reasoning trace and an instruction given the scene, goal, and previous response.
-                    A language-conditioned low-level actor then executes the instruction.
+                    <!-- A high-level VLM generates a reasoning trace and an instruction given the scene, goal, and previous response.
+                    A language-conditioned low-level actor then executes the instruction. -->
                   </figcaption>
                 </figure>
                 <figure class="paper-figure" style="--fig-width: 100%;">
@@ -340,8 +340,8 @@
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column is-full-width">
-            <h2 class="title is-3">Examples of Successful Evaluation Rollouts</h2>
-            <p class="rollout-note">We provide 2 examples of successful rollout videos for all 14 Language Table tasks.</p>
+            <h2 class="title is-3">Examples of Evaluation Rollouts</h2>
+            <p class="rollout-note">We show two successful evaluation rollouts for each of the 14 Language Table tasks.</p>
 
             <div class="expandable-container">
               <button class="expandable-toggle button is-small is-outlined" onclick="toggleRollouts()">
