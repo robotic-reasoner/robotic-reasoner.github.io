@@ -200,8 +200,8 @@ body {
 
 .paper-figure figcaption {
   display: block;
-  width: var(--fig-width);
-  max-width: var(--fig-width);
+  width: 100%;
+  max-width: 100%;
   margin: 0.75rem auto 0;
   color: #6b7280;
   font-size: 0.88rem;
@@ -228,33 +228,22 @@ body {
   color: #6b7280;
 }
 
-.wrap-content::after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-.paper-figure.wrap-figure-right {
-  float: right;
-  width: var(--fig-width);
-  max-width: var(--fig-width);
-  margin: 0.15rem 0 0.75rem 1.25rem !important;
+.paper-figure.wrap-figure-group {
+  width: 100%;
+  max-width: 100%;
+  margin: 1.25rem 0 1.75rem !important;
   text-align: left;
 }
 
-.paper-figure.wrap-figure-right img {
-  width: 100% !important;
-  max-width: 100% !important;
-  margin-left: 0;
-  margin-right: 0;
+.paper-figure.wrap-figure-group img {
+  float: right;
+  width: var(--fig-width) !important;
+  max-width: var(--fig-width) !important;
+  margin: 0.15rem 0 0.75rem 1.25rem;
 }
 
-.paper-figure.wrap-figure-right figcaption {
-  width: 100%;
-  max-width: 100%;
-  margin: 0.5rem 0 0;
-  font-size: 0.78rem;
-  line-height: 1.35;
+.paper-figure.wrap-figure-group figcaption {
+  clear: both;
 }
 
 /* Main body text: black; captions stay gray for contrast */
@@ -299,7 +288,7 @@ body {
 
 /* Section titles (level-1): dark blue underline under the title text */
 .main-content h2.title.is-3 {
-  color: #1a1a1a;
+  color: #2563eb;
   display: inline-block;
   border-bottom: 2px solid #2563eb;
   padding-bottom: 0.3rem;
@@ -569,12 +558,12 @@ body {
     width: 100%;
   }
 
-  .paper-figure.wrap-figure-right {
+  .paper-figure.wrap-figure-group img {
     float: none;
-    width: 55%;
-    max-width: 55%;
-    margin: 0 auto 1rem !important;
-    text-align: center;
+    display: block !important;
+    width: 55% !important;
+    max-width: 55% !important;
+    margin: 0 auto 1rem;
   }
 }
 
