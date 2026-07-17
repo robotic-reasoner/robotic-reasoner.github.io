@@ -215,12 +215,12 @@ body {
 .paper-figure figcaption::before {
   content: "Figure: ";
   font-weight: 700;
-  color: #6b7280;
+  color: #4b5563;
 }
 
 .paper-figure figcaption b {
-  color: #4b5563;
   font-weight: 700;
+  color: #6b7280;
 }
 
 .content .paper-figure figcaption {
@@ -252,8 +252,8 @@ body {
 .main-content .content li,
 .main-content .rollout-note,
 .main-content .takeaways {
-  color: #1a1a1a;
-  font-size: 1.2rem;
+  color: #000000;
+  font-size: 1.1rem;
 }
 
 .figure-row {
