@@ -189,7 +189,7 @@
                   A high-level VLM generates a reasoning trace and an instruction given the scene, goal, and previous response.
                   A language-conditioned low-level actor then executes the instruction.
                 </p>
-                <figure class="paper-figure" style="--fig-width: 30%;">
+                <figure class="paper-figure" style="--fig-width: 35%;">
                   <img src="./static/images/arch_v2.png" alt="Hierarchical architecture of R³">
                   <figcaption>
                     <b>Architecture of R³.</b>
@@ -222,8 +222,8 @@
                   Stage I mid-trains the VLM on expert-generated reasoning traces so it learns to reason about the state and interaction history before emitting an instruction.
                 </p>
                 <ul>
-                  <li><b>Objective:</b> next-token prediction</li>
-                  <li><b>Data:</b> expert demos with reasoning labels</li>
+                  <li>Data: expert demonstrations with reasoning labels</li>
+                  <li>Objective: next-token prediction loss</li>
                 </ul>
 
                 <h4 class="title is-5">Stage II: Rubric-based Single-step RL</h4>
@@ -233,9 +233,10 @@
                   A frozen VLM judge scores whether the predicted instruction semantically matches the expert instruction under a rubric.
                 </p>
                 <ul>
-                  <li><b>Objective:</b> Dr.GRPO</li>
-                  <li><b>Data:</b> expert demos without reasoning labels</li>
-                  <li><b>Reward:</b> rubric-based VLM judge (semantic match to expert instruction)</li>
+                  <li>Data: expert demonstrations without reasoning labels</li>
+                  <li>Objective: Dr.GRPO</li>
+                  <li>Reward: A frozen VLM judge provides reward for each predicted instruction. It evaluates whether the predicted instruction aligns with
+                    the expert’s, is feasible for the low-level policy, and would lead to a similar outcome. </li>
                 </ul>
               </div>
             </div>
@@ -271,8 +272,8 @@
               <div class="content">
                 <p><b>Takeaway:</b> Explicit inference-time reasoning improves generalization beyond what is achieved by using reasoning only as a training-time supervision signal.</p>
                 <ul class="takeaways">
-                  <li><b>Evidence A:</b> R³ improves static perception and action understanding, but these gains alone do not explain its manipulation improvements.</li>
-                  <li><b>Evidence B:</b> Non-reasoning policies that pre-train or co-train on reasoning still lag behind R³, especially on OOD tasks.</li>
+                  <li><b>Evidence A:</b> R³ improves both static perception and action understanding, but these improvements alone does not explain its manipulation gains.</li>
+                  <li><b>Evidence B:</b> R³ outperforms non-reasoning policies that use reasoning as training-time supervision, especially on OOD tasks.</li>
                 </ul>
                 <div class="table-placeholder">
                   <span class="table-placeholder-label">Table placeholder</span>
@@ -285,8 +286,7 @@
               <h3 class="title is-4">Understanding Reasoning Behaviors Learned by R³</h3>
               <div class="content">
                 <ul class="takeaways">
-                  <li>R³ learns strategies useful for manipulation: comparing alternatives, self-correction, and resolving visual or historical uncertainty.</li>
-                  <li>Mid-training stabilizes the reasoning interface; RL makes reasoning more deliberate and action-oriented. With mid-training as a warm start, RL refines an already reasonable behavior distribution rather than rediscovering behaviors from scratch.</li>
+                  <li>R³ learns reasoning strategies that are useful for long-horizon manipulation: comparing alternatives, self-correction, and resolving visual or historical uncertainty.</li>
                 </ul>
                 <div class="columns is-mobile is-variable is-2 figure-row" style="--fig-width: 100%;">
                   <div class="column">
@@ -308,6 +308,9 @@
                     </figure>
                   </div>
                 </div>
+                <ul class="takeaways">
+                  <li>Mid-training stabilizes the reasoning interface; RL makes reasoning more deliberate and action-oriented. With mid-training as a warm start, RL refines an already reasonable behavior distribution rather than rediscovering behaviors from scratch.</li>
+                </ul>
                 <figure class="paper-figure" style="--fig-width: 40%;">
                   <img src="./static/images/method_instr_rl_effect_log.png" alt="Effect of RL on instruction distributions">
                   <figcaption>
@@ -321,7 +324,7 @@
             <div id="results-ecot" class="subsection">
               <h3 class="title is-4">Comparison with Embodied Chain-of-Thought (ECoT)</h3>
               <div class="content">
-                <p>Adding ECoT-style structured state annotations generally <b>does not help</b> over free-form language reasoning in our setting.</p>
+                <p>Adding ECoT-style structured state annotations generally <b>does not help over free-form language reasoning</b> in our setting.</p>
                 <div class="table-placeholder">
                   <span class="table-placeholder-label">Table placeholder</span>
                   <span class="table-placeholder-caption">ECoT variants comparison</span>
