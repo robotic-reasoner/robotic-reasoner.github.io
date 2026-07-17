@@ -15,7 +15,6 @@
   <link rel="stylesheet" href="./static/css/index.css">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="./static/js/index.js" defer></script>
 </head>
 
 <body>
@@ -272,7 +271,7 @@
               </div>
 
               <div class="expandable-container">
-                <button id="mainResultsTableToggle" type="button" class="expandable-toggle button is-small is-outlined" aria-expanded="false" aria-controls="mainResultsTablePanel">
+                <button id="mainResultsTableToggle" type="button" class="expandable-toggle button is-small is-outlined" onclick="toggleMainResultsTable()">
                   <span class="main-results-table-toggle-text">View detailed per-task numbers</span>
                   <span class="icon"><i class="fas fa-chevron-down main-results-table-toggle-icon"></i></span>
                 </button>
@@ -286,7 +285,7 @@
                       </figcaption>
                     </figure>
                     <div class="expandable-close-container">
-                      <button type="button" class="expandable-close button is-small is-outlined" data-expandable-close>
+                      <button type="button" class="expandable-close button is-small is-outlined" onclick="toggleMainResultsTable()">
                         <span class="icon"><i class="fas fa-chevron-up"></i></span>
                         <span>Close</span>
                       </button>
@@ -376,7 +375,7 @@
             <p class="rollout-note">Here we show 2 successful evaluation rollouts for each of the 14 Language Table tasks.</p>
 
             <div class="expandable-container">
-              <button id="rolloutsToggle" type="button" class="expandable-toggle button is-small is-outlined" aria-expanded="false" aria-controls="rolloutsPanel">
+              <button id="rolloutsToggle" type="button" class="expandable-toggle button is-small is-outlined" onclick="toggleRollouts()">
                 <span class="rollout-toggle-text">Click to View More</span>
                 <span class="icon"><i class="fas fa-chevron-down rollout-toggle-icon"></i></span>
               </button>
@@ -608,7 +607,7 @@
                   </div>
 
                   <div class="expandable-close-container">
-                    <button type="button" class="expandable-close button is-small is-outlined" data-expandable-close>
+                    <button type="button" class="expandable-close button is-small is-outlined" onclick="toggleRollouts()">
                       <span class="icon"><i class="fas fa-chevron-up"></i></span>
                       <span>Close</span>
                     </button>
@@ -655,6 +654,7 @@
 
   </main>
 
+  <script src="./static/js/index.js"></script>
 </body>
 
 </html>
