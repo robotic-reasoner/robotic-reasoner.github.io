@@ -1,9 +1,7 @@
-function toggleExpandable(panelId, toggleButtonSelector, toggleTextSelector, options = {}) {
-    const panel = document.getElementById(panelId);
-    const toggleButton = document.querySelector(toggleButtonSelector);
-    const toggleText = document.querySelector(toggleTextSelector);
-    const collapsedLabel = options.collapsedLabel || 'Click to View More';
-    const expandedLabel = options.expandedLabel || 'Click to View Less';
+function toggleExpandable(panel, toggleButton, toggleText, options) {
+    options = options || {};
+    var collapsedLabel = options.collapsedLabel || 'Click to View More';
+    var expandedLabel = options.expandedLabel || 'Click to View Less';
 
     if (!panel || !toggleButton || !toggleText) {
         return;
@@ -12,20 +10,50 @@ function toggleExpandable(panelId, toggleButtonSelector, toggleTextSelector, opt
     if (panel.classList.contains('expanded')) {
         panel.classList.remove('expanded');
         toggleButton.classList.remove('expanded');
+        toggleButton.setAttribute('aria-expanded', 'false');
         toggleText.textContent = collapsedLabel;
     } else {
         panel.classList.add('expanded');
         toggleButton.classList.add('expanded');
+        toggleButton.setAttribute('aria-expanded', 'true');
         toggleText.textContent = expandedLabel;
     }
 }
 
+function setupExpandable(panelId, toggleButtonId, toggleTextSelector, options) {
+    var panel = document.getElementById(panelId);
+    var toggleButton = document.getElementById(toggleButtonId);
+    var toggleText = toggleButton ? toggleButton.querySelector(toggleTextSelector) : null;
+
+    if (!panel || !toggleButton || !toggleText) {
+        return;
+    }
+
+    var handler = function(event) {
+        if (event) {
+            event.preventDefault();
+        }
+        toggleExpandable(panel, toggleButton, toggleText, options);
+    };
+
+    toggleButton.addEventListener('click', handler);
+    panel.querySelectorAll('[data-expandable-close]').forEach(function(closeButton) {
+        closeButton.addEventListener('click', handler);
+    });
+}
+
 function toggleRollouts() {
-    toggleExpandable('rolloutsPanel', '#rolloutsToggle', '.rollout-toggle-text');
+    var panel = document.getElementById('rolloutsPanel');
+    var toggleButton = document.getElementById('rolloutsToggle');
+    var toggleText = toggleButton ? toggleButton.querySelector('.rollout-toggle-text') : null;
+    toggleExpandable(panel, toggleButton, toggleText);
 }
 
 function toggleMainResultsTable() {
-    toggleExpandable('mainResultsTablePanel', '#mainResultsTableToggle', '.main-results-table-toggle-text', {
+    var panel = document.getElementById('mainResultsTablePanel');
+    var toggleButton = document.getElementById('mainResultsTableToggle');
+    var toggleText = toggleButton ? toggleButton.querySelector('.main-results-table-toggle-text') : null;
+    toggleExpandable(panel, toggleButton, toggleText, {
         collapsedLabel: 'View detailed per-task numbers',
         expandedLabel: 'Hide detailed table',
     });
@@ -235,4 +263,9 @@ class NavigationManager {
 // Initialize Navigation when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     new NavigationManager();
+    setupExpandable('mainResultsTablePanel', 'mainResultsTableToggle', '.main-results-table-toggle-text', {
+        collapsedLabel: 'View detailed per-task numbers',
+        expandedLabel: 'Hide detailed table',
+    });
+    setupExpandable('rolloutsPanel', 'rolloutsToggle', '.rollout-toggle-text');
 });

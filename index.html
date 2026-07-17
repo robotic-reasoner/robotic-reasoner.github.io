@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="./static/css/index.css">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="./static/js/index.js"></script>
+  <script src="./static/js/index.js" defer></script>
 </head>
 
 <body>
@@ -266,30 +266,30 @@
                   <img src="./static/images/main_results_bar_chart.png" alt="Main results: average success rates across methods">
                   <figcaption>
                     <b>Main results.</b>
-                    Average success rates on mid-training, RL, and held-out OOD task splits across baselines and R³ variants.
+                    Average success rates on 6 mid-training tasks, 3 RL-only tasks, and 5 held-out OOD task splits across baselines and R³ variants. For detailed per-task numbers, see the table below.
                   </figcaption>
                 </figure>
+              </div>
 
-                <div class="expandable-container">
-                  <button id="mainResultsTableToggle" class="expandable-toggle button is-small is-outlined" onclick="toggleMainResultsTable()">
-                    <span class="main-results-table-toggle-text">View detailed per-task numbers</span>
-                    <span class="icon"><i class="fas fa-chevron-down main-results-table-toggle-icon"></i></span>
-                  </button>
-                  <div class="expandable-panel" id="mainResultsTablePanel">
-                    <div class="expandable-content">
-                      <figure class="paper-figure" style="--fig-width: 100%;">
-                        <img src="./static/images/main_results_table.png" alt="Main results: per-task success rates">
-                        <figcaption>
-                          <b>Per-task success rates.</b>
-                          Full results table with per-task success rates across all methods.
-                        </figcaption>
-                      </figure>
-                      <div class="expandable-close-container">
-                        <button class="expandable-close button is-small is-outlined" onclick="toggleMainResultsTable()">
-                          <span class="icon"><i class="fas fa-chevron-up"></i></span>
-                          <span>Close</span>
-                        </button>
-                      </div>
+              <div class="expandable-container">
+                <button id="mainResultsTableToggle" type="button" class="expandable-toggle button is-small is-outlined" aria-expanded="false" aria-controls="mainResultsTablePanel">
+                  <span class="main-results-table-toggle-text">View detailed per-task numbers</span>
+                  <span class="icon"><i class="fas fa-chevron-down main-results-table-toggle-icon"></i></span>
+                </button>
+                <div class="expandable-panel" id="mainResultsTablePanel">
+                  <div class="expandable-content">
+                    <figure class="paper-figure" style="--fig-width: 100%;">
+                      <img src="./static/images/main_results_table.png" alt="Main results: per-task success rates">
+                      <figcaption>
+                        <b>Per-task success rates.</b>
+                        Full results table with per-task success rates across all methods.
+                      </figcaption>
+                    </figure>
+                    <div class="expandable-close-container">
+                      <button type="button" class="expandable-close button is-small is-outlined" data-expandable-close>
+                        <span class="icon"><i class="fas fa-chevron-up"></i></span>
+                        <span>Close</span>
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -376,7 +376,7 @@
             <p class="rollout-note">Here we show 2 successful evaluation rollouts for each of the 14 Language Table tasks.</p>
 
             <div class="expandable-container">
-              <button id="rolloutsToggle" class="expandable-toggle button is-small is-outlined" onclick="toggleRollouts()">
+              <button id="rolloutsToggle" type="button" class="expandable-toggle button is-small is-outlined" aria-expanded="false" aria-controls="rolloutsPanel">
                 <span class="rollout-toggle-text">Click to View More</span>
                 <span class="icon"><i class="fas fa-chevron-down rollout-toggle-icon"></i></span>
               </button>
@@ -608,7 +608,7 @@
                   </div>
 
                   <div class="expandable-close-container">
-                    <button class="expandable-close button is-small is-outlined" onclick="toggleRollouts()">
+                    <button type="button" class="expandable-close button is-small is-outlined" data-expandable-close>
                       <span class="icon"><i class="fas fa-chevron-up"></i></span>
                       <span>Close</span>
                     </button>

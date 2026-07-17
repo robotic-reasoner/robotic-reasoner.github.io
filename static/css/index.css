@@ -447,7 +447,8 @@ body {
 }
 
 .expandable-panel.expanded {
-  max-height: none;
+  max-height: 8000px;
+  overflow: visible;
   transition: max-height 0.4s ease-in;
 }
 
