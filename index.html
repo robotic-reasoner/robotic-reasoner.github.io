@@ -235,9 +235,9 @@
                   A frozen VLM judge scores whether the predicted instruction semantically matches the expert instruction under a rubric.
                 </p>
                 <ul>
-                  <li>Data: expert demonstrations without reasoning labels</li>
-                  <li>Objective: Dr.GRPO</li>
-                  <li>Reward: A frozen VLM judge guided by a rubric provides reward for each predicted instruction. The rubric evaluates whether the predicted instruction aligns with
+                  <li>Data: expert demonstrations <b>without reasoning labels</b></li>
+                  <li>Objective: <b>Dr.GRPO</b></li>
+                  <li>Reward: <b>A frozen VLM judge guided by a rubric</b> provides reward for each predicted instruction. The rubric evaluates whether the predicted instruction aligns with
                     the expert’s, is feasible for the low-level policy, and would lead to a similar outcome. </li>
                 </ul>
               </div>
@@ -258,9 +258,9 @@
               <h3 class="title is-4">Main Results</h3>
               <div class="content">
                 <ul class="takeaways">
-                  <li><b>1. RL alone improves performance.</b> Rubric-based RL can reinforce useful reasoning behaviors even without mid-training.</li>
-                  <li><b>2. Mid-training improves RL.</b> Mid-training is a strong warm start; a modest amount of reasoning data is often enough, especially for OOD generalization.</li>
-                  <li><b>3. Better OOD generalization than non-reasoning imitation.</b> R³ matches or beats instruction-only imitation on seen tasks, and generalizes much better to held-out tasks.</li>
+                  <li><b>RL alone improves performance.</b> Rubric-based RL can reinforce useful reasoning behaviors and improve task performance even without mid-training.</li>
+                  <li><b>Mid-training improves RL post-training.</b> Mid-training is a strong warm start; a modest amount of reasoning data is enough, especially for OOD generalization.</li>
+                  <li><b>R³ enables better OOD generalization than non-reasoning imitation.</b> R³ matches or beats instruction-only imitation learning baselines on seen tasks, and generalizes much better to held-out tasks.</li>
                 </ul>
                 <div class="table-placeholder">
                   <span class="table-placeholder-label">Table placeholder</span>
