@@ -24,7 +24,7 @@ body {
 
 .teaser .hero-body {
   padding-top: 0;
-  padding-bottom: 3rem;
+  padding-bottom: 1.5rem;
 }
 
 .teaser {
@@ -168,6 +168,112 @@ body {
 .teaser-caption {
   color: #555;
   font-size: 0.95rem;
+}
+
+.paper-figure {
+  margin: 1.25rem 0 1.75rem;
+  text-align: center;
+}
+
+.paper-figure img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+  border-radius: 6px;
+  background: #fff;
+}
+
+.paper-figure-narrow img {
+  max-width: 720px;
+}
+
+.paper-figure figcaption {
+  margin-top: 0.75rem;
+  color: #555;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  text-align: left;
+}
+
+.subsection {
+  margin-top: 2rem;
+}
+
+.subsection:first-of-type {
+  margin-top: 1.25rem;
+}
+
+.content .takeaways {
+  margin-bottom: 1.25rem;
+}
+
+.content .takeaways li + li {
+  margin-top: 0.45rem;
+}
+
+.table-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  min-height: 160px;
+  margin: 1rem 0 1.5rem;
+  padding: 1.5rem 1rem;
+  border: 2px dashed #c5cdd6;
+  border-radius: 8px;
+  background: #f7f9fb;
+  color: #6b7280;
+  text-align: center;
+}
+
+.table-placeholder-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #8892a0;
+}
+
+.table-placeholder-caption {
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.navbar-sidebar-submenu {
+  list-style: none;
+  margin: 0 0 4px 0;
+  padding: 0 0 0 28px;
+}
+
+.navbar-sidebar-submenu li {
+  margin-bottom: 2px;
+}
+
+.nav-sublink {
+  padding: 6px 10px !important;
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  color: #888 !important;
+}
+
+.nav-sublink:hover,
+.nav-sublink.active {
+  color: #007bff !important;
+  background: rgba(0, 123, 255, 0.06) !important;
+  transform: none !important;
+}
+
+.nav-sublink::before {
+  display: none !important;
+}
+
+.nav-sublink-mobile {
+  padding-left: 28px !important;
+  font-size: 14px !important;
+  color: #666 !important;
 }
 
 .rollout-note {

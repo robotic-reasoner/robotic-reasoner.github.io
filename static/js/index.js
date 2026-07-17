@@ -28,7 +28,20 @@ function toggleRollouts() {
 
 class NavigationManager {
     constructor() {
-        this.sections = ['introduction', 'abstract', 'method', 'results', 'rollouts', 'citation'];
+        this.sections = [
+            'introduction',
+            'abstract',
+            'method',
+            'method-hierarchical',
+            'method-twostage',
+            'results',
+            'results-main',
+            'results-representations',
+            'results-behaviors',
+            'results-ecot',
+            'rollouts',
+            'citation'
+        ];
         this.navLinks = {
             desktop: document.querySelectorAll('.nav-link'),
             mobile: document.querySelectorAll('.nav-link-mobile')
@@ -87,10 +100,23 @@ class NavigationManager {
     }
     
     updateActiveNavigation(activeSection) {
+        const parentMap = {
+            'method-hierarchical': 'method',
+            'method-twostage': 'method',
+            'results-main': 'results',
+            'results-representations': 'results',
+            'results-behaviors': 'results',
+            'results-ecot': 'results'
+        };
+        const activeTargets = new Set([activeSection]);
+        if (parentMap[activeSection]) {
+            activeTargets.add(parentMap[activeSection]);
+        }
+
         // Update desktop navigation
         this.navLinks.desktop.forEach(link => {
             const target = link.dataset.target;
-            if (target === activeSection) {
+            if (activeTargets.has(target)) {
                 link.classList.add('active');
             } else {
                 link.classList.remove('active');
@@ -100,7 +126,7 @@ class NavigationManager {
         // Update mobile navigation
         this.navLinks.mobile.forEach(link => {
             const target = link.dataset.target;
-            if (target === activeSection) {
+            if (activeTargets.has(target)) {
                 link.classList.add('active');
             } else {
                 link.classList.remove('active');

@@ -30,12 +30,26 @@
         <li><a href="#abstract" class="nav-link" data-target="abstract">
           <span class="nav-indicator"></span>Abstract
         </a></li>
-        <li><a href="#method" class="nav-link" data-target="method">
-          <span class="nav-indicator"></span>Method
-        </a></li>
-        <li><a href="#results" class="nav-link" data-target="results">
-          <span class="nav-indicator"></span>Results
-        </a></li>
+        <li>
+          <a href="#method" class="nav-link" data-target="method">
+            <span class="nav-indicator"></span>Method
+          </a>
+          <ul class="navbar-sidebar-submenu">
+            <li><a href="#method-hierarchical" class="nav-link nav-sublink" data-target="method-hierarchical">Hierarchical policy</a></li>
+            <li><a href="#method-twostage" class="nav-link nav-sublink" data-target="method-twostage">Two-stage training</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#results" class="nav-link" data-target="results">
+            <span class="nav-indicator"></span>Results
+          </a>
+          <ul class="navbar-sidebar-submenu">
+            <li><a href="#results-main" class="nav-link nav-sublink" data-target="results-main">Main results</a></li>
+            <li><a href="#results-representations" class="nav-link nav-sublink" data-target="results-representations">Beyond representations</a></li>
+            <li><a href="#results-behaviors" class="nav-link nav-sublink" data-target="results-behaviors">Reasoning behaviors</a></li>
+            <li><a href="#results-ecot" class="nav-link nav-sublink" data-target="results-ecot">Comparison with ECoT</a></li>
+          </ul>
+        </li>
         <li><a href="#rollouts" class="nav-link" data-target="rollouts">
           <span class="nav-indicator"></span>Example Videos
         </a></li>
@@ -64,7 +78,13 @@
       <ul>
         <li><a href="#abstract" class="nav-link-mobile" data-target="abstract">Abstract</a></li>
         <li><a href="#method" class="nav-link-mobile" data-target="method">Method</a></li>
+        <li><a href="#method-hierarchical" class="nav-link-mobile nav-sublink-mobile" data-target="method-hierarchical">— Hierarchical policy</a></li>
+        <li><a href="#method-twostage" class="nav-link-mobile nav-sublink-mobile" data-target="method-twostage">— Two-stage training</a></li>
         <li><a href="#results" class="nav-link-mobile" data-target="results">Results</a></li>
+        <li><a href="#results-main" class="nav-link-mobile nav-sublink-mobile" data-target="results-main">— Main results</a></li>
+        <li><a href="#results-representations" class="nav-link-mobile nav-sublink-mobile" data-target="results-representations">— Beyond representations</a></li>
+        <li><a href="#results-behaviors" class="nav-link-mobile nav-sublink-mobile" data-target="results-behaviors">— Reasoning behaviors</a></li>
+        <li><a href="#results-ecot" class="nav-link-mobile nav-sublink-mobile" data-target="results-ecot">— Comparison with ECoT</a></li>
         <li><a href="#rollouts" class="nav-link-mobile" data-target="rollouts">Example Videos</a></li>
         <li><a href="#citation" class="nav-link-mobile" data-target="citation">Citation</a></li>
       </ul>
@@ -117,7 +137,15 @@
 
     <section class="hero teaser" id="teaser">
       <div class="container is-max-desktop">
-        <div class="hero-body"></div>
+        <div class="hero-body">
+          <figure class="paper-figure">
+            <img src="./static/images/workflow_v3.png" alt="Two-stage training pipeline of R³">
+            <figcaption>
+              <b>Two-stage training of R³.</b>
+              R³ mid-trains a VLM on expert reasoning, then improves it with single-step RL so the reasoner can steer a fixed low-level policy.
+            </figcaption>
+          </figure>
+        </div>
       </div>
     </section>
 
@@ -128,7 +156,10 @@
             <h2 class="title is-3">Abstract</h2>
             <div class="content has-text-justified">
               <p>
-                Reasoning in language allows foundation models to spend more test-time compute on hard problems, such as those requiring decomposition, constraint tracking, and prediction of future consequences. Whether this mechanism can improve robotic manipulation remains unclear, where long-horizon tasks require tracking partial progress, reasoning about object relations, recovering from mistakes, and steering noisy low-level policies. In this paper, we study whether VLMs can be trained to reason directly in natural language to guide low-level manipulation policies. We introduce R³, a simple post-training recipe that turns off-the-shelf VLMs into robotic reasoners: it first mid-trains a VLM on expert-generated reasoning traces to initialize the desired reasoning style, then improves the reasoner with single-step rubric-based RL from offline action data. Unlike prior robotic reasoning methods that mostly use structured traces as auxiliary supervision, R³ trains free-form language reasoning to produce test-time guidance for action. We instantiate R³ on Language Table, a controlled testbed for studying robotic reasoning, and find that it improves exploration and generalization across unseen tasks. These results suggest that free-form language reasoning can function as a test-time compute mechanism for steering low-level policies.
+                Reasoning in language allows foundation models to spend more test-time compute on hard problems.
+                We study whether VLMs can be trained to reason directly in natural language to guide low-level manipulation policies.
+                We introduce R³, a post-training recipe that first mid-trains a VLM on expert-generated reasoning traces, then improves the reasoner with single-step rubric-based RL from offline action data.
+                On Language Table, free-form language reasoning improves exploration and generalization across unseen tasks.
               </p>
             </div>
           </div>
@@ -140,7 +171,70 @@
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column is-full-width">
-            <h2 class="title is-3">Method: Robotic Reasoners via Reinforcement Learning</h2>
+            <h2 class="title is-3">R³: Robotic Reasoners via Reinforcement Learning</h2>
+
+            <div id="method-hierarchical" class="subsection">
+              <h3 class="title is-4">Hierarchical Policy for Long-Horizon Manipulation</h3>
+              <div class="content">
+                <p>
+                  To train reasoners for robotic manipulation, we use a hierarchical architecture:
+                  a high-level VLM reasons in natural language and issues a short-horizon instruction,
+                  while a frozen language-conditioned low-level policy executes that instruction.
+                </p>
+                <figure class="paper-figure paper-figure-narrow">
+                  <img src="./static/images/arch_v2.png" alt="Hierarchical architecture of R³">
+                  <figcaption>
+                    <b>Architecture of R³.</b>
+                    A high-level VLM generates a reasoning trace and an instruction given the scene, goal, and previous response.
+                    A language-conditioned low-level actor then executes the instruction.
+                  </figcaption>
+                </figure>
+                <p>
+                  We instantiate this setup on Language Table with long-horizon block-arrangement tasks that require composing object movements and reasoning about spatial relationships.
+                </p>
+                <figure class="paper-figure">
+                  <img src="./static/images/filmstrip_task_example.png" alt="Expert trajectory example on Language Table">
+                  <figcaption>
+                    <b>Example expert trajectory and reasoning trace</b> on a line-arrangement task.
+                    The high-level reasoner tracks progress and issues the next instruction for the low-level policy.
+                  </figcaption>
+                </figure>
+              </div>
+            </div>
+
+            <div id="method-twostage" class="subsection">
+              <h3 class="title is-4">Two-stage Training Framework of R³</h3>
+              <div class="content">
+                <p>
+                  R³ turns expert manipulation demonstrations into practical training signal for reasoning in two stages:
+                  mid-training initializes the desired reasoning style, and rubric-based RL further improves the reasoner from offline action data.
+                </p>
+
+                <h4 class="title is-5">Stage I: Mid-training</h4>
+                <p>
+                  Off-the-shelf VLMs often do not produce the reasoning style needed for manipulation.
+                  Stage I mid-trains the VLM on expert-generated reasoning traces so it learns to reason about the state and interaction history before emitting an instruction.
+                </p>
+                <ul>
+                  <li><b>Objective:</b> next-token prediction</li>
+                  <li><b>Data:</b> expert demos with reasoning labels</li>
+                </ul>
+
+                <h4 class="title is-5">Stage II: Rubric-based Single-step RL</h4>
+                <p>
+                  Mid-training alone does not ensure that test-time reasoning produces effective instructions.
+                  Stage II improves the reasoner with single-step RL on offline instruction data, without requiring expert reasoning traces or multi-turn robot rollouts.
+                  A frozen VLM judge scores whether the predicted instruction semantically matches the expert instruction under a rubric.
+                </p>
+                <ul>
+                  <li><b>Objective:</b> Dr.GRPO</li>
+                  <li><b>Data:</b> expert demos without reasoning labels</li>
+                  <li><b>Reward:</b> rubric-based VLM judge (semantic match to expert instruction)</li>
+                  <li><b>Design choices:</b> history as the previous response; reasoning-context imputation; filtering repetitive steps to avoid reward shortcuts</li>
+                </ul>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
@@ -151,6 +245,83 @@
         <div class="columns is-centered">
           <div class="column is-full-width">
             <h2 class="title is-3">Experimental Evaluation</h2>
+
+            <div id="results-main" class="subsection">
+              <h3 class="title is-4">Main Results</h3>
+              <div class="content">
+                <ul class="takeaways">
+                  <li><b>RL alone improves performance.</b> Rubric-based RL can reinforce useful reasoning behaviors even without mid-training.</li>
+                  <li><b>Mid-training improves RL.</b> Mid-training is a strong warm start; a modest amount of reasoning data is often enough, especially for OOD generalization.</li>
+                  <li><b>Better OOD generalization than non-reasoning imitation.</b> R³ matches or beats instruction-only imitation on seen tasks, and generalizes much better to held-out tasks.</li>
+                </ul>
+                <div class="table-placeholder">
+                  <span class="table-placeholder-label">Table placeholder</span>
+                  <span class="table-placeholder-caption">Main results table (per-task success rates)</span>
+                </div>
+              </div>
+            </div>
+
+            <div id="results-representations" class="subsection">
+              <h3 class="title is-4">Does Reasoning Help Beyond Better Representations?</h3>
+              <div class="content">
+                <ul class="takeaways">
+                  <li>Explicit inference-time reasoning improves generalization beyond using reasoning only as training-time supervision.</li>
+                  <li>R³ improves static perception and action understanding, but these gains alone do not explain its manipulation improvements.</li>
+                  <li>Non-reasoning policies that pre-train or co-train on reasoning still lag behind R³, especially on OOD tasks.</li>
+                </ul>
+                <div class="table-placeholder">
+                  <span class="table-placeholder-label">Table placeholder</span>
+                  <span class="table-placeholder-caption">Imitation with pre-training / co-training on reasoning</span>
+                </div>
+              </div>
+            </div>
+
+            <div id="results-behaviors" class="subsection">
+              <h3 class="title is-4">Understanding Reasoning Behaviors Learned by R³</h3>
+              <div class="content">
+                <ul class="takeaways">
+                  <li>R³ learns strategies useful for manipulation: comparing alternatives, self-correction, and resolving visual or historical uncertainty.</li>
+                  <li>Mid-training stabilizes the reasoning interface; RL makes reasoning more deliberate and action-oriented.</li>
+                  <li>With mid-training as a warm start, RL refines an already reasonable behavior distribution rather than rediscovering behaviors from scratch.</li>
+                </ul>
+                <figure class="paper-figure">
+                  <img src="./static/images/reasoning_example_backtrack.png" alt="Self-correction reasoning example">
+                  <figcaption>
+                    <b>Self-correction.</b>
+                    The reasoner compares alternatives, notices an inconsistent plan, and revises before issuing the instruction.
+                  </figcaption>
+                </figure>
+                <figure class="paper-figure">
+                  <img src="./static/images/reasoning_example_occlusion.png" alt="Occlusion reasoning example">
+                  <figcaption>
+                    <b>Resolving uncertainty.</b>
+                    When an object is partially occluded, the model re-examines the scene and history instead of blindly trusting the previous response.
+                  </figcaption>
+                </figure>
+                <figure class="paper-figure paper-figure-narrow">
+                  <img src="./static/images/method_instr_rl_effect_log.png" alt="Effect of RL on instruction distributions">
+                  <figcaption>
+                    <b>RL affects instruction distributions.</b>
+                    RL from the base model broadly rewrites the distribution, while RL after mid-training makes more targeted edits.
+                  </figcaption>
+                </figure>
+              </div>
+            </div>
+
+            <div id="results-ecot" class="subsection">
+              <h3 class="title is-4">Comparison with Embodied Chain-of-Thought (ECoT)</h3>
+              <div class="content">
+                <ul class="takeaways">
+                  <li>Adding ECoT-style structured state annotations generally does not help over free-form language reasoning in our setting.</li>
+                  <li>Post-hoc labeled reasoning performs comparably to reasoning recorded during data collection.</li>
+                </ul>
+                <div class="table-placeholder">
+                  <span class="table-placeholder-label">Table placeholder</span>
+                  <span class="table-placeholder-caption">ECoT variants comparison</span>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
