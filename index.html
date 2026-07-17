@@ -141,7 +141,10 @@
             <img src="./static/images/workflow_v3.png" alt="Two-stage training pipeline of R³">
             <figcaption>
               <b>Two-stage training of R³.</b>
-              R³ mid-trains a VLM on expert reasoning, then improves it with single-step RL so the reasoner can steer a fixed low-level policy.
+              R³ trains a high-level VLM to reason in natural language and steer a fixed low-level
+              robot policy for robotic manipulation tasks. R³ proceeds in two stages: Stage I (mid-training) imbues an off-the-shelf VLM
+              with the reasoning style and behaviors needed to produce useful instructions for the low-level policy. Stage II (single-step RL)
+              further improves the VLM by training it to generate reasoning traces that match the expert instruction in offline data.
             </figcaption>
           </figure>
         </div>
@@ -236,7 +239,7 @@
                 <ul>
                   <li>Data: expert demonstrations <b>without reasoning labels</b></li>
                   <li>Objective: <b>Dr.GRPO</b></li>
-                  <li>Reward: <b>A frozen VLM judge guided by a rubric</b> provides reward for each predicted instruction. The rubric evaluates whether the predicted instruction aligns with
+                  <li>Reward: A frozen VLM judge guided by a rubric provides reward for each predicted instruction. The rubric evaluates whether the predicted instruction aligns with
                     the expert’s, is feasible for the low-level policy, and would lead to a similar outcome. </li>
                 </ul>
               </div>
