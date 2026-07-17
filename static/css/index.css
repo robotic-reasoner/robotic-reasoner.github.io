@@ -228,6 +228,35 @@ body {
   color: #6b7280;
 }
 
+.wrap-content::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.paper-figure.wrap-figure-right {
+  float: right;
+  width: var(--fig-width);
+  max-width: var(--fig-width);
+  margin: 0.15rem 0 0.75rem 1.25rem !important;
+  text-align: left;
+}
+
+.paper-figure.wrap-figure-right img {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.paper-figure.wrap-figure-right figcaption {
+  width: 100%;
+  max-width: 100%;
+  margin: 0.5rem 0 0;
+  font-size: 0.78rem;
+  line-height: 1.35;
+}
+
 /* Main body text: black; captions stay gray for contrast */
 .main-content .content,
 .main-content .content p,
@@ -538,6 +567,14 @@ body {
   .abstract-plots img {
     max-width: 100%;
     width: 100%;
+  }
+
+  .paper-figure.wrap-figure-right {
+    float: none;
+    width: 55%;
+    max-width: 55%;
+    margin: 0 auto 1rem !important;
+    text-align: center;
   }
 }
 

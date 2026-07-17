@@ -183,13 +183,8 @@
 
             <div id="method-hierarchical" class="subsection">
               <h3 class="title is-4">Hierarchical Policy for Long-Horizon Manipulation</h3>
-              <div class="content">
-                <p>
-                  To train reasoners for robotic manipulation, we use a hierarchical architecture:
-                  a high-level VLM reasons in natural language and issues a short-horizon instruction,
-                  while a frozen language-conditioned low-level policy executes that instruction.
-                </p>
-                <figure class="paper-figure" style="--fig-width: 25%;">
+              <div class="content wrap-content">
+                <figure class="paper-figure wrap-figure-right" style="--fig-width: 20%;">
                   <img src="./static/images/arch_v2.png" alt="Hierarchical architecture of R³">
                   <figcaption>
                     <b>Architecture of R³.</b>
@@ -197,6 +192,11 @@
                     A language-conditioned low-level actor then executes the instruction.
                   </figcaption>
                 </figure>
+                <p>
+                  To train reasoners for robotic manipulation, we use a hierarchical architecture:
+                  a high-level VLM reasons in natural language and issues a short-horizon instruction,
+                  while a frozen language-conditioned low-level policy executes that instruction.
+                </p>
                 <p>
                   We instantiate this setup on Language Table with long-horizon block-arrangement tasks that require composing object movements and reasoning about spatial relationships.
                 </p>
