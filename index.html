@@ -237,7 +237,7 @@
                 <ul>
                   <li>Data: expert demonstrations without reasoning labels</li>
                   <li>Objective: Dr.GRPO</li>
-                  <li>Reward: A frozen VLM judge provides reward for each predicted instruction. It evaluates whether the predicted instruction aligns with
+                  <li>Reward: A frozen VLM judge guided by a rubric provides reward for each predicted instruction. The rubric evaluates whether the predicted instruction aligns with
                     the expert’s, is feasible for the low-level policy, and would lead to a similar outcome. </li>
                 </ul>
               </div>

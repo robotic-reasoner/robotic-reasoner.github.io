@@ -289,16 +289,16 @@ body {
 
 /* Section titles (level-1): dark blue underline under the title text */
 .main-content h2.title.is-3 {
-  color: #2563eb;
+  color: #000000;
   display: inline-block;
-  border-bottom: 2px solid #2563eb;
+  border-bottom: 2px solid #255eda;
   padding-bottom: 0.3rem;
   margin-bottom: 1.25rem;
 }
 
 /* Subsection titles (level-2): blue */
 .main-content .subsection > h3.title.is-4 {
-  color: #2563eb;
+  color: #255eda;
 }
 
 .content .takeaways {
