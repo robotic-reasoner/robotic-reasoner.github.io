@@ -46,6 +46,13 @@ body {
 
 .publication-title {
     font-family: 'Google Sans', sans-serif;
+    font-weight: 800;
+    line-height: 1.25;
+    background: linear-gradient(90deg, #1e3a8a, #3b82f6);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
 }
 
 .publication-authors {
@@ -259,6 +266,20 @@ body {
 
 .subsection:first-of-type {
   margin-top: 1.25rem;
+}
+
+/* Section titles (level-1): dark blue underline under the title text */
+.main-content h2.title.is-3 {
+  color: #1a1a1a;
+  display: inline-block;
+  border-bottom: 2px solid #1e3a8a;
+  padding-bottom: 0.3rem;
+  margin-bottom: 1.25rem;
+}
+
+/* Subsection titles (level-2): blue */
+.main-content .subsection > h3.title.is-4 {
+  color: #2563eb;
 }
 
 .content .takeaways {

@@ -16,6 +16,15 @@ Lehong Wu, Yuxiao Qu, Zheyuan Hu, Ivan Zhang, Limin Wei, Zackory Erickson, Avira
 Carnegie Mellon University
 Links: arXiv (TBD), Code (TBD)
 
+Author's personal website link:
+Lehong Wu: https://lehongwu.github.io/
+Yuxiao Qu: https://cohenqu.github.io/
+Zheyuan Hu: https://huzheyuan.io/
+Ivan Zhang: TBD
+Limin Wei: TBD
+Zackory Erickson: https://zackory.com/
+Aviral Kumar: https://aviralkumar2907.github.io/
+
 # Side bar
 Below shows the titles and subtitles of each section in the side bar, but full title in main content might be different.
 - Abstract
