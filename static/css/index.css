@@ -602,13 +602,9 @@ body {
   line-height: 1;
   font-size: 20px;
   font-weight: 700;
+  color: #3b82f6;
   font-family: 'Google Sans', sans-serif;
   letter-spacing: 0.02em;
-  background: linear-gradient(90deg, #1e3a8a, #3b82f6);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
 }
 
 .nav-title-mobile {
@@ -616,13 +612,9 @@ body {
   line-height: 1;
   font-size: 18px;
   font-weight: 700;
+  color: #3b82f6;
   font-family: 'Google Sans', sans-serif;
   letter-spacing: 0.02em;
-  background: linear-gradient(90deg, #1e3a8a, #3b82f6);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
 }
 
 .navbar-sidebar-menu {
