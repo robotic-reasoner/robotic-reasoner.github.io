@@ -172,43 +172,59 @@ body {
 
 .paper-figure {
   --fig-width: 70%;
-  width: var(--fig-width);
-  margin: 1.25rem auto 1.75rem;
-  text-align: center;
-}
-
-.paper-figure img {
   display: block;
   width: 100%;
   max-width: 100%;
-  height: auto;
-  margin: 0 auto;
+  margin: 1.25rem 0 1.75rem !important;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.paper-figure img {
+  display: block !important;
+  width: var(--fig-width) !important;
+  max-width: var(--fig-width) !important;
+  height: auto !important;
+  margin-left: auto;
+  margin-right: auto;
   border-radius: 6px;
   background: #fff;
 }
 
 .paper-figure figcaption {
-  margin-top: 0.75rem;
+  display: block;
+  width: var(--fig-width);
+  max-width: var(--fig-width);
+  margin: 0.75rem auto 0;
   color: #555;
   font-size: 0.95rem;
-  font-style: normal;
+  font-style: normal !important;
   line-height: 1.45;
   text-align: left;
+  box-sizing: border-box;
 }
 
 .content .paper-figure figcaption {
-  font-style: normal;
+  font-style: normal !important;
 }
 
 .figure-row {
-  width: var(--fig-width, 70%);
+  --fig-width: 70%;
+  width: var(--fig-width);
+  max-width: var(--fig-width);
   margin: 1.25rem auto 1.75rem;
+  box-sizing: border-box;
 }
 
 .figure-row .paper-figure {
   --fig-width: 100%;
-  width: 100%;
-  margin: 0;
+  margin: 0 !important;
+}
+
+.figure-row .paper-figure img,
+.figure-row .paper-figure figcaption {
+  width: 100% !important;
+  max-width: 100% !important;
 }
 
 .figure-row .column {
@@ -535,39 +551,23 @@ body {
 }
 
 .nav-title {
-  display: inline-flex;
-  align-items: center;
+  display: inline-block;
   line-height: 1;
-  font-size: 19px;
+  font-size: 20px;
   font-weight: 700;
   color: #333;
   font-family: 'Google Sans', sans-serif;
-}
-
-.nav-title sup {
-  font-size: 0.58em;
-  line-height: 1;
-  position: relative;
-  top: 0;
-  margin-left: 1px;
+  letter-spacing: 0.02em;
 }
 
 .nav-title-mobile {
-  display: inline-flex;
-  align-items: center;
+  display: inline-block;
   line-height: 1;
   font-size: 18px;
   font-weight: 700;
   color: #333;
   font-family: 'Google Sans', sans-serif;
-}
-
-.nav-title-mobile sup {
-  font-size: 0.58em;
-  line-height: 1;
-  position: relative;
-  top: 0;
-  margin-left: 1px;
+  letter-spacing: 0.02em;
 }
 
 .navbar-sidebar-menu {
