@@ -427,12 +427,18 @@ body {
 }
 
 .rollout-toggle-icon,
-.main-results-table-toggle-icon {
+.main-results-table-toggle-icon,
+.vqa-results-table-toggle-icon,
+.pretrain-cotrain-results-table-toggle-icon,
+.ecot-results-table-toggle-icon {
   transition: transform 0.3s ease;
 }
 
 .expandable-toggle.expanded .rollout-toggle-icon,
-.expandable-toggle.expanded .main-results-table-toggle-icon {
+.expandable-toggle.expanded .main-results-table-toggle-icon,
+.expandable-toggle.expanded .vqa-results-table-toggle-icon,
+.expandable-toggle.expanded .pretrain-cotrain-results-table-toggle-icon,
+.expandable-toggle.expanded .ecot-results-table-toggle-icon {
   transform: rotate(180deg);
 }
 

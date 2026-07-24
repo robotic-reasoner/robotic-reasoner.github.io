@@ -33,6 +33,27 @@ function toggleMainResultsTable() {
     });
 }
 
+function toggleVqaResultsTable() {
+    toggleExpandable('vqaResultsTablePanel', 'vqaResultsTableToggle', '.vqa-results-table-toggle-text', {
+        collapsedLabel: 'View VQA results',
+        expandedLabel: 'Hide VQA results',
+    });
+}
+
+function togglePretrainCotrainResultsTable() {
+    toggleExpandable('pretrainCotrainResultsTablePanel', 'pretrainCotrainResultsTableToggle', '.pretrain-cotrain-results-table-toggle-text', {
+        collapsedLabel: 'View pre-train / co-train results',
+        expandedLabel: 'Hide pre-train / co-train results',
+    });
+}
+
+function toggleEcotResultsTable() {
+    toggleExpandable('ecotResultsTablePanel', 'ecotResultsTableToggle', '.ecot-results-table-toggle-text', {
+        collapsedLabel: 'View ECoT comparison',
+        expandedLabel: 'Hide ECoT comparison',
+    });
+}
+
 // =================================
 // NAVIGATION SYSTEM FUNCTIONALITY
 // =================================
