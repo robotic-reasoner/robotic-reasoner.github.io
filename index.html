@@ -268,7 +268,7 @@
                   <img src="./static/images/main_results_bar_chart.png" alt="Main results: average success rates across methods">
                   <figcaption>
                     <b>Main results.</b>
-                    We compare base models, imitation baselines, and R³ variants. We report average success rates on 6 mid-training tasks, 3 RL-only tasks, and 5 held-out OOD tasks. For detailed per-task numbers, see the table below.
+                    We compare base models, imitation baselines, and R³ variants. We report average success rates on 6 mid-training tasks, 3 RL-only tasks, and 5 held-out OOD tasks. To account for heterogeneous task difficulty, we normalize a method’s score by the corresponding Gemini score on each task, then report the average of these normalized scores within each task group. For detailed per-task numbers, see the table below.
                   </figcaption>
                 </figure>
               </div>
@@ -337,7 +337,7 @@
                   <img src="./static/images/pretrain_cotrain_results_bar_chart.png" alt="IL with pre-training or co-training on reasoning: average success rates">
                   <figcaption>
                     <b>IL with pre-training or co-training on reasoning.</b>
-                    R³ outperforms non-reasoning imitation variants that use reasoning only as training-time supervision, especially on OOD tasks. For detailed per-task numbers, see the table below.
+                    R³ outperforms non-reasoning imitation variants that use reasoning only as training-time supervision, especially on OOD tasks. To account for heterogeneous task difficulty, we normalize a method’s score by the corresponding Gemini score on each task, then report the average of these normalized scores within each task group. For detailed per-task numbers, see the table below.
                   </figcaption>
                 </figure>
                 <div class="expandable-container">
@@ -347,7 +347,7 @@
                   </button>
                   <div class="expandable-panel" id="pretrainCotrainResultsTablePanel">
                     <div class="expandable-content">
-                      <figure class="paper-figure" style="--fig-width: 100%;">
+                      <figure class="paper-figure" style="--fig-width: 55%;">
                         <img src="./static/images/pretrain_cotrain_results_table.png" alt="Imitation with pre-training and co-training on reasoning">
                         <figcaption>
                           <b>IL with pre-training or co-training on reasoning.</b>
@@ -417,7 +417,7 @@
                   <img src="./static/images/ECoT_results_bar_chart.png" alt="ECoT variants: average success rates">
                   <figcaption>
                     <b>Evaluation results of ECoT variants.</b>
-                    Adding ECoT-style structured state annotations generally does not help over free-form language reasoning. For detailed per-task numbers, see the table below.
+                    Adding ECoT-style structured state annotations generally does not help over free-form language reasoning. To account for heterogeneous task difficulty, we normalize a method’s score by the corresponding Gemini score on each task, then report the average of these normalized scores within each task group. For detailed per-task numbers, see the table below.
                   </figcaption>
                 </figure>
                 <div class="expandable-container">
@@ -427,7 +427,7 @@
                   </button>
                   <div class="expandable-panel" id="ecotResultsTablePanel">
                     <div class="expandable-content">
-                      <figure class="paper-figure" style="--fig-width: 100%;">
+                      <figure class="paper-figure" style="--fig-width: 55%;">
                         <img src="./static/images/ECoT_results_table.png" alt="ECoT variants comparison">
                         <figcaption>
                           <b>Evaluation results of ECoT variants.</b>
