@@ -268,7 +268,8 @@
                   <img src="./static/images/main_results_bar_chart.png" alt="Main results: average success rates across methods">
                   <figcaption>
                     <b>Main results.</b>
-                    We compare base models, imitation baselines, and R³ variants. We report average success rates on 6 mid-training tasks, 3 RL-only tasks, and 5 held-out OOD tasks. To account for heterogeneous task difficulty, we normalize a method’s score by the corresponding Gemini score on each task, then report the average of these normalized scores within each task group. For detailed per-task numbers, see the table below.
+                    We compare base models, imitation baselines, and R³ variants. 
+                    To account for heterogeneous task difficulty, we normalize a method’s success rate by Gemini's success rate on each task, then report the average of the normalized performance within each task group. For detailed per-task numbers, see the table below.
                   </figcaption>
                 </figure>
               </div>
@@ -316,7 +317,7 @@
                         <img src="./static/images/vqa_results_table.png" alt="VQA results on perception and instruction comprehension">
                         <figcaption>
                           <b>Accuracy by VQA question class.</b>
-                          Gemini is reported as an external reference and is not included when determining the best Qwen3.5-4B variant. Blue highlights indicate the best-performing Qwen3.5-4B variant for each question class.
+                          Blue highlights indicate the best-performing Qwen3.5-4B variant for each question class. Gemini’s performance during data collection is shown for reference.
                           Even our best model remains far below Gemini on several VQA categories, yet matches or approaches Gemini on many manipulation tasks.
                           These results suggest that R³ improves both static perception and action understanding, but they also show that VQA performance alone, i.e., improving static perception, does not fully explain the gains in manipulation performance. 
                         </figcaption>
@@ -337,7 +338,8 @@
                   <img src="./static/images/pretrain_cotrain_results_bar_chart.png" alt="IL with pre-training or co-training on reasoning: average success rates">
                   <figcaption>
                     <b>IL with pre-training or co-training on reasoning.</b>
-                    R³ outperforms non-reasoning imitation variants that use reasoning only as training-time supervision, especially on OOD tasks. To account for heterogeneous task difficulty, we normalize a method’s score by the corresponding Gemini score on each task, then report the average of these normalized scores within each task group. For detailed per-task numbers, see the table below.
+                    R³ outperforms non-reasoning imitation variants that use reasoning only as training-time supervision, especially on OOD tasks. 
+                    To account for heterogeneous task difficulty, we normalize a method’s success rate by Gemini's success rate on each task, then report the average of the normalized performance within each task group. For detailed per-task numbers, see the table below.
                   </figcaption>
                 </figure>
                 <div class="expandable-container">
@@ -417,7 +419,8 @@
                   <img src="./static/images/ECoT_results_bar_chart.png" alt="ECoT variants: average success rates">
                   <figcaption>
                     <b>Evaluation results of ECoT variants.</b>
-                    Adding ECoT-style structured state annotations generally does not help over free-form language reasoning. To account for heterogeneous task difficulty, we normalize a method’s score by the corresponding Gemini score on each task, then report the average of these normalized scores within each task group. For detailed per-task numbers, see the table below.
+                    Adding ECoT-style structured state annotations generally does not help over free-form language reasoning. 
+                    To account for heterogeneous task difficulty, we normalize a method’s success rate by Gemini's success rate on each task, then report the average of the normalized performance within each task group. For detailed per-task numbers, see the table below.
                   </figcaption>
                 </figure>
                 <div class="expandable-container">
