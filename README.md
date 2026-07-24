@@ -69,8 +69,8 @@ Writes `draft.md` with one line per example, including job/scene/trial metadata.
 ```markdown
 ## Group isolate
 
-example 1 (job0, scene 0, trial 2): tmp/vis_vlm_qwen35_v3_1_rendered/vis_gris-.../job0_seed204000/videos/custom_group_isolate_0_2_success.mp4
-example 2 (job0, scene 1, trial 0): tmp/vis_vlm_qwen35_v3_1_rendered/vis_gris-.../job0_seed204000/videos/custom_group_isolate_1_0_success.mp4
+Example trajectory 1 (job0, scene 0, trial 2): tmp/vis_vlm_qwen35_v3_1_rendered/vis_gris-.../job0_seed204000/videos/custom_group_isolate_0_2_success.mp4
+Example trajectory 2 (job0, scene 1, trial 0): tmp/vis_vlm_qwen35_v3_1_rendered/vis_gris-.../job0_seed204000/videos/custom_group_isolate_1_0_success.mp4
 ```
 
 You can edit `draft.md` by hand or re-run the find script after new renders land in `tmp/`.
@@ -110,11 +110,11 @@ Each task gets a section with **two videos in one row** (Bulma `columns`):
           <video controls muted playsinline preload="metadata">
             <source src="./static/task_examples_ours/clear_half/job0/custom_clear_half_0_0_success.mp4" type="video/mp4">
           </video>
-          <p class="caption has-text-centered">Example 1</p>
+          <p class="caption has-text-centered">Example trajectory 1</p>
         </div>
       </div>
       <div class="column">
-        <!-- Example 2 (may be same or different job; always a different scene) -->
+        <!-- Example trajectory 2 (may be same or different job; always a different scene) -->
       </div>
     </div>
   </div>

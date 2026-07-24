@@ -76,7 +76,7 @@ def parse_draft(path: Path) -> list[tuple[str, list[str]]]:
             current = line[3:].strip()
             examples = []
         elif line.startswith("example "):
-            # "example 1: path" or "example 1 (job0, scene 0, trial 2): path"
+            # "Example trajectory 1: path" or "Example trajectory 1 (job0, scene 0, trial 2): path"
             examples.append(line.split(": ", 1)[1].strip())
 
     if current is not None:
