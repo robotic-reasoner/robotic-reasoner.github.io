@@ -333,30 +333,15 @@
                 <ul class="takeaways">
                   <li><b>Evidence B:</b> R³ outperforms non-reasoning policies that use reasoning as training-time supervision, especially on OOD tasks.</li>
                 </ul>
-                <div class="expandable-container">
-                  <button id="pretrainCotrainResultsTableToggle" type="button" class="expandable-toggle button is-small is-outlined" data-expanded-label="Hide pre-train / co-train results" onclick="togglePretrainCotrainResultsTable()">
-                    <span class="pretrain-cotrain-results-table-toggle-text">View pre-train / co-train results</span>
-                    <span class="icon"><i class="fas fa-chevron-down pretrain-cotrain-results-table-toggle-icon"></i></span>
-                  </button>
-                  <div class="expandable-panel" id="pretrainCotrainResultsTablePanel">
-                    <div class="expandable-content">
-                      <figure class="paper-figure" style="--fig-width: 55%;">
-                        <img src="./static/images/pretrain_cotrain_results_table.png" alt="Imitation with pre-training and co-training on reasoning">
-                        <figcaption>
-                          <b>IL with pre-training or co-training on reasoning.</b>
-                          Values are percentages. Parenthetical values for IL (Pre-train) and IL (Co-train) indicate absolute changes relative to IL.
-                          R³ consistently outperforms all imitation learning variants, including those trained with reasoning supervision. This gap suggests that the benefit of reasoning cannot be fully captured by pre-training or co-training alone. 
-                        </figcaption>
-                      </figure>
-                      <div class="expandable-close-container">
-                        <button type="button" class="expandable-close button is-small is-outlined" onclick="togglePretrainCotrainResultsTable()">
-                          <span class="icon"><i class="fas fa-chevron-up"></i></span>
-                          <span>Close</span>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <figure class="paper-figure" style="--fig-width: 55%;">
+                  <img src="./static/images/pretrain_cotrain_results_table.png" alt="Imitation with pre-training and co-training on reasoning">
+                  <figcaption>
+                    <b>IL with pre-training or co-training on reasoning.</b>
+                    Values are percentages. Parenthetical values for IL (Pre-train) and IL (Co-train) indicate absolute changes relative to IL.
+                    Note that reasoning data for pre-training or co-training include mid-training tasks, while non-reasoning data include mid-training and RL-only tasks.
+                    R³ consistently outperforms all imitation learning variants, suggesting that the benefit of reasoning cannot be fully captured by pre-training or co-training alone.
+                  </figcaption>
+                </figure>
               </div>
             </div>
 
@@ -405,29 +390,13 @@
                 <p>
                   We adapt ECoT to our hierarchical setting by augmenting the response with explicit simulator-state annotations.
                   Our results show that adding ECoT-style structured state annotations generally <b>does not help over free-form language reasoning</b> in our setting.</p>
-                <div class="expandable-container">
-                  <button id="ecotResultsTableToggle" type="button" class="expandable-toggle button is-small is-outlined" data-expanded-label="Hide ECoT comparison table" onclick="toggleEcotResultsTable()">
-                    <span class="ecot-results-table-toggle-text">View ECoT comparison table</span>
-                    <span class="icon"><i class="fas fa-chevron-down ecot-results-table-toggle-icon"></i></span>
-                  </button>
-                  <div class="expandable-panel" id="ecotResultsTablePanel">
-                    <div class="expandable-content">
-                      <figure class="paper-figure" style="--fig-width: 60%;">
-                        <img src="./static/images/ECoT_results_table.png" alt="ECoT variants comparison">
-                        <figcaption>
-                          <b>Evaluation results of ECoT variants.</b>
-                          Values are percentages. We train all variants by SFT on only our mid-training data. The results suggest that ECoT and post-hoc reasoning do not provide additional benefit over our free-form language reasoning.
-                        </figcaption>
-                      </figure>
-                      <div class="expandable-close-container">
-                        <button type="button" class="expandable-close button is-small is-outlined" onclick="toggleEcotResultsTable()">
-                          <span class="icon"><i class="fas fa-chevron-up"></i></span>
-                          <span>Close</span>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <figure class="paper-figure" style="--fig-width: 60%;">
+                  <img src="./static/images/ecot_results_table.png" alt="ECoT variants comparison">
+                  <figcaption>
+                    <b>Evaluation results of ECoT variants.</b>
+                    Values are percentages. We train all variants by SFT on only our mid-training data. The results suggest that ECoT does not provide additional benefit over our free-form language reasoning.
+                  </figcaption>
+                </figure>
               </div>
             </div>
 

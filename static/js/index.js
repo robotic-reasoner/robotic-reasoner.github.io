@@ -37,14 +37,6 @@ function toggleVqaResultsTable() {
     toggleExpandable('vqaResultsTablePanel', 'vqaResultsTableToggle', '.vqa-results-table-toggle-text');
 }
 
-function togglePretrainCotrainResultsTable() {
-    toggleExpandable('pretrainCotrainResultsTablePanel', 'pretrainCotrainResultsTableToggle', '.pretrain-cotrain-results-table-toggle-text');
-}
-
-function toggleEcotResultsTable() {
-    toggleExpandable('ecotResultsTablePanel', 'ecotResultsTableToggle', '.ecot-results-table-toggle-text');
-}
-
 // =================================
 // NAVIGATION SYSTEM FUNCTIONALITY
 // =================================
