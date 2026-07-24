@@ -274,7 +274,7 @@
               </div>
 
               <div class="expandable-container">
-                <button id="mainResultsTableToggle" type="button" class="expandable-toggle button is-small is-outlined" onclick="toggleMainResultsTable()">
+                <button id="mainResultsTableToggle" type="button" class="expandable-toggle button is-small is-outlined" data-expanded-label="Hide detailed table" onclick="toggleMainResultsTable()">
                   <span class="main-results-table-toggle-text">View detailed per-task numbers</span>
                   <span class="icon"><i class="fas fa-chevron-down main-results-table-toggle-icon"></i></span>
                 </button>
@@ -306,7 +306,7 @@
                   <li><b>Evidence A:</b> R³ improves both static perception and action understanding, but these improvements alone does not explain its manipulation gains.</li>
                 </ul>
                 <div class="expandable-container">
-                  <button id="vqaResultsTableToggle" type="button" class="expandable-toggle button is-small is-outlined" onclick="toggleVqaResultsTable()">
+                  <button id="vqaResultsTableToggle" type="button" class="expandable-toggle button is-small is-outlined" data-expanded-label="Hide VQA results" onclick="toggleVqaResultsTable()">
                     <span class="vqa-results-table-toggle-text">View VQA results</span>
                     <span class="icon"><i class="fas fa-chevron-down vqa-results-table-toggle-icon"></i></span>
                   </button>
@@ -334,13 +334,13 @@
                   <li><b>Evidence B:</b> R³ outperforms non-reasoning policies that use reasoning as training-time supervision, especially on OOD tasks.</li>
                 </ul>
                 <div class="expandable-container">
-                  <button id="pretrainCotrainResultsTableToggle" type="button" class="expandable-toggle button is-small is-outlined" onclick="togglePretrainCotrainResultsTable()">
+                  <button id="pretrainCotrainResultsTableToggle" type="button" class="expandable-toggle button is-small is-outlined" data-expanded-label="Hide pre-train / co-train results" onclick="togglePretrainCotrainResultsTable()">
                     <span class="pretrain-cotrain-results-table-toggle-text">View pre-train / co-train results</span>
                     <span class="icon"><i class="fas fa-chevron-down pretrain-cotrain-results-table-toggle-icon"></i></span>
                   </button>
                   <div class="expandable-panel" id="pretrainCotrainResultsTablePanel">
                     <div class="expandable-content">
-                      <figure class="paper-figure" style="--fig-width: 100%;">
+                      <figure class="paper-figure" style="--fig-width: 55%;">
                         <img src="./static/images/pretrain_cotrain_results_table.png" alt="Imitation with pre-training and co-training on reasoning">
                         <figcaption>
                           <b>IL with pre-training or co-training on reasoning.</b>
@@ -389,7 +389,7 @@
                 <ul class="takeaways">
                   <li>Mid-training largely aligns the model’s instruction distribution with the expert’s, providing a strong behavioral prior before RL. With mid-training as a warm start, RL refines an already reasonable behavior distribution rather than rediscovering behaviors from scratch.</li>
                 </ul>
-                <figure class="paper-figure" style="--fig-width: 60%;">
+                <figure class="paper-figure" style="--fig-width: 55%;">
                   <img src="./static/images/method_instr_rl_effect_log.png" alt="Effect of RL on instruction distributions">
                   <figcaption>
                     <b>RL affects instruction distributions.</b>
@@ -406,13 +406,13 @@
                   We adapt ECoT to our hierarchical setting by augmenting the response with explicit simulator-state annotations.
                   Our results show that adding ECoT-style structured state annotations generally <b>does not help over free-form language reasoning</b> in our setting.</p>
                 <div class="expandable-container">
-                  <button id="ecotResultsTableToggle" type="button" class="expandable-toggle button is-small is-outlined" onclick="toggleEcotResultsTable()">
-                    <span class="ecot-results-table-toggle-text">View ECoT comparison</span>
+                  <button id="ecotResultsTableToggle" type="button" class="expandable-toggle button is-small is-outlined" data-expanded-label="Hide ECoT comparison table" onclick="toggleEcotResultsTable()">
+                    <span class="ecot-results-table-toggle-text">View ECoT comparison table</span>
                     <span class="icon"><i class="fas fa-chevron-down ecot-results-table-toggle-icon"></i></span>
                   </button>
                   <div class="expandable-panel" id="ecotResultsTablePanel">
                     <div class="expandable-content">
-                      <figure class="paper-figure" style="--fig-width: 100%;">
+                      <figure class="paper-figure" style="--fig-width: 60%;">
                         <img src="./static/images/ECoT_results_table.png" alt="ECoT variants comparison">
                         <figcaption>
                           <b>Evaluation results of ECoT variants.</b>
@@ -444,8 +444,8 @@
             <p class="rollout-note">Here we show 2 successful evaluation rollouts for each of the 14 Language Table tasks.</p>
 
             <div class="expandable-container">
-              <button id="rolloutsToggle" type="button" class="expandable-toggle button is-small is-outlined" onclick="toggleRollouts()">
-                <span class="rollout-toggle-text">Click to View More</span>
+              <button id="rolloutsToggle" type="button" class="expandable-toggle button is-small is-outlined" data-expanded-label="Click to Hide Videos" onclick="toggleRollouts()">
+                <span class="rollout-toggle-text">Click to View Videos</span>
                 <span class="icon"><i class="fas fa-chevron-down rollout-toggle-icon"></i></span>
               </button>
               <div class="expandable-panel" id="rolloutsPanel">

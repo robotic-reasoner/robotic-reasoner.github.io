@@ -1,8 +1,4 @@
-function toggleExpandable(panelId, toggleButtonId, toggleTextSelector, options) {
-    options = options || {};
-    var collapsedLabel = options.collapsedLabel || 'Click to View More';
-    var expandedLabel = options.expandedLabel || 'Click to View Less';
-
+function toggleExpandable(panelId, toggleButtonId, toggleTextSelector) {
     var panel = document.getElementById(panelId);
     var toggleButton = document.getElementById(toggleButtonId);
     var toggleText = toggleButton ? toggleButton.querySelector(toggleTextSelector) : null;
@@ -10,6 +6,13 @@ function toggleExpandable(panelId, toggleButtonId, toggleTextSelector, options) 
     if (!panel || !toggleButton || !toggleText) {
         return;
     }
+
+    // Labels live in HTML: collapsed text is the span content; expanded text is data-expanded-label.
+    if (!toggleButton.dataset.collapsedLabel) {
+        toggleButton.dataset.collapsedLabel = toggleText.textContent;
+    }
+    var collapsedLabel = toggleButton.dataset.collapsedLabel;
+    var expandedLabel = toggleButton.dataset.expandedLabel || 'Hide';
 
     if (panel.classList.contains('expanded')) {
         panel.classList.remove('expanded');
@@ -27,31 +30,19 @@ function toggleRollouts() {
 }
 
 function toggleMainResultsTable() {
-    toggleExpandable('mainResultsTablePanel', 'mainResultsTableToggle', '.main-results-table-toggle-text', {
-        collapsedLabel: 'View detailed per-task numbers',
-        expandedLabel: 'Hide detailed table',
-    });
+    toggleExpandable('mainResultsTablePanel', 'mainResultsTableToggle', '.main-results-table-toggle-text');
 }
 
 function toggleVqaResultsTable() {
-    toggleExpandable('vqaResultsTablePanel', 'vqaResultsTableToggle', '.vqa-results-table-toggle-text', {
-        collapsedLabel: 'View VQA results',
-        expandedLabel: 'Hide VQA results',
-    });
+    toggleExpandable('vqaResultsTablePanel', 'vqaResultsTableToggle', '.vqa-results-table-toggle-text');
 }
 
 function togglePretrainCotrainResultsTable() {
-    toggleExpandable('pretrainCotrainResultsTablePanel', 'pretrainCotrainResultsTableToggle', '.pretrain-cotrain-results-table-toggle-text', {
-        collapsedLabel: 'View pre-train / co-train results',
-        expandedLabel: 'Hide pre-train / co-train results',
-    });
+    toggleExpandable('pretrainCotrainResultsTablePanel', 'pretrainCotrainResultsTableToggle', '.pretrain-cotrain-results-table-toggle-text');
 }
 
 function toggleEcotResultsTable() {
-    toggleExpandable('ecotResultsTablePanel', 'ecotResultsTableToggle', '.ecot-results-table-toggle-text', {
-        collapsedLabel: 'View ECoT comparison',
-        expandedLabel: 'Hide ECoT comparison',
-    });
+    toggleExpandable('ecotResultsTablePanel', 'ecotResultsTableToggle', '.ecot-results-table-toggle-text');
 }
 
 // =================================
@@ -136,7 +127,7 @@ class NavigationManager {
             'method-hierarchical': 'method',
             'method-twostage': 'method',
             'results-main': 'results',
-            'results-representations': 'results',
+            'results-nxt': 'results',
             'results-behaviors': 'results',
             'results-ecot': 'results'
         };
