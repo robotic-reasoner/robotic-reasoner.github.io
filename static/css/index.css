@@ -454,19 +454,32 @@ body {
 }
 
 .rollout-toggle-icon,
+.packing-rollout-toggle-icon,
 .main-results-table-toggle-icon,
 .vqa-results-table-toggle-icon,
 .pretrain-cotrain-results-table-toggle-icon,
-.ecot-results-table-toggle-icon {
+.ecot-results-table-toggle-icon,
+.packing-results-table-toggle-icon,
+.reasoning-budget-table-toggle-icon,
+.abstract-toggle-icon {
   transition: transform 0.3s ease;
 }
 
 .expandable-toggle.expanded .rollout-toggle-icon,
+.expandable-toggle.expanded .packing-rollout-toggle-icon,
 .expandable-toggle.expanded .main-results-table-toggle-icon,
 .expandable-toggle.expanded .vqa-results-table-toggle-icon,
 .expandable-toggle.expanded .pretrain-cotrain-results-table-toggle-icon,
-.expandable-toggle.expanded .ecot-results-table-toggle-icon {
+.expandable-toggle.expanded .ecot-results-table-toggle-icon,
+.expandable-toggle.expanded .packing-results-table-toggle-icon,
+.expandable-toggle.expanded .reasoning-budget-table-toggle-icon,
+.expandable-toggle.expanded .abstract-toggle-icon {
   transform: rotate(180deg);
+}
+
+#abstract .expandable-panel {
+  background-color: #fff;
+  border: 1px solid #e5e7eb;
 }
 
 .expandable-panel {
@@ -517,6 +530,26 @@ body {
   margin-bottom: 15px;
   text-align: left;
   text-justify: none;
+}
+
+.teaser-rollouts {
+  margin-top: 1.75rem;
+}
+
+.teaser-rollout + .teaser-rollout {
+  margin-top: 1.5rem;
+}
+
+.teaser-rollouts .title.is-4 {
+  color: #255eda;
+  margin-bottom: 0.75rem;
+}
+
+.teaser-rollouts video {
+  width: 100%;
+  border-radius: 8px;
+  background: #000;
+  display: block;
 }
 
 .abstract-toggle {

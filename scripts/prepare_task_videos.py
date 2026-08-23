@@ -5,7 +5,7 @@ Workflow:
 1. Run: python scripts/find_task_examples.py   (optional; writes draft.md)
 2. Or edit draft.md manually with source paths.
 3. Run: python scripts/prepare_task_videos.py
-4. Commit static/task_examples_ours/ (and index.html if UPDATE_HTML is True).
+4. Commit static/task_examples/language_table/ (and index.html if UPDATE_HTML is True).
 5. Push to main; GitHub Pages deploys automatically.
 
 Requires ffmpeg and ffprobe on PATH.
@@ -22,7 +22,7 @@ from pathlib import Path
 # --- CONFIG (edit these) ---
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DRAFT_PATH = REPO_ROOT / "draft.md"
-DEST_ROOT = REPO_ROOT / "static" / "task_examples_ours"
+DEST_ROOT = REPO_ROOT / "static" / "task_examples" / "language_table"
 INDEX_PATH = REPO_ROOT / "index.html"
 
 UPDATE_HTML = True
@@ -114,7 +114,7 @@ def dest_filename(slug: str, use_shape: bool, scene: str, trial: str) -> str:
 
 
 def dest_rel_path(slug: str, job_dir: str, filename: str) -> str:
-    return f"./static/task_examples_ours/{slug}/{job_dir}/{filename}"
+    return f"./static/task_examples/language_table/{slug}/{job_dir}/{filename}"
 
 
 def get_codec(path: Path) -> str:
@@ -268,7 +268,7 @@ def main() -> None:
         f"\nDone. Copied {sum(len(r[1]) for r in html_rows)} videos to "
         f"{DEST_ROOT.relative_to(REPO_ROOT)}/"
     )
-    print("Next: git add static/task_examples_ours/ index.html && git commit && git push")
+    print("Next: git add static/task_examples/language_table/ index.html && git commit && git push")
 
 
 if __name__ == "__main__":

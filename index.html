@@ -27,7 +27,7 @@
       </div>
       <ul class="navbar-sidebar-menu">
         <li><a href="#abstract" class="nav-link" data-target="abstract">
-          <span class="nav-indicator"></span>Abstract
+          <span class="nav-indicator"></span>TL;DR
         </a></li>
         <li><a href="#method" class="nav-link" data-target="method">
           <span class="nav-indicator"></span>Method
@@ -77,7 +77,7 @@
     <div class="navbar-mobile-menu">
       <button class="mobile-menu-close" id="mobileMenuClose">&times;</button>
       <ul>
-        <li><a href="#abstract" class="nav-link-mobile" data-target="abstract">Abstract</a></li>
+        <li><a href="#abstract" class="nav-link-mobile" data-target="abstract">TL;DR</a></li>
         <li><a href="#method" class="nav-link-mobile" data-target="method">Method</a></li>
         <li><a href="#results" class="nav-link-mobile" data-target="results">Main Results</a></li>
         <li><a href="#results-lt" class="nav-link-mobile nav-sublink-mobile" data-target="results-lt">— Language Table</a></li>
@@ -139,30 +139,60 @@
     <section class="section hero is-light" id="abstract">
       <div class="container is-max-desktop">
         <div class="columns is-centered has-text-centered">
-          <div class="column is-four-fifths">
-            <h2 class="title is-3">Abstract</h2>
-            <div class="content has-text-justified">
+          <div class="column is-full-width">
+            <h2 class="title is-3">TL;DR</h2>
+            <div class="content has-text-justified abstract-tldr">
               <p>
-                Reasoning in language allows foundation models to spend more test-time compute on hard problems,
-                such as those requiring decomposition, constraint tracking, and prediction of future consequences. Whether this
-                mechanism can improve robotic manipulation remains unclear, where <b>long-horizon tasks</b> require tracking partial
-                progress, reasoning about object relations, recovering from mistakes, and steering noisy low-level policies. In this
-                paper, we study whether VLMs can be trained to <b>reason directly in natural language to guide low-level manipulation
-                policies.</b> We introduce R³, a simple post-training recipe that turns off-the-shelf VLMs into robotic reasoners: it first
-                mid-trains a VLM on expert-generated reasoning traces to initialize the desired reasoning style, then improves the
-                reasoner with <b>single-step rubric-based RL</b> from offline action data. Unlike prior robotic reasoning methods that
-                mostly use structured traces as auxiliary supervision, R³ trains free-form language reasoning to produce test-time
-                guidance for action. 
-                <br>
-                <br>
-                We instantiate R³ on <b>Language Table</b> and <b>simulated bimanual grocery packing</b>,
-                two controlled testbeds for studying robotic reasoning and long-horizon manipulation.
-                R³ improves exploration and generalization across unseen tasks and significantly outperforms instruction-only
-                imitation learning baselines on both benchmarks.
-                These results suggest that free-form language reasoning can function as a test-time compute mechanism for
-                steering low-level policies.
+                R³ trains VLM reasoners with <b>single-step rubric-based RL</b> to reason in natural language to guide low-level policies on long-horizon manipulation tasks.
+                Instantiated on <b>Language Table</b> and <b>simulated bimanual grocery packing</b> tasks, R³ improves generalization on unseen tasks and significantly outperforms instruction-only imitation learning.
               </p>
             </div>
+            <div class="expandable-container">
+              <button id="abstractToggle" type="button" class="expandable-toggle button is-small is-outlined" data-expanded-label="Hide full abstract" onclick="toggleAbstract()">
+                <span class="abstract-toggle-text">View full abstract</span>
+                <span class="icon"><i class="fas fa-chevron-down abstract-toggle-icon"></i></span>
+              </button>
+              <div class="expandable-panel" id="abstractPanel">
+                <div class="expandable-content content has-text-justified">
+                  <p>
+                    Reasoning in language allows foundation models to spend more test-time compute on hard problems,
+                    such as those requiring decomposition, constraint tracking, and prediction of future consequences. Whether this
+                    mechanism can improve robotic manipulation remains unclear, where <b>long-horizon tasks</b> require tracking partial
+                    progress, reasoning about object relations, recovering from mistakes, and steering noisy low-level policies. In this
+                    paper, we study whether VLMs can be trained to <b>reason directly in natural language to guide low-level manipulation
+                    policies.</b> We introduce R³, a simple post-training recipe that turns off-the-shelf VLMs into robotic reasoners: it first
+                    mid-trains a VLM on expert-generated reasoning traces to initialize the desired reasoning style, then improves the
+                    reasoner with <b>single-step rubric-based RL</b> from offline action data. Unlike prior robotic reasoning methods that
+                    mostly use structured traces as auxiliary supervision, R³ trains free-form language reasoning to produce test-time
+                    guidance for action.
+                    <br>
+                    <br>
+                    We instantiate R³ on <b>Language Table</b> and <b>simulated bimanual grocery packing</b>,
+                    two controlled testbeds for studying robotic reasoning and long-horizon manipulation.
+                    R³ improves exploration and generalization across unseen tasks and significantly outperforms instruction-only
+                    imitation learning baselines on both benchmarks.
+                    These results suggest that free-form language reasoning can function as a test-time compute mechanism for
+                    steering low-level policies.
+                  </p>
+                  <div class="expandable-close-container">
+                    <button type="button" class="expandable-close button is-small is-outlined" onclick="toggleAbstract()">
+                      <span class="icon"><i class="fas fa-chevron-up"></i></span>
+                      <span>Close</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="teaser-rollouts">
+          <div class="teaser-rollout">
+            <h3 class="title is-4 has-text-centered">Language Table</h3>
+            <video controls muted playsinline autoplay loop preload="metadata" src="./static/task_examples/language_table/T/job0/custom_T_shape_3_10_success.mp4"></video>
+          </div>
+          <div class="teaser-rollout">
+            <h3 class="title is-4 has-text-centered">Grocery Packing</h3>
+            <video controls muted playsinline autoplay loop preload="metadata" src="./static/task_examples/packing/SP-B6_seed42_roll0.mp4"></video>
           </div>
         </div>
       </div>
@@ -220,7 +250,7 @@
               </div>
             </div>
 
-            <div id="method-environments" class="subsection">
+            <!-- <div id="method-environments" class="subsection">
               <h3 class="title is-4">Environments</h3>
               <div class="content">
                 <p>
@@ -230,19 +260,21 @@
                   that test relational transfer, compositional generalization, and geometric difficulty.
                   Gemini 3 Flash provides expert reasoning that steers a pretrained language-conditioned policy.
                 </p>
+                
                 <figure class="paper-figure" style="--fig-width: 100%;">
                   <img src="./static/images/filmstrip_task_example.png" alt="Expert trajectory example on Language Table make-a-V task">
                   <figcaption>
                     <b>Language Table.</b>
                     Expert trajectory on the "make a V-shape" task.
-                     <!-- each frame shows the tabletop scene and the short-horizon instruction issued to the low-level policy (×n marks a repeated instruction). -->
                   </figcaption>
                 </figure>
+               
                 <p>
                   <b>Grocery Packing.</b>
                   Dual 7-DoF xArm-7s pack YCB objects into 3 different trays.
                   Humans provide instruction-only demonstrations via teleoperation. We fine-tune &pi;<sub>0.5</sub> to serve as the low-level policy.
                 </p>
+                
                 <figure class="paper-figure" style="--fig-width: 50%;">
                   <img src="./static/images/packing_example_3views.png" alt="Simulated grocery packing from left-wrist, base, and right-wrist views">
                   <figcaption>
@@ -250,8 +282,9 @@
                     Dual-arm packing from left-wrist, base, and right-wrist views.
                   </figcaption>
                 </figure>
+               
               </div>
-            </div>
+            </div> -->
 
           </div>
         </div>
@@ -267,6 +300,12 @@
             <div id="results-lt" class="subsection">
               <h3 class="title is-4">Language Table</h3>
               <div class="content">
+                <p>
+                  We evaluate R³ on 14 long-horizon block-arrangement tasks in
+                  <a href="https://interactive-language.github.io/" target="_blank" rel="noopener">Language Table</a>
+                  that test relational transfer, compositional generalization, and geometric difficulty.
+                  Gemini 3 Flash provides expert reasoning that steers a pretrained language-conditioned policy.
+                </p>
                 <ul class="takeaways">
                   <li><b>RL alone improves performance.</b> Rubric-based RL can reinforce useful reasoning behaviors and improve task performance even without mid-training.</li>
                   <li><b>Mid-training improves RL post-training.</b> Mid-training is a strong warm start; a modest amount of reasoning data is enough, especially for OOD generalization.</li>
@@ -310,7 +349,11 @@
               <h3 class="title is-4">Grocery Packing</h3>
               <div class="content">
                 <p>
-                  The recipe transfers beyond Language Table: on 12 held-out bimanual packing goals, R³ (RL only) reaches higher success and progress than instruction-only imitation (47.0% vs. 38.0% mean success), and mid-training can be skipped because the base VLM already produces useful packing reasoning.
+                  We evaluate R³ on simulated grocery packing tasks, where two 7-DoF xArm-7s pack YCB objects into 3 trays.
+                  Humans provide instruction-only demonstrations via teleoperation, and we fine-tune &pi;<sub>0.5</sub> as the low-level policy.
+                </p>
+                <p>
+                  On 12 held-out bimanual packing goals, R³ (RL only) reaches higher success and progress than instruction-only imitation (47.0% vs. 38.0% mean success), and mid-training can be skipped because the base VLM already produces useful packing reasoning.
                 </p>
                 <figure class="paper-figure" style="--fig-width: 70%;">
                   <img src="./static/images/packing_results_bar_chart.png" alt="Grocery packing main results: average success rate and progress">
@@ -507,11 +550,15 @@
         <div class="columns is-centered">
           <div class="column is-full-width">
             <h2 class="title is-3">Examples of Evaluation Rollouts</h2>
-            <p class="rollout-note">Here we show 2 successful evaluation rollouts for each of the 14 Language Table tasks. Grocery packing videos will be added here.</p>
+            <p>
+              Here we show evaluation rollouts of our model on 14 Language Table tasks and 12 unseen grocery packing goals.
+            </p>
 
-            <div class="expandable-container">
-              <button id="rolloutsToggle" type="button" class="expandable-toggle button is-small is-outlined" data-expanded-label="Click to hide videos" onclick="toggleRollouts()">
-                <span class="rollout-toggle-text">Click to view videos</span>
+            <div class="subsection">
+              <h3 class="title is-4">Language Table</h3>
+              <div class="expandable-container">
+              <button id="rolloutsToggle" type="button" class="expandable-toggle button is-small is-outlined" data-expanded-label="Click to hide Language Table videos" onclick="toggleRollouts()">
+                <span class="rollout-toggle-text">Click to view Language Table videos</span>
                 <span class="icon"><i class="fas fa-chevron-down rollout-toggle-icon"></i></span>
               </button>
               <div class="expandable-panel" id="rolloutsPanel">
@@ -521,13 +568,13 @@
                   <div class="columns is-vcentered rollout-row">
                     <div class="column">
                       <div class="item">
-                        <video controls muted playsinline preload="metadata" src="./static/task_examples_ours/group_color/job0/custom_group_color_0_0_success.mp4"></video>
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples/language_table/group_color/job0/custom_group_color_0_0_success.mp4"></video>
                         <p class="caption has-text-centered">Example trajectory 1</p>
                       </div>
                     </div>
                     <div class="column">
                       <div class="item">
-                        <video controls muted playsinline preload="metadata" src="./static/task_examples_ours/group_color/job0/custom_group_color_1_5_success.mp4"></video>
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples/language_table/group_color/job0/custom_group_color_1_5_success.mp4"></video>
                         <p class="caption has-text-centered">Example trajectory 2</p>
                       </div>
                     </div>
@@ -537,13 +584,13 @@
                   <div class="columns is-vcentered rollout-row">
                     <div class="column">
                       <div class="item">
-                        <video controls muted playsinline preload="metadata" src="./static/task_examples_ours/line_color/job0/custom_line_color_0_0_success.mp4"></video>
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples/language_table/line_color/job0/custom_line_color_0_0_success.mp4"></video>
                         <p class="caption has-text-centered">Example trajectory 1</p>
                       </div>
                     </div>
                     <div class="column">
                       <div class="item">
-                        <video controls muted playsinline preload="metadata" src="./static/task_examples_ours/line_color/job0/custom_line_color_1_8_success.mp4"></video>
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples/language_table/line_color/job0/custom_line_color_1_8_success.mp4"></video>
                         <p class="caption has-text-centered">Example trajectory 2</p>
                       </div>
                     </div>
@@ -553,13 +600,13 @@
                   <div class="columns is-vcentered rollout-row">
                     <div class="column">
                       <div class="item">
-                        <video controls muted playsinline preload="metadata" src="./static/task_examples_ours/T/job0/custom_T_shape_3_10_success.mp4"></video>
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples/language_table/T/job0/custom_T_shape_3_10_success.mp4"></video>
                         <p class="caption has-text-centered">Example trajectory 1</p>
                       </div>
                     </div>
                     <div class="column">
                       <div class="item">
-                        <video controls muted playsinline preload="metadata" src="./static/task_examples_ours/T/job0/custom_T_shape_1_3_success.mp4"></video>
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples/language_table/T/job0/custom_T_shape_1_3_success.mp4"></video>
                         <p class="caption has-text-centered">Example trajectory 2</p>
                       </div>
                     </div>
@@ -569,13 +616,13 @@
                   <div class="columns is-vcentered rollout-row">
                     <div class="column">
                       <div class="item">
-                        <video controls muted playsinline preload="metadata" src="./static/task_examples_ours/V/job0/custom_V_shape_0_0_success.mp4"></video>
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples/language_table/V/job0/custom_V_shape_0_0_success.mp4"></video>
                         <p class="caption has-text-centered">Example trajectory 1</p>
                       </div>
                     </div>
                     <div class="column">
                       <div class="item">
-                        <video controls muted playsinline preload="metadata" src="./static/task_examples_ours/V/job0/custom_V_shape_1_0_success.mp4"></video>
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples/language_table/V/job0/custom_V_shape_1_0_success.mp4"></video>
                         <p class="caption has-text-centered">Example trajectory 2</p>
                       </div>
                     </div>
@@ -585,13 +632,13 @@
                   <div class="columns is-vcentered rollout-row">
                     <div class="column">
                       <div class="item">
-                        <video controls muted playsinline preload="metadata" src="./static/task_examples_ours/L/job0/custom_L_shape_0_1_success.mp4"></video>
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples/language_table/L/job0/custom_L_shape_0_1_success.mp4"></video>
                         <p class="caption has-text-centered">Example trajectory 1</p>
                       </div>
                     </div>
                     <div class="column">
                       <div class="item">
-                        <video controls muted playsinline preload="metadata" src="./static/task_examples_ours/L/job0/custom_L_shape_1_2_success.mp4"></video>
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples/language_table/L/job0/custom_L_shape_1_2_success.mp4"></video>
                         <p class="caption has-text-centered">Example trajectory 2</p>
                       </div>
                     </div>
@@ -601,13 +648,13 @@
                   <div class="columns is-vcentered rollout-row">
                     <div class="column">
                       <div class="item">
-                        <video controls muted playsinline preload="metadata" src="./static/task_examples_ours/rect/job0/custom_rect_5_4_success.mp4"></video>
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples/language_table/rect/job0/custom_rect_5_4_success.mp4"></video>
                         <p class="caption has-text-centered">Example trajectory 1</p>
                       </div>
                     </div>
                     <div class="column">
                       <div class="item">
-                        <video controls muted playsinline preload="metadata" src="./static/task_examples_ours/rect/job0/custom_rect_3_7_success.mp4"></video>
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples/language_table/rect/job0/custom_rect_3_7_success.mp4"></video>
                         <p class="caption has-text-centered">Example trajectory 2</p>
                       </div>
                     </div>
@@ -617,13 +664,13 @@
                   <div class="columns is-vcentered rollout-row">
                     <div class="column">
                       <div class="item">
-                        <video controls muted playsinline preload="metadata" src="./static/task_examples_ours/gris/job0/custom_gris_0_2_success.mp4"></video>
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples/language_table/gris/job0/custom_gris_0_2_success.mp4"></video>
                         <p class="caption has-text-centered">Example trajectory 1</p>
                       </div>
                     </div>
                     <div class="column">
                       <div class="item">
-                        <video controls muted playsinline preload="metadata" src="./static/task_examples_ours/gris/job0/custom_gris_1_0_success.mp4"></video>
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples/language_table/gris/job0/custom_gris_1_0_success.mp4"></video>
                         <p class="caption has-text-centered">Example trajectory 2</p>
                       </div>
                     </div>
@@ -633,13 +680,13 @@
                   <div class="columns is-vcentered rollout-row">
                     <div class="column">
                       <div class="item">
-                        <video controls muted playsinline preload="metadata" src="./static/task_examples_ours/mid/job0/custom_mid_0_0_success.mp4"></video>
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples/language_table/mid/job0/custom_mid_0_0_success.mp4"></video>
                         <p class="caption has-text-centered">Example trajectory 1</p>
                       </div>
                     </div>
                     <div class="column">
                       <div class="item">
-                        <video controls muted playsinline preload="metadata" src="./static/task_examples_ours/mid/job0/custom_mid_1_0_success.mp4"></video>
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples/language_table/mid/job0/custom_mid_1_0_success.mp4"></video>
                         <p class="caption has-text-centered">Example trajectory 2</p>
                       </div>
                     </div>
@@ -649,13 +696,13 @@
                   <div class="columns is-vcentered rollout-row">
                     <div class="column">
                       <div class="item">
-                        <video controls muted playsinline preload="metadata" src="./static/task_examples_ours/clear_quarter/job0/custom_clear_quarter_0_0_success.mp4"></video>
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples/language_table/clear_quarter/job0/custom_clear_quarter_0_0_success.mp4"></video>
                         <p class="caption has-text-centered">Example trajectory 1</p>
                       </div>
                     </div>
                     <div class="column">
                       <div class="item">
-                        <video controls muted playsinline preload="metadata" src="./static/task_examples_ours/clear_quarter/job0/custom_clear_quarter_1_0_success.mp4"></video>
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples/language_table/clear_quarter/job0/custom_clear_quarter_1_0_success.mp4"></video>
                         <p class="caption has-text-centered">Example trajectory 2</p>
                       </div>
                     </div>
@@ -665,13 +712,13 @@
                   <div class="columns is-vcentered rollout-row">
                     <div class="column">
                       <div class="item">
-                        <video controls muted playsinline preload="metadata" src="./static/task_examples_ours/iip/job0/custom_iip_0_0_success.mp4"></video>
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples/language_table/iip/job0/custom_iip_0_0_success.mp4"></video>
                         <p class="caption has-text-centered">Example trajectory 1</p>
                       </div>
                     </div>
                     <div class="column">
                       <div class="item">
-                        <video controls muted playsinline preload="metadata" src="./static/task_examples_ours/iip/job0/custom_iip_1_0_success.mp4"></video>
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples/language_table/iip/job0/custom_iip_1_0_success.mp4"></video>
                         <p class="caption has-text-centered">Example trajectory 2</p>
                       </div>
                     </div>
@@ -681,13 +728,13 @@
                   <div class="columns is-vcentered rollout-row">
                     <div class="column">
                       <div class="item">
-                        <video controls muted playsinline preload="metadata" src="./static/task_examples_ours/iV/job0/custom_iV_shape_0_0_success.mp4"></video>
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples/language_table/iV/job0/custom_iV_shape_0_0_success.mp4"></video>
                         <p class="caption has-text-centered">Example trajectory 1</p>
                       </div>
                     </div>
                     <div class="column">
                       <div class="item">
-                        <video controls muted playsinline preload="metadata" src="./static/task_examples_ours/iV/job0/custom_iV_shape_1_0_success.mp4"></video>
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples/language_table/iV/job0/custom_iV_shape_1_0_success.mp4"></video>
                         <p class="caption has-text-centered">Example trajectory 2</p>
                       </div>
                     </div>
@@ -697,13 +744,13 @@
                   <div class="columns is-vcentered rollout-row">
                     <div class="column">
                       <div class="item">
-                        <video controls muted playsinline preload="metadata" src="./static/task_examples_ours/iL/job0/custom_iL_shape_0_0_success.mp4"></video>
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples/language_table/iL/job0/custom_iL_shape_0_0_success.mp4"></video>
                         <p class="caption has-text-centered">Example trajectory 1</p>
                       </div>
                     </div>
                     <div class="column">
                       <div class="item">
-                        <video controls muted playsinline preload="metadata" src="./static/task_examples_ours/iL/job0/custom_iL_shape_1_2_success.mp4"></video>
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples/language_table/iL/job0/custom_iL_shape_1_2_success.mp4"></video>
                         <p class="caption has-text-centered">Example trajectory 2</p>
                       </div>
                     </div>
@@ -713,13 +760,13 @@
                   <div class="columns is-vcentered rollout-row">
                     <div class="column">
                       <div class="item">
-                        <video controls muted playsinline preload="metadata" src="./static/task_examples_ours/dline/job0/custom_dline_2_5_success.mp4"></video>
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples/language_table/dline/job0/custom_dline_2_5_success.mp4"></video>
                         <p class="caption has-text-centered">Example trajectory 1</p>
                       </div>
                     </div>
                     <div class="column">
                       <div class="item">
-                        <video controls muted playsinline preload="metadata" src="./static/task_examples_ours/dline/job0/custom_dline_1_0_success.mp4"></video>
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples/language_table/dline/job0/custom_dline_1_0_success.mp4"></video>
                         <p class="caption has-text-centered">Example trajectory 2</p>
                       </div>
                     </div>
@@ -729,28 +776,17 @@
                   <div class="columns is-vcentered rollout-row">
                     <div class="column">
                       <div class="item">
-                        <video controls muted playsinline preload="metadata" src="./static/task_examples_ours/clear_half/job0/custom_clear_half_0_0_success.mp4"></video>
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples/language_table/clear_half/job0/custom_clear_half_0_0_success.mp4"></video>
                         <p class="caption has-text-centered">Example trajectory 1</p>
                       </div>
                     </div>
                     <div class="column">
                       <div class="item">
-                        <video controls muted playsinline preload="metadata" src="./static/task_examples_ours/clear_half/job0/custom_clear_half_1_0_success.mp4"></video>
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples/language_table/clear_half/job0/custom_clear_half_1_0_success.mp4"></video>
                         <p class="caption has-text-centered">Example trajectory 2</p>
                       </div>
                     </div>
                   </div>
-
-                  <h3 class="title is-4 has-text-centered">Grocery packing (coming soon)</h3>
-                  <figure class="paper-figure" style="--fig-width: 100%;">
-                    <div class="figure-placeholder">
-                      <span class="table-placeholder-label">Video placeholder</span>
-                      <span class="table-placeholder-caption">packing evaluation rollouts</span>
-                    </div>
-                    <figcaption>
-                      Successful evaluation rollouts on held-out grocery packing goals will appear here.
-                    </figcaption>
-                  </figure>
 
                   <div class="expandable-close-container">
                     <button type="button" class="expandable-close button is-small is-outlined" onclick="toggleRollouts()">
@@ -760,6 +796,136 @@
                   </div>
                 </div>
               </div>
+            </div>
+            </div>
+
+            <div class="subsection">
+              <h3 class="title is-4">Grocery Packing</h3>
+              <div class="expandable-container">
+              <button id="packingRolloutsToggle" type="button" class="expandable-toggle button is-small is-outlined" data-expanded-label="Click to hide grocery packing videos" onclick="togglePackingRollouts()">
+                <span class="packing-rollout-toggle-text">Click to view grocery packing videos</span>
+                <span class="icon"><i class="fas fa-chevron-down packing-rollout-toggle-icon"></i></span>
+              </button>
+              <div class="expandable-panel" id="packingRolloutsPanel">
+                <div class="expandable-content">
+
+                  <h3 class="title is-4 has-text-centered">Goal B1</h3>
+                  <div class="columns is-vcentered rollout-row">
+                    <div class="column">
+                      <div class="item">
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples/packing/SP-B1_seed42_roll1.mp4"></video>
+                      </div>
+                    </div>
+                  </div>
+
+                  <h3 class="title is-4 has-text-centered">Goal B2</h3>
+                  <div class="columns is-vcentered rollout-row">
+                    <div class="column">
+                      <div class="item">
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples/packing/SP-B2_seed43_roll0.mp4"></video>
+                      </div>
+                    </div>
+                  </div>
+
+                  <h3 class="title is-4 has-text-centered">Goal B3</h3>
+                  <div class="columns is-vcentered rollout-row">
+                    <div class="column">
+                      <div class="item">
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples/packing/SP-B3_seed46_roll1.mp4"></video>
+                      </div>
+                    </div>
+                  </div>
+
+                  <h3 class="title is-4 has-text-centered">Goal B4</h3>
+                  <div class="columns is-vcentered rollout-row">
+                    <div class="column">
+                      <div class="item">
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples/packing/SP-B4_seed45_roll3.mp4"></video>
+                      </div>
+                    </div>
+                  </div>
+
+                  <h3 class="title is-4 has-text-centered">Goal B5</h3>
+                  <div class="columns is-vcentered rollout-row">
+                    <div class="column">
+                      <div class="item">
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples/packing/SP-B5_seed46_roll1.mp4"></video>
+                      </div>
+                    </div>
+                  </div>
+
+                  <h3 class="title is-4 has-text-centered">Goal B6</h3>
+                  <div class="columns is-vcentered rollout-row">
+                    <div class="column">
+                      <div class="item">
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples/packing/SP-B6_seed42_roll0.mp4"></video>
+                      </div>
+                    </div>
+                  </div>
+
+                  <h3 class="title is-4 has-text-centered">Goal B7</h3>
+                  <div class="columns is-vcentered rollout-row">
+                    <div class="column">
+                      <div class="item">
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples/packing/SP-B7_seed45_roll2.mp4"></video>
+                      </div>
+                    </div>
+                  </div>
+
+                  <h3 class="title is-4 has-text-centered">Goal B8</h3>
+                  <div class="columns is-vcentered rollout-row">
+                    <div class="column">
+                      <div class="item">
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples/packing/SP-B8_seed43_roll2.mp4"></video>
+                      </div>
+                    </div>
+                  </div>
+
+                  <h3 class="title is-4 has-text-centered">Goal B9</h3>
+                  <div class="columns is-vcentered rollout-row">
+                    <div class="column">
+                      <div class="item">
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples/packing/SP-B9_seed44_roll1.mp4"></video>
+                      </div>
+                    </div>
+                  </div>
+
+                  <h3 class="title is-4 has-text-centered">Goal B10</h3>
+                  <div class="columns is-vcentered rollout-row">
+                    <div class="column">
+                      <div class="item">
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples/packing/SP-B10_seed43_roll0.mp4"></video>
+                      </div>
+                    </div>
+                  </div>
+
+                  <h3 class="title is-4 has-text-centered">Goal B11</h3>
+                  <div class="columns is-vcentered rollout-row">
+                    <div class="column">
+                      <div class="item">
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples/packing/SP-B11_seed43_roll0.mp4"></video>
+                      </div>
+                    </div>
+                  </div>
+
+                  <h3 class="title is-4 has-text-centered">Goal B12</h3>
+                  <div class="columns is-vcentered rollout-row">
+                    <div class="column">
+                      <div class="item">
+                        <video controls muted playsinline preload="metadata" src="./static/task_examples/packing/SP-B12_seed44_roll1.mp4"></video>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="expandable-close-container">
+                    <button type="button" class="expandable-close button is-small is-outlined" onclick="togglePackingRollouts()">
+                      <span class="icon"><i class="fas fa-chevron-up"></i></span>
+                      <span>Close</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
             </div>
           </div>
         </div>

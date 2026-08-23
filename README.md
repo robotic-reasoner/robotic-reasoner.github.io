@@ -80,7 +80,7 @@ You can edit `draft.md` by hand or re-run the find script after new renders land
 Videos committed to the repo go under:
 
 ```
-static/task_examples_ours/
+static/task_examples/language_table/
   <task_name>/
     job0/          # job folder matches source job (job0, job1, …)
       custom_<task_name>_<scene>_<trial>_success.mp4
@@ -94,7 +94,7 @@ Naming rules (applied by the script):
 - Other tasks: `custom_<task>_<scene>_<trial>_success.mp4`
 - Job folder reflects the source job; both examples can live under `job0/` if selected there
 
-Only files under `static/task_examples_ours/` are deployed. **`tmp/` is never committed.**
+Only files under `static/task_examples/language_table/` are deployed. **`tmp/` is never committed.**
 
 ### 5. Update `index.html`
 
@@ -108,7 +108,7 @@ Each task gets a section with **two videos in one row** (Bulma `columns`):
       <div class="column">
         <div class="item">
           <video controls muted playsinline preload="metadata">
-            <source src="./static/task_examples_ours/clear_half/job0/custom_clear_half_0_0_success.mp4" type="video/mp4">
+            <source src="./static/task_examples/language_table/clear_half/job0/custom_clear_half_0_0_success.mp4" type="video/mp4">
           </video>
           <p class="caption has-text-centered">Example trajectory 1</p>
         </div>
@@ -137,7 +137,7 @@ ffmpeg -i input.mp4 -c:v libx264 -pix_fmt yuv420p -preset medium -crf 23 \
 ### 7. Commit and deploy
 
 ```bash
-git add static/task_examples_ours/ index.html
+git add static/task_examples/language_table/ index.html
 git commit -m "Update task rollout videos"
 git push origin main
 ```
@@ -156,7 +156,7 @@ python scripts/prepare_task_videos.py  # draft.md → static/ + index.html
 Requires `ffmpeg` and `ffprobe`. `prepare_task_videos.py`:
 
 1. Reads `draft.md`
-2. Copies videos to `static/task_examples_ours/<task>/<jobN>/`
+2. Copies videos to `static/task_examples/language_table/<task>/<jobN>/`
 3. Re-encodes to H.264
 4. Updates rollout sections in `index.html`
 
@@ -178,7 +178,7 @@ python scripts/reencode_videos_for_web.py
 ffprobe -v error -select_streams v:0 \
   -show_entries stream=codec_name,codec_tag_string \
   -of default=noprint_wrappers=1 \
-  static/task_examples_ours/group_color/job0/custom_group_color_0_0_success.mp4
+  static/task_examples/language_table/group_color/job0/custom_group_color_0_0_success.mp4
 ```
 
 Expected for web-ready files:
@@ -201,4 +201,4 @@ python3 -m http.server 8000
 |--------|---------|
 | `scripts/find_task_examples.py` | Scan `tmp/` and write `draft.md` (N successes, distinct scenes) |
 | `scripts/prepare_task_videos.py` | draft → copy → re-encode → update HTML |
-| `scripts/reencode_videos_for_web.py` | Re-encode existing files under `static/task_examples_ours/` |
+| `scripts/reencode_videos_for_web.py` | Re-encode existing files under `static/task_examples/language_table/` |

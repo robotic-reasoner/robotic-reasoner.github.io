@@ -15,7 +15,7 @@ from pathlib import Path
 
 # --- CONFIG (edit these) ---
 REPO_ROOT = Path(__file__).resolve().parents[1]
-VIDEO_ROOT = REPO_ROOT / "static" / "task_examples_ours"
+VIDEO_ROOT = REPO_ROOT / "static" / "task_examples" / "language_table"
 
 FFMPEG_CRF = 23
 FFMPEG_PRESET = "medium"

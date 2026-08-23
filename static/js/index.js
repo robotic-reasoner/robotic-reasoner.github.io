@@ -25,8 +25,16 @@ function toggleExpandable(panelId, toggleButtonId, toggleTextSelector) {
     }
 }
 
+function toggleAbstract() {
+    toggleExpandable('abstractPanel', 'abstractToggle', '.abstract-toggle-text');
+}
+
 function toggleRollouts() {
     toggleExpandable('rolloutsPanel', 'rolloutsToggle', '.rollout-toggle-text');
+}
+
+function togglePackingRollouts() {
+    toggleExpandable('packingRolloutsPanel', 'packingRolloutsToggle', '.packing-rollout-toggle-text');
 }
 
 function toggleMainResultsTable() {
