@@ -229,17 +229,19 @@
                   The recipe is shared; the expert, history, and reward are domain-specific.
                 </p>
 
-                <h4 class="title is-5">Stage I: Mid-training</h4>
-                <p>
-                  Supervised fine-tuning (SFT) on expert reasoning traces teaches the VLM to reason over scene and history before acting.
-                  We skip this stage on packing, where the base VLM already reasons usefully.
-                </p>
-                <h4 class="title is-5">Stage II: Single-step RL</h4>
-                <p>
-                  Single-step RL (Dr.GRPO) on expert instructions, without reasoning supervision or multi-turn rollouts.
-                  Language Table uses a rubric-based VLM judge (semantic match).
-                  Packing uses exact string match over a finite pack / remove / transfer set.
-                </p>
+                <ul>
+                  <li>
+                    <b>Stage I: Mid-training.</b>
+                    Supervised fine-tuning (SFT) on expert reasoning traces teaches the VLM to reason over scene and history before acting.
+                    We skip this stage on packing, where the base VLM already reasons usefully.
+                  </li>
+                  <li>
+                    <b>Stage II: Single-step RL.</b>
+                    Single-step RL (Dr.GRPO) on expert instructions, without reasoning supervision or multi-turn rollouts.
+                    Language Table uses a rubric-based VLM judge (semantic match).
+                    Packing uses exact string match over a finite pack / remove / transfer set.
+                  </li>
+                </ul>
                 <figure class="paper-figure" style="--fig-width: 100%;">
                   <img src="./static/images/workflow_v4.png" alt="Two-stage training pipeline of R³">
                   <figcaption>
