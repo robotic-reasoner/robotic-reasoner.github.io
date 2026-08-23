@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <meta name="description" content="R³: Training Robots to Reason in Natural Language via Reinforcement Learning">
+  <meta name="description" content="R³: Training Robots to Reason in Natural Language via Reinforcement Learning. A post-training recipe that turns VLMs into robotic reasoners, evaluated on Language Table and bimanual grocery packing.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>R³: Training Robots to Reason in Natural Language via Reinforcement Learning</title>
   <link rel="icon" type="image/png" href="./static/images/icon_v1.png">
@@ -29,22 +29,24 @@
         <li><a href="#abstract" class="nav-link" data-target="abstract">
           <span class="nav-indicator"></span>Abstract
         </a></li>
-        <li>
-          <a href="#method" class="nav-link" data-target="method">
-            <span class="nav-indicator"></span>Method
-          </a>
-          <!-- <ul class="navbar-sidebar-submenu">
-            <li><a href="#method-hierarchical" class="nav-link nav-sublink" data-target="method-hierarchical">Hierarchical policy</a></li>
-            <li><a href="#method-twostage" class="nav-link nav-sublink" data-target="method-twostage">Two-stage training</a></li>
-          </ul> -->
-        </li>
+        <li><a href="#method" class="nav-link" data-target="method">
+          <span class="nav-indicator"></span>Method
+        </a></li>
         <li>
           <a href="#results" class="nav-link" data-target="results">
-            <span class="nav-indicator"></span>Results
+            <span class="nav-indicator"></span>Main Results
           </a>
           <ul class="navbar-sidebar-submenu">
-            <li><a href="#results-main" class="nav-link nav-sublink" data-target="results-main">Main results</a></li>
-            <li><a href="#results-representations" class="nav-link nav-sublink" data-target="results-representations">Beyond representations</a></li>
+            <li><a href="#results-lt" class="nav-link nav-sublink" data-target="results-lt">Language Table</a></li>
+            <li><a href="#results-packing" class="nav-link nav-sublink" data-target="results-packing">Grocery packing</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#analysis" class="nav-link" data-target="analysis">
+            <span class="nav-indicator"></span>Analysis
+          </a>
+          <ul class="navbar-sidebar-submenu">
+            <li><a href="#results-representations" class="nav-link nav-sublink" data-target="results-representations">Beyond representation learning</a></li>
             <li><a href="#results-behaviors" class="nav-link nav-sublink" data-target="results-behaviors">Reasoning behaviors</a></li>
             <li><a href="#results-ecot" class="nav-link nav-sublink" data-target="results-ecot">Comparison with ECoT</a></li>
           </ul>
@@ -77,11 +79,11 @@
       <ul>
         <li><a href="#abstract" class="nav-link-mobile" data-target="abstract">Abstract</a></li>
         <li><a href="#method" class="nav-link-mobile" data-target="method">Method</a></li>
-        <li><a href="#method-hierarchical" class="nav-link-mobile nav-sublink-mobile" data-target="method-hierarchical">— Hierarchical policy</a></li>
-        <li><a href="#method-twostage" class="nav-link-mobile nav-sublink-mobile" data-target="method-twostage">— Two-stage training</a></li>
-        <li><a href="#results" class="nav-link-mobile" data-target="results">Results</a></li>
-        <li><a href="#results-main" class="nav-link-mobile nav-sublink-mobile" data-target="results-main">— Main results</a></li>
-        <li><a href="#results-representations" class="nav-link-mobile nav-sublink-mobile" data-target="results-representations">— Beyond representations</a></li>
+        <li><a href="#results" class="nav-link-mobile" data-target="results">Main Results</a></li>
+        <li><a href="#results-lt" class="nav-link-mobile nav-sublink-mobile" data-target="results-lt">— Language Table</a></li>
+        <li><a href="#results-packing" class="nav-link-mobile nav-sublink-mobile" data-target="results-packing">— Grocery packing</a></li>
+        <li><a href="#analysis" class="nav-link-mobile" data-target="analysis">Analysis</a></li>
+        <li><a href="#results-representations" class="nav-link-mobile nav-sublink-mobile" data-target="results-representations">— Beyond representation learning</a></li>
         <li><a href="#results-behaviors" class="nav-link-mobile nav-sublink-mobile" data-target="results-behaviors">— Reasoning behaviors</a></li>
         <li><a href="#results-ecot" class="nav-link-mobile nav-sublink-mobile" data-target="results-ecot">— Comparison with ECoT</a></li>
         <li><a href="#rollouts" class="nav-link-mobile" data-target="rollouts">Evaluation Videos</a></li>
@@ -134,23 +136,6 @@
       </div>
     </section>
 
-    <section class="hero teaser" id="teaser">
-      <div class="container is-max-desktop">
-        <div class="hero-body">
-          <figure class="paper-figure" style="--fig-width: 100%;">
-            <img src="./static/images/workflow_v4.png" alt="Two-stage training pipeline of R³">
-            <figcaption>
-              <b>Two-stage training of R³.</b>
-              R³ trains a high-level VLM to reason in natural language and steer a fixed low-level
-              robot policy for robotic manipulation tasks. R³ proceeds in two stages: Stage I (mid-training) imbues an off-the-shelf VLM
-              with the reasoning style and behaviors needed to produce useful instructions for the low-level policy. Stage II (single-step RL)
-              further improves the VLM by training it to generate reasoning traces that match the expert instruction in offline data.
-            </figcaption>
-          </figure>
-        </div>
-      </div>
-    </section>
-
     <section class="section hero is-light" id="abstract">
       <div class="container is-max-desktop">
         <div class="columns is-centered has-text-centered">
@@ -158,7 +143,7 @@
             <h2 class="title is-3">Abstract</h2>
             <div class="content has-text-justified">
               <p>
-                Reasoning in language allows foundation models to <b>spend more test-time compute</b> on hard problems,
+                Reasoning in language allows foundation models to spend more test-time compute on hard problems,
                 such as those requiring decomposition, constraint tracking, and prediction of future consequences. Whether this
                 mechanism can improve robotic manipulation remains unclear, where <b>long-horizon tasks</b> require tracking partial
                 progress, reasoning about object relations, recovering from mistakes, and steering noisy low-level policies. In this
@@ -167,9 +152,15 @@
                 mid-trains a VLM on expert-generated reasoning traces to initialize the desired reasoning style, then improves the
                 reasoner with <b>single-step rubric-based RL</b> from offline action data. Unlike prior robotic reasoning methods that
                 mostly use structured traces as auxiliary supervision, R³ trains free-form language reasoning to produce test-time
-                guidance for action. We instantiate R³ on <b>Language Table</b>, a controlled testbed for studying robotic reasoning,
-                and find that it improves exploration and generalization across unseen tasks. These results suggest that free-form
-                language reasoning can function as a test-time compute mechanism for steering low-level policies. 
+                guidance for action. 
+                <br>
+                <br>
+                We instantiate R³ on <b>Language Table</b> and <b>simulated bimanual grocery packing</b>,
+                two controlled testbeds for studying robotic reasoning and long-horizon manipulation.
+                R³ improves exploration and generalization across unseen tasks and significantly outperforms instruction-only
+                imitation learning baselines on both benchmarks.
+                These results suggest that free-form language reasoning can function as a test-time compute mechanism for
+                steering low-level policies.
               </p>
             </div>
           </div>
@@ -187,26 +178,47 @@
               <h3 class="title is-4">Hierarchical Policy for Long-Horizon Manipulation</h3>
               <div class="content">
                 <p>
-                  To train reasoners for robotic manipulation, we use a hierarchical architecture:
-                  a low-level policy controls the robot, while a high-level VLM provides language instruction that steers this policy.
-                  With expert trajectories, our goal is to train the high-level VLM to reason in natural language before issuing this instruction.
+                  A high-level VLM takes a scene, goal, and previous response as input, then reasons in language and issues a short-horizon instruction;
+                  a frozen language-conditioned low-level policy executes it.
                 </p>
                 <figure class="paper-figure" style="--fig-width: 40%;">
                   <img src="./static/images/arch_v4.png" alt="Hierarchical architecture of R³">
                   <figcaption>
-                    <b>Architecture of R³.</b> A high-level VLM generates a reasoning trace and an instruction given the
-                    scene, goal, and previous response as input. A language-conditioned low-level actor then executes the instruction.
+                    <b>Architecture of R³.</b>
+                    <!-- The VLM consumes the scene, goal, and previous response, then emits a reasoning trace and instruction. -->
+                  </figcaption>
+                </figure>
+              </div>
+            </div>
+
+            <div id="method-environments" class="subsection">
+              <h3 class="title is-4">Environments</h3>
+              <div class="content">
+                <p>
+                  <b>Language Table.</b>
+                  14 long-horizon block-arrangement tasks in
+                  <a href="https://interactive-language.github.io/" target="_blank" rel="noopener">Language Table</a>
+                  that test relational transfer, compositional generalization, and geometric difficulty.
+                  Gemini 3 Flash provides expert reasoning that steers a pretrained language-conditioned policy.
+                </p>
+                <figure class="paper-figure" style="--fig-width: 100%;">
+                  <img src="./static/images/filmstrip_task_example.png" alt="Expert trajectory example on Language Table make-a-V task">
+                  <figcaption>
+                    <b>Language Table.</b>
+                    Expert trajectory on the "make a V-shape" task.
+                     <!-- each frame shows the tabletop scene and the short-horizon instruction issued to the low-level policy (×n marks a repeated instruction). -->
                   </figcaption>
                 </figure>
                 <p>
-                  We instantiate this setup on <a href="https://interactive-language.github.io/" target="_blank" rel="noopener">Language Table</a>. 
-                  We design 14 types of long-horizon block-arrangement tasks in Language Table that require composing object movements and reasoning about spatial relationships.
-                  The task suite is designed to test relational transfer, compositional generalization, and increasing geometric difficulty.
+                  <b>Grocery Packing.</b>
+                  Dual 7-DoF xArm-7s pack YCB objects into 3 different trays.
+                  Humans provide instruction-only demonstrations via teleoperation. We fine-tune &pi;<sub>0.5</sub> to serve as the low-level policy.
                 </p>
-                <figure class="paper-figure" style="--fig-width: 100%;">
-                  <img src="./static/images/filmstrip_task_example.png" alt="Expert trajectory example on Language Table">
+                <figure class="paper-figure" style="--fig-width: 50%;">
+                  <img src="./static/images/packing_example_3views.png" alt="Simulated grocery packing from left-wrist, base, and right-wrist views">
                   <figcaption>
-                    Example of expert-collected trajectory and reasoning trace on the "make a line" task.
+                    <b>Grocery packing.</b>
+                    Dual-arm packing from left-wrist, base, and right-wrist views.
                   </figcaption>
                 </figure>
               </div>
@@ -216,32 +228,28 @@
               <h3 class="title is-4">Two-stage Training Framework of R³</h3>
               <div class="content">
                 <p>
-                  R³ turns expert manipulation demonstrations into practical training signal for reasoning in two stages:
-                  mid-training initializes the desired reasoning style, and rubric-based RL further improves the reasoner from offline action data.
+                  R³ mid-trains on limited reasoning traces, then improves the reasoner with single-step RL on instruction-only offline data.
+                  The recipe is shared; the expert, history, and reward are domain-specific.
                 </p>
 
                 <h4 class="title is-5">Stage I: Mid-training</h4>
                 <p>
-                  Off-the-shelf VLMs often do not produce the reasoning style needed for manipulation.
-                  Stage I mid-trains the VLM on expert-generated reasoning traces so it learns to reason about the state and interaction history before emitting an instruction.
+                  Next-token prediction on expert reasoning traces teaches the VLM to reason over scene and history before acting.
+                  We skip this stage on packing, where the base VLM already reasons usefully.
                 </p>
-                <ul>
-                  <li>Data: expert demonstrations with reasoning labels</li>
-                  <li>Objective: next-token prediction loss</li>
-                </ul>
-
-                <h4 class="title is-5">Stage II: Rubric-based Single-step RL</h4>
+                <h4 class="title is-5">Stage II: Single-step RL</h4>
                 <p>
-                  Mid-training alone does not ensure that test-time reasoning produces effective instructions.
-                  Stage II improves the reasoner with single-step RL on offline instruction data, without requiring expert reasoning traces or multi-turn robot rollouts.
-                  A frozen VLM judge scores whether the predicted instruction semantically matches the expert instruction under a rubric.
+                  Dr.GRPO on expert instructions, without reasoning labels or multi-turn rollouts.
+                  Language Table uses a rubric-based VLM judge (semantic match).
+                  Packing uses exact string match over a finite pack / remove / transfer set.
                 </p>
-                <ul>
-                  <li>Data: expert demonstrations <b>without reasoning labels</b></li>
-                  <li>Objective: <b>Dr.GRPO</b></li>
-                  <li>Reward: A frozen VLM judge guided by a rubric provides reward for each predicted instruction. The rubric evaluates whether the predicted instruction aligns with
-                    the expert’s, is feasible for the low-level policy, and would lead to a similar outcome. </li>
-                </ul>
+                <figure class="paper-figure" style="--fig-width: 100%;">
+                  <img src="./static/images/workflow_v4.png" alt="Two-stage training pipeline of R³">
+                  <figcaption>
+                    <b>Two-stage training of R³.</b>
+                    <!-- Stage I mid-trains a VLM on expert reasoning; Stage II improves it with single-step RL from offline action data. Mid-training can be skipped when the base VLM already reasons usefully. -->
+                  </figcaption>
+                </figure>
               </div>
             </div>
 
@@ -254,22 +262,21 @@
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column is-full-width">
-            <h2 class="title is-3">Experimental Evaluation</h2>
+            <h2 class="title is-3">Main Results</h2>
 
-            <div id="results-main" class="subsection">
-              <h3 class="title is-4">Main Results</h3>
+            <div id="results-lt" class="subsection">
+              <h3 class="title is-4">Language Table</h3>
               <div class="content">
                 <ul class="takeaways">
                   <li><b>RL alone improves performance.</b> Rubric-based RL can reinforce useful reasoning behaviors and improve task performance even without mid-training.</li>
                   <li><b>Mid-training improves RL post-training.</b> Mid-training is a strong warm start; a modest amount of reasoning data is enough, especially for OOD generalization.</li>
-                  <li><b>R³ enables better OOD generalization than non-reasoning imitation.</b> R³ matches or beats instruction-only imitation learning baselines on seen tasks, and generalizes much better to held-out tasks.</li>
+                  <li><b>R³ enables better OOD generalization than instruction-only imitation.</b> R³ matches or beats instruction-only imitation on seen tasks, and significantly outperforms it on every held-out OOD task.</li>
                 </ul>
                 <figure class="paper-figure" style="--fig-width: 100%;">
-                  <img src="./static/images/main_results_bar_chart.png" alt="Main results: average success rates across methods">
+                  <img src="./static/images/main_results_bar_chart.png" alt="Language Table main results: average success rates across methods">
                   <figcaption>
-                    <b>Main results.</b>
-                    We compare base models, imitation baselines, and R³ variants. 
-                    To account for heterogeneous task difficulty, <b>we normalize a method’s success rate by Gemini's success rate on each task</b>, then report the average of the normalized performance within each task group. For detailed per-task numbers, see the table below.
+                    <b>Language Table main results.</b>
+                    Average success rate across mid-train, RL, and OOD task groups for base models, imitation baselines, and R³ variants. For detailed per-task numbers, see the table below.
                   </figcaption>
                 </figure>
               </div>
@@ -282,10 +289,10 @@
                 <div class="expandable-panel" id="mainResultsTablePanel">
                   <div class="expandable-content">
                     <figure class="paper-figure" style="--fig-width: 100%;">
-                      <img src="./static/images/main_results_table.png" alt="Main results: per-task success rates">
+                      <img src="./static/images/main_results_table.png" alt="Language Table main results: per-task success rates">
                       <figcaption>
-                        <b>Main results.</b>
-                        We compare base models, imitation baselines, and R³ variants. Values are percentages. Gemini’s performance during data collection is shown for reference. Blue marks the best non-expert model.
+                        <b>Language Table main results.</b>
+                        We compare base models, imitation baselines, and R³ variants. Values are percentages with 95% confidence intervals. Gemini’s performance during data collection is shown for reference. Bold / underlined values mark the best / second-best non-expert model.
                       </figcaption>
                     </figure>
                     <div class="expandable-close-container">
@@ -299,16 +306,69 @@
               </div>
             </div>
 
+            <div id="results-packing" class="subsection">
+              <h3 class="title is-4">Grocery Packing</h3>
+              <div class="content">
+                <p>
+                  The recipe transfers beyond Language Table: on 12 held-out bimanual packing goals, R³ (RL only) reaches higher success and progress than instruction-only imitation (47.0% vs. 38.0% mean success), and mid-training can be skipped because the base VLM already produces useful packing reasoning.
+                </p>
+                <figure class="paper-figure" style="--fig-width: 70%;">
+                  <img src="./static/images/packing_results_bar_chart.png" alt="Grocery packing main results: average success rate and progress">
+                  <figcaption>
+                    <b>Grocery packing main results.</b>
+                    Average success rate and normalized task progress on 12 held-out goals. For detailed per-goal numbers, see the table below.
+                  </figcaption>
+                </figure>
+              </div>
+
+              <div class="expandable-container">
+                <button id="packingResultsTableToggle" type="button" class="expandable-toggle button is-small is-outlined" data-expanded-label="Hide detailed table" onclick="togglePackingResultsTable()">
+                  <span class="packing-results-table-toggle-text">View detailed per-goal numbers</span>
+                  <span class="icon"><i class="fas fa-chevron-down packing-results-table-toggle-icon"></i></span>
+                </button>
+                <div class="expandable-panel" id="packingResultsTablePanel">
+                  <div class="expandable-content">
+                    <figure class="paper-figure" style="--fig-width: 90%;">
+                      <img src="./static/images/packing_results_table.png" alt="Grocery packing main results: per-goal success rate and progress">
+                      <figcaption>
+                        <b>Grocery packing main results.</b>
+                        Success rate and normalized progress on 12 held-out goals. Values are percentages with 95% confidence intervals. Bold values mark the best model.
+                      </figcaption>
+                    </figure>
+                    <div class="expandable-close-container">
+                      <button type="button" class="expandable-close button is-small is-outlined" onclick="togglePackingResultsTable()">
+                        <span class="icon"><i class="fas fa-chevron-up"></i></span>
+                        <span>Close</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section content-section" id="analysis">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column is-full-width">
+            <h2 class="title is-3">Analysis</h2>
+
             <div id="results-representations" class="subsection">
-              <h3 class="title is-4">Reasoning Helps Beyond Better Representations</h3>
+              <h3 class="title is-4">Inference-Time Reasoning Matters Beyond Representation Learning</h3>
               <div class="content">
                 <p><b>Takeaway:</b> Explicit inference-time reasoning improves generalization beyond what is achieved by using reasoning only as a training-time supervision signal.</p>
                 <ul class="takeaways">
-                  <li><b>Evidence A:</b> R³ improves both static perception and action understanding, but these improvements alone does not explain its manipulation gains.</li>
+                  <li><b>Evidence A:</b> R³ improves both static perception and action understanding, as shown by VQA results, but these improvements alone do not explain its manipulation gains.</li>
+                  <li><b>Evidence B:</b> R³ generalizes better than non-reasoning policies that use reasoning as additional training-time supervision (by pre-training or co-training on reasoning traces).</li>
+                  <li><b>Evidence C:</b> Increasing the inference-time reasoning budget causally improves success rates.</li>
                 </ul>
                 <div class="expandable-container">
-                  <button id="vqaResultsTableToggle" type="button" class="expandable-toggle button is-small is-outlined" data-expanded-label="Hide VQA results" onclick="toggleVqaResultsTable()">
-                    <span class="vqa-results-table-toggle-text">View VQA results</span>
+                  <button id="vqaResultsTableToggle" type="button" class="expandable-toggle button is-small is-outlined" data-expanded-label="Hide evidence A results" onclick="toggleVqaResultsTable()">
+                    <span class="vqa-results-table-toggle-text">View evidence A results</span>
                     <span class="icon"><i class="fas fa-chevron-down vqa-results-table-toggle-icon"></i></span>
                   </button>
                   <div class="expandable-panel" id="vqaResultsTablePanel">
@@ -331,35 +391,30 @@
                     </div>
                   </div>
                 </div>
-                <ul class="takeaways">
-                  <li><b>Evidence B:</b> R³ outperforms non-reasoning policies that use reasoning as training-time supervision, especially on OOD tasks.</li>
-                </ul>
-                <figure class="paper-figure" style="--fig-width: 100%;">
-                  <img src="./static/images/pretrain_cotrain_results_bar_chart.png" alt="IL with pre-training or co-training on reasoning: average success rates">
-                  <figcaption>
-                    <b>IL with pre-training or co-training on reasoning.</b>
-                    R³ outperforms non-reasoning imitation variants that use reasoning only as training-time supervision, especially on OOD tasks. 
-                    To account for heterogeneous task difficulty, <b>we normalize a method’s success rate by Gemini's success rate on each task</b>, then report the average of the normalized performance within each task group. For detailed per-task numbers, see the table below.
-                  </figcaption>
-                </figure>
                 <div class="expandable-container">
-                  <button id="pretrainCotrainResultsTableToggle" type="button" class="expandable-toggle button is-small is-outlined" data-expanded-label="Hide detailed table" onclick="togglePretrainCotrainResultsTable()">
-                    <span class="pretrain-cotrain-results-table-toggle-text">View detailed per-task numbers</span>
-                    <span class="icon"><i class="fas fa-chevron-down pretrain-cotrain-results-table-toggle-icon"></i></span>
+                  <button id="reasoningBudgetTableToggle" type="button" class="expandable-toggle button is-small is-outlined" data-expanded-label="Hide evidence B/C results" onclick="toggleReasoningBudgetTable()">
+                    <span class="reasoning-budget-table-toggle-text">View evidence B/C results</span>
+                    <span class="icon"><i class="fas fa-chevron-down reasoning-budget-table-toggle-icon"></i></span>
                   </button>
-                  <div class="expandable-panel" id="pretrainCotrainResultsTablePanel">
+                  <div class="expandable-panel" id="reasoningBudgetTablePanel">
                     <div class="expandable-content">
-                      <figure class="paper-figure" style="--fig-width: 50%;">
-                        <img src="./static/images/pretrain_cotrain_results_table.png" alt="Imitation with pre-training and co-training on reasoning">
+                      <figure class="paper-figure" style="--fig-width: 100%;">
+                        <img src="./static/images/pretrain_cotrain_truncate.png" alt="IL pre-train/co-train comparison and R³ reasoning truncation">
                         <figcaption>
-                          <b>IL with pre-training or co-training on reasoning.</b>
-                          Values are percentages. Parenthetical values for IL (Pre-train) and IL (Co-train) indicate absolute changes relative to IL.
-                          Note that reasoning data for pre-training or co-training include mid-training tasks, while non-reasoning data include mid-training and RL-only tasks.
-                          R³ consistently outperforms all imitation learning variants, suggesting that the benefit of reasoning cannot be fully captured by pre-training or co-training alone.
+                          <b>IL with pre-training or co-training, and truncation of R³ reasoning at test time.</b>
+                          Parenthetical values for IL (Pre-train) and IL (Co-train) are changes relative to IL; for truncated R³ variants, changes relative to full R³.
+                          The last three R³ columns evaluate the same checkpoint with reasoning truncated at 100 / 50 tokens or removed.
+                        </figcaption>
+                      </figure>
+                      <figure class="paper-figure" style="--fig-width: 35%;">
+                        <img src="./static/images/success_vs_reasoning_tokens.png" alt="Per-task success rate versus average reasoning tokens">
+                        <figcaption>
+                          <b>Per-task reasoning tokens.</b>
+                          The trained reasoner generally elicits longer reasoning traces on harder, lower-success tasks.
                         </figcaption>
                       </figure>
                       <div class="expandable-close-container">
-                        <button type="button" class="expandable-close button is-small is-outlined" onclick="togglePretrainCotrainResultsTable()">
+                        <button type="button" class="expandable-close button is-small is-outlined" onclick="toggleReasoningBudgetTable()">
                           <span class="icon"><i class="fas fa-chevron-up"></i></span>
                           <span>Close</span>
                         </button>
@@ -391,7 +446,7 @@
                       <img src="./static/images/reasoning_example_occlusion.png" alt="Occlusion reasoning example">
                       <figcaption>
                         <b>Resolving uncertainty.</b>
-                        When an object is partially occluded, the model re-examines the scene and history instead of blindly trusting the previous response.
+                        The model re-examines the scene and history for the correct states of the occluded object.
                       </figcaption>
                     </figure>
                   </div>
@@ -399,7 +454,7 @@
                 <ul class="takeaways">
                   <li>Mid-training largely aligns the model’s instruction distribution with the expert’s, providing a strong behavioral prior before RL. With mid-training as a warm start, RL refines an already reasonable behavior distribution rather than rediscovering behaviors from scratch.</li>
                 </ul>
-                <figure class="paper-figure" style="--fig-width: 55%;">
+                <figure class="paper-figure" style="--fig-width: 50%;">
                   <img src="./static/images/method_instr_rl_effect_log.png" alt="Effect of RL on instruction distributions">
                   <figcaption>
                     <b>RL affects instruction distributions.</b>
@@ -414,16 +469,8 @@
               <div class="content">
                 <p>
                   We adapt ECoT to our hierarchical setting by augmenting the response with explicit simulator-state annotations.
-                  Our results show that adding ECoT-style structured state annotations generally <b>does not help over free-form language reasoning</b> in our setting.</p>
-                <figure class="paper-figure" style="--fig-width: 100%;">
-                  <img src="./static/images/ECoT_results_bar_chart.png" alt="ECoT variants: average success rates">
-                  <figcaption>
-                    <b>Evaluation results of ECoT variants.</b>
-                    Adding ECoT-style structured state annotations generally does not help over free-form language reasoning. 
-                    Note that this experiment only uses mid-training data, so RL-only task and OOD tasks are both held out for evaluation.
-                    To account for heterogeneous task difficulty, <b>we normalize a method’s success rate by Gemini's success rate on each task</b>, then report the average of the normalized performance within each task group. For detailed per-task numbers, see the table below.
-                  </figcaption>
-                </figure>
+                  Our results show that adding ECoT-style structured state annotations generally <b>does not help over free-form language reasoning</b> in our setting.
+                  Long-horizon progress tracking, recovery, and closed-loop replanning matter more here than making low-level visual grounding explicit.</p>
                 <div class="expandable-container">
                   <button id="ecotResultsTableToggle" type="button" class="expandable-toggle button is-small is-outlined" data-expanded-label="Hide detailed table" onclick="toggleEcotResultsTable()">
                     <span class="ecot-results-table-toggle-text">View detailed per-task numbers</span>
@@ -435,7 +482,7 @@
                         <img src="./static/images/ECoT_results_table.png" alt="ECoT variants comparison">
                         <figcaption>
                           <b>Evaluation results of ECoT variants.</b>
-                          Values are percentages. We train all variants by SFT on only our mid-training data. The results suggest that ECoT does not provide additional benefit over our free-form language reasoning.
+                          We train all variants by SFT on only our mid-training data. The results suggest that ECoT does not provide additional benefit over our free-form language reasoning.
                         </figcaption>
                       </figure>
                       <div class="expandable-close-container">
@@ -460,7 +507,7 @@
         <div class="columns is-centered">
           <div class="column is-full-width">
             <h2 class="title is-3">Examples of Evaluation Rollouts</h2>
-            <p class="rollout-note">Here we show 2 successful evaluation rollouts for each of the 14 Language Table tasks.</p>
+            <p class="rollout-note">Here we show 2 successful evaluation rollouts for each of the 14 Language Table tasks. Grocery packing videos will be added here.</p>
 
             <div class="expandable-container">
               <button id="rolloutsToggle" type="button" class="expandable-toggle button is-small is-outlined" data-expanded-label="Click to hide videos" onclick="toggleRollouts()">
@@ -693,6 +740,17 @@
                       </div>
                     </div>
                   </div>
+
+                  <h3 class="title is-4 has-text-centered">Grocery packing (coming soon)</h3>
+                  <figure class="paper-figure" style="--fig-width: 100%;">
+                    <div class="figure-placeholder">
+                      <span class="table-placeholder-label">Video placeholder</span>
+                      <span class="table-placeholder-caption">packing evaluation rollouts</span>
+                    </div>
+                    <figcaption>
+                      Successful evaluation rollouts on held-out grocery packing goals will appear here.
+                    </figcaption>
+                  </figure>
 
                   <div class="expandable-close-container">
                     <button type="button" class="expandable-close button is-small is-outlined" onclick="toggleRollouts()">

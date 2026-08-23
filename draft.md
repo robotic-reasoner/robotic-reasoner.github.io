@@ -29,66 +29,73 @@ Aviral Kumar: https://aviralkumar2907.github.io/
 Below shows the titles and subtitles of each section in the side bar, but full title in main content might be different.
 - Abstract
 - Method (full title: R^3: Robotic Reasoners via Reinforcement Learning)
-    - Hierarchical policy for long-horizon manipulation (the "problem setup" part)
+    - Hierarchical policy for long-horizon manipulation
+    - Environments (Language Table + Grocery Packing, each a paragraph + image)
     - Two-stage Training Framework of R^3
-- Results
-    - Main results
-    - Reasoning helps More than better representations
+- Main Results
+    - Language Table
+    - Grocery Packing
+- Analysis
+    - Inference-time reasoning matters beyond representation learning (Evidence A/B/C)
     - Understanding reasoning behaviors
     - Comparison with ECoT
-- Evaluation Videos (full title: Examples of Successful Evaluation Rollouts)
+- Evaluation Videos (full title: Examples of Evaluation Rollouts)
 - Citation
 
 # Main Figure
-Put the two-stage training pipeline fig (`figures/workflow_v3.pdf` in paper) before abstract, after institution.
-Caption (brief): R³ mid-trains a VLM on expert reasoning, then improves it with single-step RL so the reasoner can steer a fixed low-level policy.
+Put the two-stage training pipeline fig (`figures/workflow_v4.pdf`) under Two-stage Training Framework, not above the abstract.
 
 # Abstract
-Reasoning in language lets models spend more test-time compute on hard problems. We study whether VLMs can reason in natural language to guide low-level robot policies. R³ mid-trains a VLM on expert reasoning traces, then improves it with single-step rubric-based RL from offline action data. On Language Table, free-form language reasoning improves exploration and generalization to unseen tasks.
+Reasoning in language lets models spend more test-time compute on hard problems. We study whether VLMs can reason in natural language to guide low-level robot policies. R³ mid-trains a VLM on expert reasoning traces, then improves it with single-step rubric-based RL from offline action data. Instantiated on Language Table and simulated bimanual grocery packing; outperforms instruction-only imitation on both benchmarks.
 
 # Method (full title: R^3: Robotic Reasoners via Reinforcement Learning)
 
 ## Hierarchical policy for long-horizon manipulation
-This is the "problem setup" part.
+High-level VLM reasons, then issues a short-horizon instruction; a frozen language-conditioned policy executes it.
+Image: architecture fig (`figures/arch_v4.pdf`).
 
-- Hierarchical setup: a high-level VLM reasons and issues a short-horizon language instruction; a frozen language-conditioned low-level policy executes it.
-- Image: hierarchical architecture fig (`figures/arch_v2.pdf` in paper).
-- Testbed: Language Table — long-horizon block-arrangement tasks that require composing moves and reasoning about spatial relations.
-- Image: show expert trajectory example (`figures/filmstrip_task_example_v2_final.pdf`) if space allows.
+## Environments
+Each domain: bold name + one short paragraph + one image.
+
+**Language Table.** 14 block-arrangement tasks; Gemini expert + pretrained policy.
+**Grocery Packing.** Dual xArm-7 packing YCB objects; human teleop + π0.5 VLA.
+Images side-by-side, smaller: V-shape filmstrip (`filmstrip_app_example_V`) and packing 3-view.
 
 ## Two-stage Training Framework of R^3
-R³ turns expert demos into reasoning supervision in two stages.
+Mid-train on limited reasoning traces, then single-step RL on instruction-only data.
 
-**Stage I (mid-training).** Warm-start an off-the-shelf VLM on expert reasoning traces so it learns to reason over scene and history before emitting an instruction.
-- Objective: next-token pred
-- Data: expert demo with reasoning labels
+**Stage I.** Next-token prediction on expert reasoning. Skipped on packing.
 
-**Stage II (RL).** Improve the reasoner with single-step rubric-based RL on offline instruction data (no expert reasoning needed):
-- Objective: Dr.GRPO
-- Data: expert demo **without reasoning labels**
-- Rubric-based VLM judge (semantic match to expert instruction)
-- Key design choices: history as previous response; reason over imputed prior context; filter repetitive steps to avoid reward shortcuts
+**Stage II.** Dr.GRPO on expert instructions. LT: VLM-judge semantic match. Packing: exact string match.
 
 
 
-# Results
-Put all 4 subsections in the original arxiv paper into this website as 4 subtitles.
+# Main Results
 Each part only put the main takeaways / findings / results, as highlighted in the paper.
 (Show result figs/tables as screenshot images; no interactive tables.)
 
-## Main results
+## Language Table
 - RL alone already improves the base VLM by reinforcing useful reasoning.
 - Mid-training is a strong warm start and further boosts RL, especially for OOD transfer; a modest amount of reasoning data is often enough.
-- R³ matches or beats instruction-only imitation on seen tasks, and generalizes much better to OOD tasks.
+- R³ matches or beats instruction-only imitation on seen tasks, and significantly outperforms it on every held-out OOD task.
 
-Image: main results table screenshot (`tab:per_task_results`).
+Image: average bar chart exposed; per-task table in a toggle (`tab:per_task_results`).
 
-## Reasoning helps More than better representations
+## Grocery Packing
+One short paragraph, no bullets. Fold in that the recipe transfers beyond Language Table (not as its own point).
+R³ (RL only) beats instruction-only IL on 12 held-out goals (47.0% vs 38.0% mean success); mid-training can be skipped.
+
+Image: average bar chart exposed; per-goal table in a toggle (`tab:packing_results`).
+
+# Analysis
+
+## Inference-time reasoning matters beyond representation learning
 - Explicit test-time reasoning helps beyond using reasoning only as training-time supervision.
-- R³ improves perception and action understanding, but those gains alone do not explain the manipulation improvements.
-- Non-reasoning policies that pre-train or co-train on reasoning still lag behind R³, especially on OOD tasks.
+- Evidence A: R³ improves perception and action understanding, but those gains alone do not explain the manipulation improvements.
+- Evidence B: Non-reasoning policies that pre-train or co-train on reasoning still lag behind R³, especially on OOD tasks.
+- Evidence C: Truncating or removing reasoning at test time on the same checkpoint causally drops success. Harder tasks elicit longer traces.
 
-Image: pretrain/cotrain comparison table screenshot (`tab:pretrain_cotrain_results`).
+Images: pretrain/cotrain comparison (`tab:pretrain_cotrain_results`); reasoning-token figure and truncation table (placeholders if missing: `success_vs_reasoning_tokens`, `reasoning_budget_results_table`).
 
 ## Understanding reasoning behaviors
 - R³ learns useful strategies: compare alternatives, self-correct, and resolve visual/historical uncertainty.
@@ -103,9 +110,10 @@ Images (optional): reasoning examples / instruction-distribution figs from paper
 
 Image: ECoT comparison table screenshot (`tab:ecot_results`).
 
-# Evaluation Videos (full title: Examples of Successful Evaluation Rollouts)
+# Evaluation Videos (full title: Examples of Evaluation Rollouts)
 
-Auto-selected: first 2 successes from distinct scenes (scene_trial in filename). Jobs searched in order job0, job1, ...
+Language Table: auto-selected first 2 successes from distinct scenes (scene_trial in filename). Jobs searched in order job0, job1, ...
+Grocery packing videos: placeholder until assets are added.
 
 ## Group blocks (group)
 

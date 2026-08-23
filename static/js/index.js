@@ -45,6 +45,14 @@ function toggleEcotResultsTable() {
     toggleExpandable('ecotResultsTablePanel', 'ecotResultsTableToggle', '.ecot-results-table-toggle-text');
 }
 
+function togglePackingResultsTable() {
+    toggleExpandable('packingResultsTablePanel', 'packingResultsTableToggle', '.packing-results-table-toggle-text');
+}
+
+function toggleReasoningBudgetTable() {
+    toggleExpandable('reasoningBudgetTablePanel', 'reasoningBudgetTableToggle', '.reasoning-budget-table-toggle-text');
+}
+
 // =================================
 // NAVIGATION SYSTEM FUNCTIONALITY
 // =================================
@@ -56,9 +64,12 @@ class NavigationManager {
             'abstract',
             'method',
             'method-hierarchical',
+            'method-environments',
             'method-twostage',
             'results',
-            'results-main',
+            'results-lt',
+            'results-packing',
+            'analysis',
             'results-representations',
             'results-behaviors',
             'results-ecot',
@@ -125,11 +136,13 @@ class NavigationManager {
     updateActiveNavigation(activeSection) {
         const parentMap = {
             'method-hierarchical': 'method',
+            'method-environments': 'method',
             'method-twostage': 'method',
-            'results-main': 'results',
-            'results-nxt': 'results',
-            'results-behaviors': 'results',
-            'results-ecot': 'results'
+            'results-lt': 'results',
+            'results-packing': 'results',
+            'results-representations': 'analysis',
+            'results-behaviors': 'analysis',
+            'results-ecot': 'analysis'
         };
         const activeTargets = new Set([activeSection]);
         if (parentMap[activeSection]) {

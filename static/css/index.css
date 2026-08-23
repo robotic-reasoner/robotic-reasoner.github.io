@@ -215,7 +215,7 @@ body {
   font-style: normal !important;
   font-weight: 400;
   line-height: 1.45;
-  text-align: left;
+  text-align: center;
   box-sizing: border-box;
 }
 
@@ -233,6 +233,7 @@ body {
 .content .paper-figure figcaption {
   font-style: normal !important;
   color: #6b7280;
+  text-align: center;
 }
 
 .paper-figure.wrap-figure-group {
@@ -343,6 +344,25 @@ body {
 .table-placeholder-caption {
   font-size: 0.95rem;
   color: #555;
+}
+
+.paper-figure .figure-placeholder,
+.figure-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  min-height: 200px;
+  width: var(--fig-width, 100%);
+  margin: 0 auto;
+  padding: 1.5rem 1rem;
+  border: 2px dashed #c5cdd6;
+  border-radius: 8px;
+  background: #f7f9fb;
+  color: #6b7280;
+  text-align: center;
+  box-sizing: border-box;
 }
 
 .navbar-sidebar-submenu {
