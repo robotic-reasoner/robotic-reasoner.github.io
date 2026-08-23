@@ -208,8 +208,8 @@
               <h3 class="title is-4">Hierarchical Policy for Long-Horizon Manipulation</h3>
               <div class="content">
                 <p>
-                  A high-level VLM takes a scene, goal, and previous response as input, then reasons in language and issues a short-horizon instruction;
-                  a frozen language-conditioned low-level policy executes it.
+                  A high-level VLM takes a scene, goal, and previous response as input, then reasons in language and issues a short-horizon instruction.
+                  A frozen language-conditioned low-level policy then executes the instruction.
                 </p>
                 <figure class="paper-figure" style="--fig-width: 40%;">
                   <img src="./static/images/arch_v4.png" alt="Hierarchical architecture of R³">
@@ -310,7 +310,7 @@
                 </p>
                 <ul class="takeaways">
                   <li><b>RL alone improves performance.</b> Rubric-based RL can reinforce useful reasoning behaviors and improve task performance even without mid-training.</li>
-                  <li><b>Mid-training improves RL post-training.</b> Mid-training is a strong warm start; a modest amount of reasoning data is enough, especially for OOD generalization.</li>
+                  <li><b>Mid-training improves RL post-training.</b> Mid-training is a strong warm start; a modest amount of reasoning data is enough for RL, especially for OOD generalization.</li>
                   <li><b>R³ enables better OOD generalization than instruction-only imitation.</b> R³ matches or beats instruction-only imitation on seen tasks, and significantly outperforms it on every held-out OOD task.</li>
                 </ul>
                 <figure class="paper-figure" style="--fig-width: 100%;">
@@ -355,7 +355,7 @@
                   Humans provide instruction-only demonstrations via teleoperation, and we fine-tune &pi;<sub>0.5</sub> as the low-level policy.
                 </p>
                 <p>
-                  On 12 held-out bimanual packing goals, R³ (RL only) reaches higher success and progress than instruction-only imitation (47.0% vs. 38.0% mean success), and mid-training can be skipped because the base VLM already produces useful packing reasoning.
+                  On 12 held-out bimanual packing goals, R³ (RL only) reaches <b>higher success rate and progress than instruction-only imitation</b> (47.0% vs. 38.0% mean success). Mid-training can be skipped because the base VLM already produces useful packing reasoning.
                 </p>
                 <figure class="paper-figure" style="--fig-width: 70%;">
                   <img src="./static/images/packing_results_bar_chart.png" alt="Grocery packing main results: average success rate and progress">
@@ -405,7 +405,7 @@
             <div id="results-representations" class="subsection">
               <h3 class="title is-4">Inference-Time Reasoning Matters Beyond Representation Learning</h3>
               <div class="content">
-                <p><b>Takeaway:</b> Explicit inference-time reasoning improves generalization beyond what is achieved by using reasoning only as a training-time supervision signal.</p>
+                <p><b>Takeaway: Explicit inference-time reasoning improves generalization beyond what is achieved by using reasoning only as a training-time supervision signal.</b></p>
                 <ul class="takeaways">
                   <li><b>Evidence A:</b> R³ improves both static perception and action understanding, as shown by VQA results, but these improvements alone do not explain its manipulation gains.</li>
                   <li><b>Evidence B:</b> R³ generalizes better than non-reasoning policies that use reasoning as additional training-time supervision (by pre-training or co-training on reasoning traces).</li>
@@ -474,7 +474,7 @@
               <h3 class="title is-4">Understanding Reasoning Behaviors Learned by R³</h3>
               <div class="content">
                 <ul class="takeaways">
-                  <li>R³ learns reasoning strategies that are useful for long-horizon manipulation: comparing alternatives, self-correction, and resolving visual or historical uncertainty.</li>
+                  <li>R³ learns reasoning strategies that are useful for long-horizon manipulation: <b>comparing alternatives, self-correction, and resolving visual or historical uncertainty</b>.</li>
                 </ul>
                 <div class="columns is-mobile is-variable is-2 figure-row" style="--fig-width: 100%;">
                   <div class="column">
@@ -497,7 +497,7 @@
                   </div>
                 </div>
                 <ul class="takeaways">
-                  <li>Mid-training largely aligns the model’s instruction distribution with the expert’s, providing a strong behavioral prior before RL. With mid-training as a warm start, RL refines an already reasonable behavior distribution rather than rediscovering behaviors from scratch.</li>
+                  <li><b>Mid-training largely aligns the model’s instruction distribution with the expert’s</b>, providing a strong behavioral prior before RL. With mid-training as a warm start, RL refines an already reasonable behavior distribution rather than rediscovering behaviors from scratch.</b></li>
                 </ul>
                 <figure class="paper-figure" style="--fig-width: 50%;">
                   <img src="./static/images/method_instr_rl_effect_log.png" alt="Effect of RL on instruction distributions">
