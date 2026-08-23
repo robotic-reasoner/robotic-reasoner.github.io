@@ -81,8 +81,6 @@ class NavigationManager {
             'results-behaviors',
             'results-ecot',
             'rollouts',
-            'rollouts-lt',
-            'rollouts-packing',
             'citation'
         ];
         this.navLinks = {
@@ -154,9 +152,7 @@ class NavigationManager {
             'results-packing': 'results',
             'results-representations': 'analysis',
             'results-behaviors': 'analysis',
-            'results-ecot': 'analysis',
-            'rollouts-lt': 'rollouts',
-            'rollouts-packing': 'rollouts'
+            'results-ecot': 'analysis'
         };
         const activeTargets = new Set([activeSection]);
         if (parentMap[activeSection]) {
