@@ -73,7 +73,6 @@ class NavigationManager {
             'method',
             'method-hierarchical',
             'method-twostage',
-            'method-environments',
             'results',
             'results-lt',
             'results-packing',
@@ -82,6 +81,8 @@ class NavigationManager {
             'results-behaviors',
             'results-ecot',
             'rollouts',
+            'rollouts-lt',
+            'rollouts-packing',
             'citation'
         ];
         this.navLinks = {
@@ -122,14 +123,18 @@ class NavigationManager {
         window.addEventListener('scroll', handleScroll);
     }
     
+    getSectionTop(section) {
+        return section.getBoundingClientRect().top + window.scrollY;
+    }
+
     handleScroll() {
         const scrollPosition = window.scrollY + 100; // Offset for fixed nav
         let activeSection = this.sections[0];
         
-        // Find the current section based on scroll position
+        // Find the current section based on document position (not offsetTop).
         for (const sectionId of this.sections) {
             const section = document.getElementById(sectionId);
-            if (section && section.offsetTop <= scrollPosition) {
+            if (section && this.getSectionTop(section) <= scrollPosition) {
                 activeSection = sectionId;
             }
         }
@@ -144,13 +149,14 @@ class NavigationManager {
     updateActiveNavigation(activeSection) {
         const parentMap = {
             'method-hierarchical': 'method',
-            'method-environments': 'method',
             'method-twostage': 'method',
             'results-lt': 'results',
             'results-packing': 'results',
             'results-representations': 'analysis',
             'results-behaviors': 'analysis',
-            'results-ecot': 'analysis'
+            'results-ecot': 'analysis',
+            'rollouts-lt': 'rollouts',
+            'rollouts-packing': 'rollouts'
         };
         const activeTargets = new Set([activeSection]);
         if (parentMap[activeSection]) {
@@ -204,7 +210,7 @@ class NavigationManager {
         if (section) {
             const isMobile = window.innerWidth <= 1024;
             const offset = isMobile ? 80 : 20; // Account for mobile header
-            const targetPosition = section.offsetTop - offset;
+            const targetPosition = this.getSectionTop(section) - offset;
             
             window.scrollTo({
                 top: targetPosition,

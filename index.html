@@ -51,9 +51,15 @@
             <li><a href="#results-ecot" class="nav-link nav-sublink" data-target="results-ecot">Comparison with ECoT</a></li>
           </ul>
         </li>
-        <li><a href="#rollouts" class="nav-link" data-target="rollouts">
-          <span class="nav-indicator"></span>Evaluation Videos
-        </a></li>
+        <li>
+          <a href="#rollouts" class="nav-link" data-target="rollouts">
+            <span class="nav-indicator"></span>Evaluation Videos
+          </a>
+          <ul class="navbar-sidebar-submenu">
+            <li><a href="#rollouts-lt" class="nav-link nav-sublink" data-target="rollouts-lt">Language Table</a></li>
+            <li><a href="#rollouts-packing" class="nav-link nav-sublink" data-target="rollouts-packing">Grocery packing</a></li>
+          </ul>
+        </li>
         <li><a href="#citation" class="nav-link" data-target="citation">
           <span class="nav-indicator"></span>Citation
         </a></li>
@@ -87,6 +93,8 @@
         <li><a href="#results-behaviors" class="nav-link-mobile nav-sublink-mobile" data-target="results-behaviors">— Reasoning behaviors</a></li>
         <li><a href="#results-ecot" class="nav-link-mobile nav-sublink-mobile" data-target="results-ecot">— Comparison with ECoT</a></li>
         <li><a href="#rollouts" class="nav-link-mobile" data-target="rollouts">Evaluation Videos</a></li>
+        <li><a href="#rollouts-lt" class="nav-link-mobile nav-sublink-mobile" data-target="rollouts-lt">— Language Table</a></li>
+        <li><a href="#rollouts-packing" class="nav-link-mobile nav-sublink-mobile" data-target="rollouts-packing">— Grocery packing</a></li>
         <li><a href="#citation" class="nav-link-mobile" data-target="citation">Citation</a></li>
       </ul>
     </div>
@@ -556,10 +564,10 @@
               Here we show evaluation rollouts of our model on 14 Language Table tasks and 12 unseen grocery packing goals.
             </p>
 
-            <div class="subsection">
+            <div id="rollouts-lt" class="subsection">
               <h3 class="title is-4">Language Table</h3>
               <div class="expandable-container">
-              <button id="rolloutsToggle" type="button" class="expandable-toggle button is-small is-outlined" data-expanded-label="Click to hide Language Table videos" onclick="toggleRollouts()">
+              <button id="rolloutsToggle"> type="button" class="expandable-toggle button is-small is-outlined" data-expanded-label="Click to hide Language Table videos" onclick="toggleRollouts()">
                 <span class="rollout-toggle-text">Click to view Language Table videos</span>
                 <span class="icon"><i class="fas fa-chevron-down rollout-toggle-icon"></i></span>
               </button>
@@ -801,10 +809,10 @@
             </div>
             </div>
 
-            <div class="subsection">
+            <div id="rollouts-packing" class="subsection">
               <h3 class="title is-4">Grocery Packing</h3>
               <div class="expandable-container">
-              <button id="packingRolloutsToggle" type="button" class="expandable-toggle button is-small is-outlined" data-expanded-label="Click to hide grocery packing videos" onclick="togglePackingRollouts()">
+              <button id="packingRolloutsToggle"> type="button" class="expandable-toggle button is-small is-outlined" data-expanded-label="Click to hide grocery packing videos" onclick="togglePackingRollouts()">
                 <span class="packing-rollout-toggle-text">Click to view grocery packing videos</span>
                 <span class="icon"><i class="fas fa-chevron-down packing-rollout-toggle-icon"></i></span>
               </button>
