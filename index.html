@@ -191,6 +191,35 @@
               </div>
             </div>
 
+            <div id="method-twostage" class="subsection">
+              <h3 class="title is-4">Two-stage Training Framework of R³</h3>
+              <div class="content">
+                <p>
+                  R³ mid-trains on limited reasoning traces, then improves the reasoner with single-step RL on instruction-only offline data.
+                  The recipe is shared; the expert, history, and reward are domain-specific.
+                </p>
+
+                <h4 class="title is-5">Stage I: Mid-training</h4>
+                <p>
+                  Supervised fine-tuning (SFT) on expert reasoning traces teaches the VLM to reason over scene and history before acting.
+                  We skip this stage on packing, where the base VLM already reasons usefully.
+                </p>
+                <h4 class="title is-5">Stage II: Single-step RL</h4>
+                <p>
+                  Single-step RL (Dr.GRPO) on expert instructions, without reasoning supervision or multi-turn rollouts.
+                  Language Table uses a rubric-based VLM judge (semantic match).
+                  Packing uses exact string match over a finite pack / remove / transfer set.
+                </p>
+                <figure class="paper-figure" style="--fig-width: 100%;">
+                  <img src="./static/images/workflow_v4.png" alt="Two-stage training pipeline of R³">
+                  <figcaption>
+                    <b>Two-stage training pipeline of our approach R³.</b>
+                    <!-- Stage I mid-trains a VLM on expert reasoning; Stage II improves it with single-step RL from offline action data. Mid-training can be skipped when the base VLM already reasons usefully. -->
+                  </figcaption>
+                </figure>
+              </div>
+            </div>
+
             <div id="method-environments" class="subsection">
               <h3 class="title is-4">Environments</h3>
               <div class="content">
@@ -224,35 +253,6 @@
               </div>
             </div>
 
-            <div id="method-twostage" class="subsection">
-              <h3 class="title is-4">Two-stage Training Framework of R³</h3>
-              <div class="content">
-                <p>
-                  R³ mid-trains on limited reasoning traces, then improves the reasoner with single-step RL on instruction-only offline data.
-                  The recipe is shared; the expert, history, and reward are domain-specific.
-                </p>
-
-                <h4 class="title is-5">Stage I: Mid-training</h4>
-                <p>
-                  Next-token prediction on expert reasoning traces teaches the VLM to reason over scene and history before acting.
-                  We skip this stage on packing, where the base VLM already reasons usefully.
-                </p>
-                <h4 class="title is-5">Stage II: Single-step RL</h4>
-                <p>
-                  Dr.GRPO on expert instructions, without reasoning labels or multi-turn rollouts.
-                  Language Table uses a rubric-based VLM judge (semantic match).
-                  Packing uses exact string match over a finite pack / remove / transfer set.
-                </p>
-                <figure class="paper-figure" style="--fig-width: 100%;">
-                  <img src="./static/images/workflow_v4.png" alt="Two-stage training pipeline of R³">
-                  <figcaption>
-                    <b>Two-stage training of R³.</b>
-                    <!-- Stage I mid-trains a VLM on expert reasoning; Stage II improves it with single-step RL from offline action data. Mid-training can be skipped when the base VLM already reasons usefully. -->
-                  </figcaption>
-                </figure>
-              </div>
-            </div>
-
           </div>
         </div>
       </div>
@@ -275,7 +275,7 @@
                 <figure class="paper-figure" style="--fig-width: 100%;">
                   <img src="./static/images/main_results_bar_chart.png" alt="Language Table main results: average success rates across methods">
                   <figcaption>
-                    <b>Language Table main results.</b>
+                    <b>Main results on Language Table.</b>
                     Average success rate across mid-train, RL, and OOD task groups for base models, imitation baselines, and R³ variants. For detailed per-task numbers, see the table below.
                   </figcaption>
                 </figure>
@@ -291,7 +291,7 @@
                     <figure class="paper-figure" style="--fig-width: 100%;">
                       <img src="./static/images/main_results_table.png" alt="Language Table main results: per-task success rates">
                       <figcaption>
-                        <b>Language Table main results.</b>
+                        <b>Main results on Language Table.</b>
                         We compare base models, imitation baselines, and R³ variants. Values are percentages with 95% confidence intervals. Gemini’s performance during data collection is shown for reference. Bold / underlined values mark the best / second-best non-expert model.
                       </figcaption>
                     </figure>
@@ -315,7 +315,7 @@
                 <figure class="paper-figure" style="--fig-width: 70%;">
                   <img src="./static/images/packing_results_bar_chart.png" alt="Grocery packing main results: average success rate and progress">
                   <figcaption>
-                    <b>Grocery packing main results.</b>
+                    <b>Main results on Grocery packing.</b>
                     Average success rate and normalized task progress on 12 held-out goals. For detailed per-goal numbers, see the table below.
                   </figcaption>
                 </figure>
@@ -331,7 +331,7 @@
                     <figure class="paper-figure" style="--fig-width: 90%;">
                       <img src="./static/images/packing_results_table.png" alt="Grocery packing main results: per-goal success rate and progress">
                       <figcaption>
-                        <b>Grocery packing main results.</b>
+                        <b>Main results on Grocery packing.</b>
                         Success rate and normalized progress on 12 held-out goals. Values are percentages with 95% confidence intervals. Bold values mark the best model.
                       </figcaption>
                     </figure>

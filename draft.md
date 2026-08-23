@@ -30,8 +30,8 @@ Below shows the titles and subtitles of each section in the side bar, but full t
 - Abstract
 - Method (full title: R^3: Robotic Reasoners via Reinforcement Learning)
     - Hierarchical policy for long-horizon manipulation
-    - Environments (Language Table + Grocery Packing, each a paragraph + image)
     - Two-stage Training Framework of R^3
+    - Environments (Language Table + Grocery Packing, each a paragraph + image)
 - Main Results
     - Language Table
     - Grocery Packing
@@ -54,19 +54,19 @@ Reasoning in language lets models spend more test-time compute on hard problems.
 High-level VLM reasons, then issues a short-horizon instruction; a frozen language-conditioned policy executes it.
 Image: architecture fig (`figures/arch_v4.pdf`).
 
-## Environments
-Each domain: bold name + one short paragraph + one image.
-
-**Language Table.** 14 block-arrangement tasks; Gemini expert + pretrained policy.
-**Grocery Packing.** Dual xArm-7 packing YCB objects; human teleop + π0.5 VLA.
-Images side-by-side, smaller: V-shape filmstrip (`filmstrip_app_example_V`) and packing 3-view.
-
 ## Two-stage Training Framework of R^3
 Mid-train on limited reasoning traces, then single-step RL on instruction-only data.
 
 **Stage I.** Next-token prediction on expert reasoning. Skipped on packing.
 
 **Stage II.** Dr.GRPO on expert instructions. LT: VLM-judge semantic match. Packing: exact string match.
+
+## Environments
+Each domain: bold name + one short paragraph + one image.
+
+**Language Table.** 14 block-arrangement tasks; Gemini expert + pretrained policy.
+**Grocery Packing.** Dual xArm-7 packing YCB objects; human teleop + π0.5 VLA.
+Images side-by-side, smaller: V-shape filmstrip (`filmstrip_app_example_V`) and packing 3-view.
 
 
 
