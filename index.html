@@ -355,13 +355,13 @@
                   Humans provide instruction-only demonstrations via teleoperation, and we fine-tune &pi;<sub>0.5</sub> as the low-level policy.
                 </p>
                 <p>
-                  On 12 held-out bimanual packing goals, R³ (RL only) reaches <b>higher success rate and progress than instruction-only imitation</b> (47.0% vs. 38.0% mean success). Mid-training can be skipped because the base VLM already produces useful packing reasoning.
+                  On 12 held-out bimanual packing tasks, R³ (RL only) reaches <b>higher success rate and progress than instruction-only imitation</b> (47.0% vs. 38.0% mean success). Mid-training can be skipped because the base VLM already produces useful packing reasoning.
                 </p>
                 <figure class="paper-figure" style="--fig-width: 70%;">
                   <img src="./static/images/packing_results_bar_chart.png" alt="Grocery packing main results: average success rate and progress">
                   <figcaption>
                     <b>Main results on Grocery packing.</b>
-                    Average success rate and normalized task progress on 12 held-out goals. For detailed per-goal numbers, see the table below.
+                    Average success rate and normalized task progress on 12 held-out tasks. For detailed per-task numbers, see the table below.
                   </figcaption>
                 </figure>
               </div>
@@ -374,10 +374,10 @@
                 <div class="expandable-panel" id="packingResultsTablePanel">
                   <div class="expandable-content">
                     <figure class="paper-figure" style="--fig-width: 90%;">
-                      <img src="./static/images/packing_results_table.png" alt="Grocery packing main results: per-goal success rate and progress">
+                      <img src="./static/images/packing_results_table.png" alt="Grocery packing main results: per-task success rate and progress">
                       <figcaption>
                         <b>Main results on Grocery packing.</b>
-                        Success rate and normalized progress on 12 held-out goals. Values are percentages with 95% confidence intervals. Bold values mark the best model.
+                        Success rate and normalized progress on 12 held-out tasks. Values are percentages with 95% confidence intervals. Bold values mark the best model.
                       </figcaption>
                     </figure>
                     <div class="expandable-close-container">
@@ -553,7 +553,7 @@
           <div class="column is-full-width">
             <h2 class="title is-3">Examples of Evaluation Rollouts</h2>
             <p>
-              Here we show evaluation rollouts of our model on 14 Language Table tasks and 12 unseen grocery packing goals.
+              Here we show evaluation rollouts of our model on 14 Language Table tasks and 12 unseen grocery packing tasks.
             </p>
 
             <div id="rollouts-lt" class="subsection">
@@ -815,7 +815,7 @@
                     <div class="column">
                       <div class="item">
                         <video controls muted playsinline preload="metadata" src="./static/task_examples/packing/SP-B1_seed42_roll1.mp4"></video>
-                        <p class="caption has-text-centered">Goal B1</p>
+                        <p class="caption has-text-centered">Task B1</p>
                       </div>
                     </div>
                   </div>
@@ -824,7 +824,7 @@
                     <div class="column">
                       <div class="item">
                         <video controls muted playsinline preload="metadata" src="./static/task_examples/packing/SP-B2_seed43_roll0.mp4"></video>
-                        <p class="caption has-text-centered">Goal B2</p>
+                        <p class="caption has-text-centered">Task B2</p>
                       </div>
                     </div>
                   </div>
@@ -833,7 +833,7 @@
                     <div class="column">
                       <div class="item">
                         <video controls muted playsinline preload="metadata" src="./static/task_examples/packing/SP-B3_seed46_roll1.mp4"></video>
-                        <p class="caption has-text-centered">Goal B3</p>
+                        <p class="caption has-text-centered">Task B3</p>
                       </div>
                     </div>
                   </div>
@@ -842,7 +842,7 @@
                     <div class="column">
                       <div class="item">
                         <video controls muted playsinline preload="metadata" src="./static/task_examples/packing/SP-B4_seed45_roll3.mp4"></video>
-                        <p class="caption has-text-centered">Goal B4</p>
+                        <p class="caption has-text-centered">Task B4</p>
                       </div>
                     </div>
                   </div>
@@ -851,7 +851,7 @@
                     <div class="column">
                       <div class="item">
                         <video controls muted playsinline preload="metadata" src="./static/task_examples/packing/SP-B5_seed46_roll1.mp4"></video>
-                        <p class="caption has-text-centered">Goal B5</p>
+                        <p class="caption has-text-centered">Task B5</p>
                       </div>
                     </div>
                   </div>
@@ -860,7 +860,7 @@
                     <div class="column">
                       <div class="item">
                         <video controls muted playsinline preload="metadata" src="./static/task_examples/packing/SP-B6_seed42_roll0.mp4"></video>
-                        <p class="caption has-text-centered">Goal B6</p>
+                        <p class="caption has-text-centered">Task B6</p>
                       </div>
                     </div>
                   </div>
@@ -869,7 +869,7 @@
                     <div class="column">
                       <div class="item">
                         <video controls muted playsinline preload="metadata" src="./static/task_examples/packing/SP-B7_seed45_roll2.mp4"></video>
-                        <p class="caption has-text-centered">Goal B7</p>
+                        <p class="caption has-text-centered">Task B7</p>
                       </div>
                     </div>
                   </div>
@@ -878,7 +878,7 @@
                     <div class="column">
                       <div class="item">
                         <video controls muted playsinline preload="metadata" src="./static/task_examples/packing/SP-B8_seed43_roll2.mp4"></video>
-                        <p class="caption has-text-centered">Goal B8</p>
+                        <p class="caption has-text-centered">Task B8</p>
                       </div>
                     </div>
                   </div>
@@ -887,7 +887,7 @@
                     <div class="column">
                       <div class="item">
                         <video controls muted playsinline preload="metadata" src="./static/task_examples/packing/SP-B9_seed44_roll1.mp4"></video>
-                        <p class="caption has-text-centered">Goal B9</p>
+                        <p class="caption has-text-centered">Task B9</p>
                       </div>
                     </div>
                   </div>
@@ -896,7 +896,7 @@
                     <div class="column">
                       <div class="item">
                         <video controls muted playsinline preload="metadata" src="./static/task_examples/packing/SP-B10_seed43_roll0.mp4"></video>
-                        <p class="caption has-text-centered">Goal B10</p>
+                        <p class="caption has-text-centered">Task B10</p>
                       </div>
                     </div>
                   </div>
@@ -905,7 +905,7 @@
                     <div class="column">
                       <div class="item">
                         <video controls muted playsinline preload="metadata" src="./static/task_examples/packing/SP-B11_seed43_roll0.mp4"></video>
-                        <p class="caption has-text-centered">Goal B11</p>
+                        <p class="caption has-text-centered">Task B11</p>
                       </div>
                     </div>
                   </div>
@@ -914,7 +914,7 @@
                     <div class="column">
                       <div class="item">
                         <video controls muted playsinline preload="metadata" src="./static/task_examples/packing/SP-B12_seed44_roll1.mp4"></video>
-                        <p class="caption has-text-centered">Goal B12</p>
+                        <p class="caption has-text-centered">Task B12</p>
                       </div>
                     </div>
                   </div>
