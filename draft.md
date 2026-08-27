@@ -100,7 +100,7 @@ Images: pretrain/cotrain comparison (`tab:pretrain_cotrain_results`); reasoning-
 ## Understanding reasoning behaviors
 - R³ learns useful strategies: compare alternatives, self-correct, and resolve visual/historical uncertainty.
 - Mid-training stabilizes the reasoning interface; RL makes reasoning more deliberate and action-oriented.
-- Mid-training gives RL a good behavior prior; RL then refines it rather than rediscovering behaviors from scratch.
+- Mid-training largely aligns the model’s instruction distribution with the expert’s. RL from the base model does not recover the expert distribution and often shifts toward a different mode; after mid-training, RL makes targeted edits and can refine an already reasonable behavior distribution.
 
 Images (optional): reasoning examples / instruction-distribution figs from paper.
 

@@ -496,7 +496,7 @@
                   </div>
                 </div>
                 <ul class="takeaways">
-                  <li><b>Mid-training largely aligns the model’s instruction distribution with the expert’s</b>, providing a strong behavioral prior before RL. With mid-training as a warm start, RL refines an already reasonable behavior distribution rather than rediscovering behaviors from scratch.</li>
+                  <li><b>Mid-training largely aligns the model’s instruction distribution with the expert’s</b>, providing a strong behavioral prior before RL. RL from the base model improves success but does not recover the expert distribution, and instead often shifts the policy toward a different mode. With mid-training as a warm start, RL makes more targeted edits and can refine an already reasonable behavior distribution, rather than having to discover new useful behaviors from a weak prior.</li>
                 </ul>
                 <figure class="paper-figure" style="--fig-width: 50%;">
                   <img src="./static/images/method_instr_rl_effect_log.png" alt="Effect of RL on instruction distributions">
