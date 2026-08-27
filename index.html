@@ -38,7 +38,7 @@
           </a>
           <ul class="navbar-sidebar-submenu">
             <li><a href="#results-lt" class="nav-link nav-sublink" data-target="results-lt">Language Table</a></li>
-            <li><a href="#results-packing" class="nav-link nav-sublink" data-target="results-packing">Grocery packing</a></li>
+            <li><a href="#results-packing" class="nav-link nav-sublink" data-target="results-packing">Grocery Packing</a></li>
           </ul>
         </li>
         <li>
@@ -81,7 +81,7 @@
         <li><a href="#method" class="nav-link-mobile" data-target="method">Method</a></li>
         <li><a href="#results" class="nav-link-mobile" data-target="results">Main Results</a></li>
         <li><a href="#results-lt" class="nav-link-mobile nav-sublink-mobile" data-target="results-lt">— Language Table</a></li>
-        <li><a href="#results-packing" class="nav-link-mobile nav-sublink-mobile" data-target="results-packing">— Grocery packing</a></li>
+        <li><a href="#results-packing" class="nav-link-mobile nav-sublink-mobile" data-target="results-packing">— Grocery Packing</a></li>
         <li><a href="#analysis" class="nav-link-mobile" data-target="analysis">Analysis</a></li>
         <li><a href="#results-representations" class="nav-link-mobile nav-sublink-mobile" data-target="results-representations">— Beyond representation learning</a></li>
         <li><a href="#results-behaviors" class="nav-link-mobile nav-sublink-mobile" data-target="results-behaviors">— Reasoning behaviors</a></li>
@@ -171,7 +171,7 @@
                     two controlled testbeds for studying robotic reasoning and long-horizon manipulation.
                     R³ improves exploration and generalization across unseen tasks and significantly outperforms instruction-only
                     imitation learning baselines on both benchmarks.
-                    These results suggest that free-form language reasoning can function as a test-time compute mechanism for
+                    Our analyses suggest that free-form language reasoning can function as a test-time compute mechanism for
                     steering low-level policies.
                   </p>
                   <div class="expandable-close-container">
@@ -209,12 +209,12 @@
               <div class="content">
                 <p>
                   A high-level VLM takes a scene, goal, and previous response as input, then reasons in language and issues a short-horizon instruction.
-                  A frozen language-conditioned low-level policy then executes the instruction.
+                  A fixed language-conditioned low-level policy then executes the instruction.
                 </p>
                 <figure class="paper-figure" style="--fig-width: 40%;">
-                  <img src="./static/images/arch_v4.png" alt="Hierarchical architecture of R³">
+                  <img src="./static/images/arch_v4.png" alt="Policy architecture of R³">
                   <figcaption>
-                    <b>Architecture of R³.</b>
+                    <b>Policy architecture.</b>
                     <!-- The VLM consumes the scene, goal, and previous response, then emits a reasoning trace and instruction. -->
                   </figcaption>
                 </figure>
@@ -222,7 +222,7 @@
             </div>
 
             <div id="method-twostage" class="subsection">
-              <h3 class="title is-4">Two-stage Training Framework of R³</h3>
+              <h3 class="title is-4">Two-stage Training of R³</h3>
               <div class="content">
                 <p>
                   R³ mid-trains on limited reasoning traces, then improves the reasoner with single-step RL on instruction-only offline data.
@@ -231,21 +231,21 @@
 
                 <ul>
                   <li>
-                    <b>Stage I: Mid-training.</b>
+                    <b>Stage I: Mid-Training Reasoning Behaviors into the VLM.</b>
                     Supervised fine-tuning (SFT) on expert reasoning traces teaches the VLM to reason over scene and history before acting.
-                    We skip this stage on packing, where the base VLM already reasons usefully.
+                    We skip this stage on grocery packing, where the base VLM already produces useful reasoning.
                   </li>
                   <li>
-                    <b>Stage II: Single-step RL.</b>
+                    <b>Stage II: Rubric-Based Single-Step RL with Offline Data.</b>
                     Single-step RL (Dr.GRPO) on expert instructions, without reasoning supervision or multi-turn rollouts.
                     Language Table uses a rubric-based VLM judge (semantic match).
-                    Packing uses exact string match over a finite pack / remove / transfer set.
+                    Grocery packing uses exact string match over a finite pack / remove / transfer set.
                   </li>
                 </ul>
                 <figure class="paper-figure" style="--fig-width: 100%;">
-                  <img src="./static/images/workflow_v4.png" alt="Two-stage training pipeline of R³">
+                  <img src="./static/images/workflow_v4.png" alt="Two-stage training of R³">
                   <figcaption>
-                    <b>Two-stage training pipeline of our approach R³.</b>
+                    <b>Two-stage training of R³.</b>
                     <!-- Stage I mid-trains a VLM on expert reasoning; Stage II improves it with single-step RL from offline action data. Mid-training can be skipped when the base VLM already reasons usefully. -->
                   </figcaption>
                 </figure>
@@ -309,7 +309,7 @@
                   Gemini 3 Flash provides expert reasoning that steers a pretrained language-conditioned policy.
                 </p>
                 <ul class="takeaways">
-                  <li><b>RL alone improves performance.</b> Rubric-based RL can reinforce useful reasoning behaviors and improve task performance even without mid-training.</li>
+                  <li><b>RL post-training alone improves performance.</b> Rubric-based RL can reinforce useful reasoning behaviors and improve task performance even without mid-training.</li>
                   <li><b>Mid-training improves RL post-training.</b> Mid-training is a strong warm start; a modest amount of reasoning data is enough for RL, especially for OOD generalization.</li>
                   <li><b>R³ enables better OOD generalization than instruction-only imitation.</b> R³ matches or beats instruction-only imitation on seen tasks, and significantly outperforms it on every held-out OOD task.</li>
                 </ul>
@@ -317,7 +317,7 @@
                   <img src="./static/images/main_results_bar_chart.png" alt="Language Table main results: average success rates across methods">
                   <figcaption>
                     <b>Main results on Language Table.</b>
-                    Average success rate across mid-train, RL, and OOD task groups for base models, imitation baselines, and R³ variants. For detailed per-task numbers, see the table below.
+                    Average success rate across mid-training, RL, and OOD held-out task groups for base models, imitation baselines, and R³ variants. For detailed per-task numbers, see the table below.
                   </figcaption>
                 </figure>
               </div>
@@ -332,8 +332,8 @@
                     <figure class="paper-figure" style="--fig-width: 100%;">
                       <img src="./static/images/main_results_table.png" alt="Language Table main results: per-task success rates">
                       <figcaption>
-                        <b>Main results on Language Table.</b>
-                        We compare base models, imitation baselines, and R³ variants. Values are percentages with 95% confidence intervals. Gemini’s performance during data collection is shown for reference. Bold / underlined values mark the best / second-best non-expert model.
+                    <b>Main results.</b>
+                    We compare base models, imitation baselines, and R³ variants. Values are percentages with 95% confidence intervals. The green / red cells in the Δ column mark significant gains / losses (|Δ| > CI). Gemini’s performance during data collection is shown for reference. Bold / underlined values mark the best / second-best non-expert model.
                       </figcaption>
                     </figure>
                     <div class="expandable-close-container">
@@ -355,12 +355,12 @@
                   Humans provide instruction-only demonstrations via teleoperation, and we fine-tune &pi;<sub>0.5</sub> as the low-level policy.
                 </p>
                 <p>
-                  On 12 held-out bimanual packing tasks, R³ (RL only) reaches <b>higher success rate and progress than instruction-only imitation</b> (47.9% vs. 38.0% mean success). Mid-training can be skipped because the base VLM already produces useful packing reasoning.
+                  On 12 held-out bimanual packing tasks, R³ (RL only) reaches <b>higher success rate and progress than instruction-only imitation</b> (47.9% vs. 38.0% mean success). Mid-training can be skipped because the base VLM already produces useful reasoning on this domain.
                 </p>
                 <figure class="paper-figure" style="--fig-width: 70%;">
                   <img src="./static/images/packing_results_bar_chart.png" alt="Grocery packing main results: average success rate and progress">
                   <figcaption>
-                    <b>Main results on Grocery packing.</b>
+                    <b>Main results on grocery packing.</b>
                     Average success rate and normalized task progress on 12 held-out tasks. For detailed per-task numbers, see the table below.
                   </figcaption>
                 </figure>
@@ -376,8 +376,8 @@
                     <figure class="paper-figure" style="--fig-width: 90%;">
                       <img src="./static/images/packing_results_table.png" alt="Grocery packing main results: per-task success rate and progress">
                       <figcaption>
-                        <b>Main results on Grocery packing.</b>
-                        Success rate and normalized progress on 12 held-out tasks. Values are percentages with 95% confidence intervals. Bold values mark the best model.
+                    <b>Main results on grocery packing.</b>
+                    Success rate and normalized progress on 12 held-out tasks. Values are percentages with 95% confidence intervals. Bold values mark the best model.
                       </figcaption>
                     </figure>
                     <div class="expandable-close-container">
@@ -405,11 +405,11 @@
             <div id="results-representations" class="subsection">
               <h3 class="title is-4">Inference-Time Reasoning Matters Beyond Representation Learning</h3>
               <div class="content">
-                <p><b>Takeaway: Explicit inference-time reasoning improves generalization beyond what is achieved by using reasoning only as a training-time supervision signal.</b></p>
+                <p><b>Takeaway: Explicit inference-time reasoning improves generalization beyond what is achieved by using reasoning only as training-time supervision.</b></p>
                 <ul class="takeaways">
-                  <li><b>Evidence A:</b> R³ improves both static perception and action understanding, as shown by VQA results, but these improvements alone do not explain its manipulation gains.</li>
-                  <li><b>Evidence B:</b> R³ generalizes better than non-reasoning policies that use reasoning as additional training-time supervision (by pre-training or co-training on reasoning traces).</li>
-                  <li><b>Evidence C:</b> Increasing the inference-time reasoning budget causally improves success rates.</li>
+                  <li><b>Evidence A:</b> R³ improves both static perception and action understanding, but these improvements alone do not explain its manipulation gains.</li>
+                  <li><b>Evidence B:</b> R³ generalizes better than non-reasoning policies that use reasoning as additional training-time supervision.</li>
+                  <li><b>Evidence C:</b> Increasing the inference-time reasoning budget improves success.</li>
                 </ul>
                 <div class="expandable-container">
                   <button id="vqaResultsTableToggle" type="button" class="expandable-toggle button is-small is-outlined" data-expanded-label="Hide evidence A results" onclick="toggleVqaResultsTable()">
@@ -422,9 +422,9 @@
                         <img src="./static/images/vqa_results_table.png" alt="VQA results on perception and instruction comprehension">
                         <figcaption>
                           <b>Accuracy by VQA question class.</b>
-                          Blue highlights indicate the best-performing Qwen3.5-4B variant for each question class. Gemini’s performance during data collection is shown for reference.
+                          Gemini is reported as an external reference and is not included in the ranking. Bold values mark the best non-reference model.
                           Even our best model remains far below Gemini on several VQA categories, yet matches or approaches Gemini on many manipulation tasks.
-                          These results suggest that R³ improves both static perception and action understanding, but they also show that VQA performance alone, i.e., improving static perception, does not fully explain the gains in manipulation performance. 
+                          These diagnostics suggest that R³ improves both static perception and action understanding, but they also show that VQA performance alone, i.e., improving static perception, does not fully explain the gains in manipulation performance. 
                         </figcaption>
                       </figure>
                       <div class="expandable-close-container">
@@ -446,15 +446,14 @@
                       <figure class="paper-figure" style="--fig-width: 100%;">
                         <img src="./static/images/pretrain_cotrain_truncate.png" alt="IL pre-train/co-train comparison and R³ reasoning truncation">
                         <figcaption>
-                          <b>IL with pre-training or co-training, and truncation of R³ reasoning at test time.</b>
-                          Parenthetical values for IL (Pre-train) and IL (Co-train) are changes relative to IL; for truncated R³ variants, changes relative to full R³.
-                          The last three R³ columns evaluate the same checkpoint with reasoning truncated at 100 / 50 tokens or removed.
+                          <b>IL with pre-training or co-training on reasoning, and truncation of R³ reasoning at test time.</b>
+                          Values are percentages. Parenthetical values for IL (Pre-train) and IL (Co-train) indicate absolute changes relative to IL; for truncated R³ variants, they indicate absolute changes relative to full R³.
                         </figcaption>
                       </figure>
                       <!-- <figure class="paper-figure" style="--fig-width: 35%;">
                         <img src="./static/images/success_vs_reasoning_tokens.png" alt="Per-task success rate versus average reasoning tokens">
                         <figcaption>
-                          <b>Per-task reasoning tokens.</b>
+                          <b>Per-task token length.</b>
                           The trained reasoner generally elicits longer reasoning traces on harder, lower-success tasks.
                         </figcaption>
                       </figure> -->
@@ -474,47 +473,47 @@
               <h3 class="title is-4">Understanding Reasoning Behaviors Learned by R³</h3>
               <div class="content">
                 <ul class="takeaways">
-                  <li>R³ learns reasoning strategies that are useful for long-horizon manipulation: <b>comparing alternatives, self-correction, and resolving visual or historical uncertainty</b>.</li>
+                  <li>R³ learns reasoning strategies that are useful for long-horizon manipulation: <b>comparing alternatives, self-correction, and resolving visual and historical uncertainty</b>.</li>
                 </ul>
                 <div class="columns is-mobile is-variable is-2 figure-row" style="--fig-width: 100%;">
                   <div class="column">
                     <figure class="paper-figure">
-                      <img src="./static/images/reasoning_example_backtrack.png" alt="Self-correction reasoning example">
+                      <img src="./static/images/reasoning_example_backtrack.png" alt="Example of reasoning strategy learned via R³">
                       <figcaption>
-                        <b>Self-correction.</b>
-                        The reasoner compares alternatives, notices an inconsistent plan, and revises before issuing the instruction.
+                        <b>Example of reasoning strategy learned via R³.</b>
+                        The R³ model considers several alternate plans before committing to one particular choice.
                       </figcaption>
                     </figure>
                   </div>
                   <div class="column">
                     <figure class="paper-figure">
-                      <img src="./static/images/reasoning_example_occlusion.png" alt="Occlusion reasoning example">
+                      <img src="./static/images/reasoning_example_occlusion.png" alt="Example of reasoning strategy learned via R³">
                       <figcaption>
-                        <b>Resolving uncertainty.</b>
-                        The model re-examines the scene and history for the correct states of the occluded object.
+                        <b>Example of reasoning strategy learned via R³.</b>
+                        The red pentagon is occluded by the robot arm. The R³ model re-examines the scene, task information, and history to correctly infer the object state.
                       </figcaption>
                     </figure>
                   </div>
                 </div>
                 <ul class="takeaways">
-                  <li><b>Mid-training largely aligns the model’s instruction distribution with the expert’s</b>, providing a strong behavioral prior before RL. With mid-training as a warm start, RL refines an already reasonable behavior distribution rather than rediscovering behaviors from scratch.</b></li>
+                  <li><b>Mid-training largely aligns the model’s instruction distribution with the expert’s</b>, providing a strong behavioral prior before RL. With mid-training as a warm start, RL refines an already reasonable behavior distribution rather than rediscovering behaviors from scratch.</li>
                 </ul>
                 <figure class="paper-figure" style="--fig-width: 50%;">
                   <img src="./static/images/method_instr_rl_effect_log.png" alt="Effect of RL on instruction distributions">
                   <figcaption>
                     <b>RL affects instruction distributions.</b>
-                    RL from the base model broadly rewrites the distribution, while RL after mid-training makes more targeted edits.
+                    RL from the base model broadly rewrites the instruction distribution, while RL after mid-training makes localized edits.
                   </figcaption>
                 </figure>
               </div>
             </div>
 
             <div id="results-ecot" class="subsection">
-              <h3 class="title is-4">Comparison with Embodied Chain-of-Thought (ECoT)</h3>
+              <h3 class="title is-4">Comparison with Approaches that Use Structured CoT Templates</h3>
               <div class="content">
                 <p>
                   We adapt ECoT to our hierarchical setting by augmenting the response with explicit simulator-state annotations.
-                  Our results show that adding ECoT-style structured state annotations generally <b>does not help over free-form language reasoning</b> in our setting.
+                  Our results show that adding ECoT-style structured state annotations generally <b>does not provide additional benefit over free-form language reasoning</b> in our setting.
                   Long-horizon progress tracking, recovery, and closed-loop replanning matter more here than making low-level visual grounding explicit.</p>
                 <div class="expandable-container">
                   <button id="ecotResultsTableToggle" type="button" class="expandable-toggle button is-small is-outlined" data-expanded-label="Hide detailed table" onclick="toggleEcotResultsTable()">
@@ -527,7 +526,7 @@
                         <img src="./static/images/ECoT_results_table.png" alt="ECoT variants comparison">
                         <figcaption>
                           <b>Evaluation results of ECoT variants.</b>
-                          We train all variants by SFT on only our mid-training data. The results suggest that ECoT does not provide additional benefit over our free-form language reasoning.
+                          Trained by SFT on only our mid-training data. Values are percentages. Bold values mark the best model.
                         </figcaption>
                       </figure>
                       <div class="expandable-close-container">
@@ -694,7 +693,7 @@
                     </div>
                   </div>
 
-                  <h3 class="title is-4 has-text-centered">Clear quarter (clear qtr)</h3>
+                  <h3 class="title is-4 has-text-centered">Clear quarter (clear_qtr)</h3>
                   <div class="columns is-vcentered rollout-row">
                     <div class="column">
                       <div class="item">
@@ -758,7 +757,7 @@
                     </div>
                   </div>
 
-                  <h3 class="title is-4 has-text-centered">Make a diagonal line (diag line)</h3>
+                  <h3 class="title is-4 has-text-centered">Make a diagonal line (diag_line)</h3>
                   <div class="columns is-vcentered rollout-row">
                     <div class="column">
                       <div class="item">
@@ -815,7 +814,7 @@
                     <div class="column">
                       <div class="item">
                         <video controls muted playsinline preload="metadata" src="./static/task_examples/packing/SP-B1_seed42_roll1.mp4"></video>
-                        <p class="caption has-text-centered">Task B1</p>
+                        <p class="caption has-text-centered">Task 1</p>
                       </div>
                     </div>
                   </div>
@@ -824,7 +823,7 @@
                     <div class="column">
                       <div class="item">
                         <video controls muted playsinline preload="metadata" src="./static/task_examples/packing/SP-B2_seed43_roll0.mp4"></video>
-                        <p class="caption has-text-centered">Task B2</p>
+                        <p class="caption has-text-centered">Task 2</p>
                       </div>
                     </div>
                   </div>
@@ -833,7 +832,7 @@
                     <div class="column">
                       <div class="item">
                         <video controls muted playsinline preload="metadata" src="./static/task_examples/packing/SP-B3_seed46_roll1.mp4"></video>
-                        <p class="caption has-text-centered">Task B3</p>
+                        <p class="caption has-text-centered">Task 3</p>
                       </div>
                     </div>
                   </div>
@@ -842,7 +841,7 @@
                     <div class="column">
                       <div class="item">
                         <video controls muted playsinline preload="metadata" src="./static/task_examples/packing/SP-B4_seed45_roll3.mp4"></video>
-                        <p class="caption has-text-centered">Task B4</p>
+                        <p class="caption has-text-centered">Task 4</p>
                       </div>
                     </div>
                   </div>
@@ -851,7 +850,7 @@
                     <div class="column">
                       <div class="item">
                         <video controls muted playsinline preload="metadata" src="./static/task_examples/packing/SP-B5_seed46_roll1.mp4"></video>
-                        <p class="caption has-text-centered">Task B5</p>
+                        <p class="caption has-text-centered">Task 5</p>
                       </div>
                     </div>
                   </div>
@@ -860,7 +859,7 @@
                     <div class="column">
                       <div class="item">
                         <video controls muted playsinline preload="metadata" src="./static/task_examples/packing/SP-B6_seed42_roll0.mp4"></video>
-                        <p class="caption has-text-centered">Task B6</p>
+                        <p class="caption has-text-centered">Task 6</p>
                       </div>
                     </div>
                   </div>
@@ -869,7 +868,7 @@
                     <div class="column">
                       <div class="item">
                         <video controls muted playsinline preload="metadata" src="./static/task_examples/packing/SP-B7_seed45_roll2.mp4"></video>
-                        <p class="caption has-text-centered">Task B7</p>
+                        <p class="caption has-text-centered">Task 7</p>
                       </div>
                     </div>
                   </div>
@@ -878,7 +877,7 @@
                     <div class="column">
                       <div class="item">
                         <video controls muted playsinline preload="metadata" src="./static/task_examples/packing/SP-B8_seed43_roll2.mp4"></video>
-                        <p class="caption has-text-centered">Task B8</p>
+                        <p class="caption has-text-centered">Task 8</p>
                       </div>
                     </div>
                   </div>
@@ -887,7 +886,7 @@
                     <div class="column">
                       <div class="item">
                         <video controls muted playsinline preload="metadata" src="./static/task_examples/packing/SP-B9_seed44_roll1.mp4"></video>
-                        <p class="caption has-text-centered">Task B9</p>
+                        <p class="caption has-text-centered">Task 9</p>
                       </div>
                     </div>
                   </div>
@@ -896,7 +895,7 @@
                     <div class="column">
                       <div class="item">
                         <video controls muted playsinline preload="metadata" src="./static/task_examples/packing/SP-B10_seed43_roll0.mp4"></video>
-                        <p class="caption has-text-centered">Task B10</p>
+                        <p class="caption has-text-centered">Task 10</p>
                       </div>
                     </div>
                   </div>
@@ -905,7 +904,7 @@
                     <div class="column">
                       <div class="item">
                         <video controls muted playsinline preload="metadata" src="./static/task_examples/packing/SP-B11_seed43_roll0.mp4"></video>
-                        <p class="caption has-text-centered">Task B11</p>
+                        <p class="caption has-text-centered">Task 11</p>
                       </div>
                     </div>
                   </div>
@@ -914,7 +913,7 @@
                     <div class="column">
                       <div class="item">
                         <video controls muted playsinline preload="metadata" src="./static/task_examples/packing/SP-B12_seed44_roll1.mp4"></video>
-                        <p class="caption has-text-centered">Task B12</p>
+                        <p class="caption has-text-centered">Task 12</p>
                       </div>
                     </div>
                   </div>
@@ -938,7 +937,7 @@
       <div class="container is-max-desktop content">
         <h2 class="title is-3">BibTeX</h2>
         <pre><code>@misc{wu2026r3trainingrobotsreason,
-  title={R³: Training Robots to Reason in Natural Language via Reinforcement Learning},
+  title={$\mathcal{R}^3$: Training Robots to Reason in Natural Language via Reinforcement Learning},
   author={Lehong Wu and Yuxiao Qu and Zheyuan Hu and Ivan Zhang and Limin Wei and Zackory Erickson and Aviral Kumar},
   year={2026},
   eprint={2608.26053},

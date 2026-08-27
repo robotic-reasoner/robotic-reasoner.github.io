@@ -83,7 +83,7 @@ Image: average bar chart exposed; per-task table in a toggle (`tab:per_task_resu
 
 ## Grocery Packing
 One short paragraph, no bullets. Fold in that the recipe transfers beyond Language Table (not as its own point).
-R³ (RL only) beats instruction-only IL on 12 held-out goals (47.0% vs 38.0% mean success); mid-training can be skipped.
+R³ (RL only) beats instruction-only IL on 12 held-out goals (47.9% vs 38.0% mean success); mid-training can be skipped.
 
 Image: average bar chart exposed; per-goal table in a toggle (`tab:packing_results`).
 
@@ -155,7 +155,7 @@ Example trajectory 2 (job0, scene 1, trial 0): tmp/vis_vlm_qwen35_v3_1_rendered_
 Example trajectory 1 (job0, scene 0, trial 0): tmp/vis_vlm_qwen35_v3_1_rendered_v2/vis_mid-qwen35_4b-grpo_v3a_S6R3_v3_1_0524_s128tj-ent0-step680-repeat12_seed204800_0618_1217/job0_seed204800/videos/custom_midpoint_0_0_success.mp4
 Example trajectory 2 (job0, scene 1, trial 0): tmp/vis_vlm_qwen35_v3_1_rendered_v2/vis_mid-qwen35_4b-grpo_v3a_S6R3_v3_1_0524_s128tj-ent0-step680-repeat12_seed204800_0618_1217/job0_seed204800/videos/custom_midpoint_1_0_success.mp4
 
-## Clear quarter (clear qtr)
+## Clear quarter (clear_qtr)
 
 Example trajectory 1 (job0, scene 0, trial 0): tmp/vis_vlm_qwen35_v3_1_rendered_v2/vis_clear_quarter-qwen35_4b-grpo_v3a_S6R3_v3_1_0524_s128tj-ent0-step680-repeat12_seed206400_0618_0306/job0_seed206400/videos/custom_clear_region_quarter_0_0_success.mp4
 Example trajectory 2 (job0, scene 1, trial 0): tmp/vis_vlm_qwen35_v3_1_rendered_v2/vis_clear_quarter-qwen35_4b-grpo_v3a_S6R3_v3_1_0524_s128tj-ent0-step680-repeat12_seed206400_0618_0306/job0_seed206400/videos/custom_clear_region_quarter_1_0_success.mp4
@@ -175,7 +175,7 @@ Example trajectory 2 (job0, scene 1, trial 0): tmp/vis_vlm_qwen35_v3_1_rendered_
 Example trajectory 1 (job0, scene 0, trial 0): tmp/vis_vlm_qwen35_v3_1_rendered_v2/vis_iL-qwen35_4b-grpo_v3a_S6R3_v3_1_0524_s128tj-ent0-step680-repeat12_seed208800_0618_1217/job0_seed208800/videos/custom_make_inverted_L_shape_0_0_success.mp4
 Example trajectory 2 (job0, scene 1, trial 2): tmp/vis_vlm_qwen35_v3_1_rendered_v2/vis_iL-qwen35_4b-grpo_v3a_S6R3_v3_1_0524_s128tj-ent0-step680-repeat12_seed208800_0618_1217/job0_seed208800/videos/custom_make_inverted_L_shape_1_2_success.mp4
 
-## Make a diagonal line (diag line)
+## Make a diagonal line (diag_line)
 
 Example trajectory 1 (job0, scene 2, trial 5): tmp/vis_vlm_qwen35_v3_1_rendered_v2/vis_dline-qwen35_4b-grpo_v3a_S6R3_v3_1_0524_s128tj-ent0-step680-repeat12_seed209600_0618_1217/job0_seed209600/videos/custom_make_diagonal_line_2_5_success.mp4
 Example trajectory 2 (job0, scene 1, trial 0): tmp/vis_vlm_qwen35_v3_1_rendered_v2/vis_dline-qwen35_4b-grpo_v3a_S6R3_v3_1_0524_s128tj-ent0-step680-repeat12_seed209600_0618_1217/job0_seed209600/videos/custom_make_diagonal_line_1_0_success.mp4
@@ -188,7 +188,7 @@ Example trajectory 2 (job0, scene 1, trial 0): tmp/vis_vlm_qwen35_v3_1_rendered_
 # Citation
 ```
 @misc{wu2026r3trainingrobotsreason,
-  title={R³: Training Robots to Reason in Natural Language via Reinforcement Learning},
+  title={$\mathcal{R}^3$: Training Robots to Reason in Natural Language via Reinforcement Learning},
   author={Lehong Wu and Yuxiao Qu and Zheyuan Hu and Ivan Zhang and Limin Wei and Zackory Erickson and Aviral Kumar},
   year={2026},
   eprint={2608.26053},
