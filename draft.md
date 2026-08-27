@@ -187,9 +187,13 @@ Example trajectory 2 (job0, scene 1, trial 0): tmp/vis_vlm_qwen35_v3_1_rendered_
 
 # Citation
 ```
-@misc{wu2026r3roboticreasoners,
+@misc{wu2026r3trainingrobotsreason,
   title={R³: Training Robots to Reason in Natural Language via Reinforcement Learning},
   author={Lehong Wu and Yuxiao Qu and Zheyuan Hu and Ivan Zhang and Limin Wei and Zackory Erickson and Aviral Kumar},
   year={2026},
+  eprint={2608.26053},
+  archivePrefix={arXiv},
+  primaryClass={cs.RO},
+  url={https://arxiv.org/abs/2608.26053},
 }
 ```
