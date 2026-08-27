@@ -21,7 +21,7 @@ Lehong Wu: https://lehongwu.github.io/
 Yuxiao Qu: https://cohenqu.github.io/
 Zheyuan Hu: https://huzheyuan.io/
 Ivan Zhang: TBD
-Limin Wei: TBD
+Limin Wei: https://www.linkedin.com/in/liminwei/
 Zackory Erickson: https://zackory.com/
 Aviral Kumar: https://aviralkumar2907.github.io/
 
