@@ -20,7 +20,7 @@ Author's personal website link:
 Lehong Wu: https://lehongwu.github.io/
 Yuxiao Qu: https://cohenqu.github.io/
 Zheyuan Hu: https://huzheyuan.io/
-Ivan Zhang: TBD
+Ivan Zhang: https://enspikondplusplus.github.io/
 Limin Wei: https://www.linkedin.com/in/liminwei/
 Zackory Erickson: https://zackory.com/
 Aviral Kumar: https://aviralkumar2907.github.io/
